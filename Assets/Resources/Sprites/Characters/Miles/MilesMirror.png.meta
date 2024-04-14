@@ -1,0 +1,583 @@
+fileFormatVersion: 2
+guid: 7bc4413289c77564ab218303278d5046
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Miles_wr_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 796980190662c8b4cb716a9379f3410c
+      internalID: -269840832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_wr_3
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d0a150e3c248c243b4d5654a2f0fb66
+      internalID: -1437833954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_wr_2
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d75540ce57b4f7847a683110df029cbc
+      internalID: -1035452894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_wr_1
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ba2d49f786d694fb98b3e20c2a4f46
+      internalID: 437069806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_wr_0
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b2b5811ad2d2345adea2fb81078b09
+      internalID: 2063255481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_sr_1
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ced276f4f7677e46a30b06bd402d242
+      internalID: -1608967156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_sr_0
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 616
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 718bc73a0ef902d429927527520169d1
+      internalID: 727880604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_wr_5
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 572
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27413934a9795bd44873cc4758d73ef7
+      internalID: -1935985663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85071ab9c2fd61b45b8299ae8f11dc9f
+      internalID: -1752459451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_4
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07c8db9ef0aa884890eb1521115dabb
+      internalID: 65752161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa476b3abcea37b47acacfc59f021784
+      internalID: 514458906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ca59f41c418ea4bb879a671a7913e2
+      internalID: 1886041243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_1
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10dad4751ab2ffb498867ffc5d283f31
+      internalID: 428285796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Miles_rr_0
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 528
+        width: 44
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91638661e36b18e41bb6b65e5d32af68
+      internalID: -1494223901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 3c7b181e5b3ceda42b8291c48b934684
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MilesMirror_0: 1803081325
+      MilesMirror_10: 1923253706
+      MilesMirror_100: 1433056496
+      MilesMirror_101: 1922799854
+      MilesMirror_102: -2082982986
+      MilesMirror_103: -1208902145
+      MilesMirror_104: 1828777127
+      MilesMirror_105: -257767669
+      MilesMirror_106: -406421603
+      MilesMirror_107: -478400191
+      MilesMirror_108: -264966620
+      MilesMirror_109: -1562222335
+      MilesMirror_11: 1727889114
+      MilesMirror_110: -2112910922
+      MilesMirror_111: 835931659
+      MilesMirror_112: 617212965
+      MilesMirror_113: -2050681112
+      MilesMirror_114: 1771331380
+      MilesMirror_115: -89361302
+      MilesMirror_116: -2102784602
+      MilesMirror_117: -950093644
+      MilesMirror_118: -648073136
+      MilesMirror_119: 563751512
+      MilesMirror_12: 529654115
+      MilesMirror_120: 991931204
+      MilesMirror_121: -1752522273
+      MilesMirror_122: 1101278798
+      MilesMirror_123: 218559266
+      MilesMirror_124: 1641255277
+      MilesMirror_125: -1902842468
+      MilesMirror_126: -2132867920
+      MilesMirror_127: -74138077
+      MilesMirror_128: 918211916
+      MilesMirror_129: 1841573047
+      MilesMirror_13: -1004647987
+      MilesMirror_130: 676184607
+      MilesMirror_131: -1777100003
+      MilesMirror_132: 328706469
+      MilesMirror_133: 878590309
+      MilesMirror_134: -973247402
+      MilesMirror_135: -2096704534
+      MilesMirror_136: 2074011468
+      MilesMirror_137: 926713752
+      MilesMirror_138: -1722387981
+      MilesMirror_139: 552595469
+      MilesMirror_14: -744053959
+      MilesMirror_140: 1454195749
+      MilesMirror_141: -620470257
+      MilesMirror_142: -1514270362
+      MilesMirror_143: 1103882249
+      MilesMirror_144: 430087508
+      MilesMirror_145: -831251833
+      MilesMirror_146: -1936611063
+      MilesMirror_147: -534919570
+      MilesMirror_15: 1473012908
+      MilesMirror_16: 2044649085
+      MilesMirror_17: 1956293165
+      MilesMirror_18: 1334951951
+      MilesMirror_20: 287397978
+      MilesMirror_27: -73862229
+      MilesMirror_28: -332331216
+      MilesMirror_29: 187451145
+      MilesMirror_30: 1040386253
+      MilesMirror_31: 1465557298
+      MilesMirror_32: 595613025
+      MilesMirror_33: -1213109313
+      MilesMirror_34: -1714815117
+      MilesMirror_35: -1268367960
+      MilesMirror_36: 1906834189
+      MilesMirror_37: 1314345251
+      MilesMirror_38: 1855196579
+      MilesMirror_39: 927288571
+      MilesMirror_40: 1034649215
+      MilesMirror_41: -294232599
+      MilesMirror_42: 1587925824
+      MilesMirror_43: -614455914
+      MilesMirror_44: -1627564645
+      MilesMirror_45: -1948375075
+      MilesMirror_46: 1657959519
+      MilesMirror_47: -28761791
+      MilesMirror_48: 321583469
+      MilesMirror_49: 224467213
+      MilesMirror_5: -308212713
+      MilesMirror_50: 1793240348
+      MilesMirror_51: -1130807819
+      MilesMirror_52: 1429002116
+      MilesMirror_53: -688011589
+      MilesMirror_54: -1149256387
+      MilesMirror_55: 895895362
+      MilesMirror_56: 417811699
+      MilesMirror_57: -2111353815
+      MilesMirror_58: -247773222
+      MilesMirror_59: 1214496154
+      MilesMirror_6: -1952934686
+      MilesMirror_60: -448920335
+      MilesMirror_61: -1080077956
+      MilesMirror_62: 817069180
+      MilesMirror_63: -763244307
+      MilesMirror_64: -1460863240
+      MilesMirror_65: -1330405975
+      MilesMirror_66: 1636083853
+      MilesMirror_67: -512442806
+      MilesMirror_68: -979479112
+      MilesMirror_69: -1454676355
+      MilesMirror_7: 124430049
+      MilesMirror_70: -22676568
+      MilesMirror_71: -1418129062
+      MilesMirror_72: 2026535650
+      MilesMirror_73: -490191453
+      MilesMirror_74: 1705919899
+      MilesMirror_75: -1255273608
+      MilesMirror_76: 921199724
+      MilesMirror_77: -39327274
+      MilesMirror_78: 1779149579
+      MilesMirror_79: -62209794
+      MilesMirror_80: 916944044
+      MilesMirror_81: 1161896709
+      MilesMirror_82: -433750822
+      MilesMirror_83: -120420568
+      MilesMirror_84: -259794914
+      MilesMirror_85: -1311918250
+      MilesMirror_86: -1560732805
+      MilesMirror_87: 1503726795
+      MilesMirror_88: 754526271
+      MilesMirror_89: -1166306798
+      MilesMirror_90: -1575899436
+      MilesMirror_91: 10580438
+      MilesMirror_92: 1787774065
+      MilesMirror_93: -750071557
+      MilesMirror_94: -1597354600
+      MilesMirror_95: -821495285
+      MilesMirror_96: 460680259
+      MilesMirror_97: 1537533713
+      MilesMirror_98: 1840636586
+      MilesMirror_99: -321022905
+      Miles_rr_0: -1494223901
+      Miles_rr_1: 428285796
+      Miles_rr_2: 1886041243
+      Miles_rr_3: 514458906
+      Miles_rr_4: 65752161
+      Miles_rr_5: -1752459451
+      Miles_sr_0: 727880604
+      Miles_sr_1: -1608967156
+      Miles_wr_0: 2063255481
+      Miles_wr_1: 437069806
+      Miles_wr_2: -1035452894
+      Miles_wr_3: -1437833954
+      Miles_wr_4: -269840832
+      Miles_wr_5: -1935985663
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

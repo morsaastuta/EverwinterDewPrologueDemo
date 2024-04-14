@@ -1,0 +1,61 @@
+{
+    "canMove": true,
+    "canJump": true,
+    "canRun": true,
+    "canInteract": true,
+    "canPause": true,
+    "sceneName": "RimeForest",
+    "playerPos": {
+        "x": 7.705128192901611,
+        "y": 0.003129422664642334,
+        "z": 2.177142381668091
+    },
+    "playerAngle": {
+        "x": 0.16320855915546418,
+        "y": -0.16277217864990235,
+        "z": 0.027311746031045915,
+        "w": 0.9726881980895996
+    },
+    "northKey": [
+        119
+    ],
+    "westKey": [
+        97
+    ],
+    "eastKey": [
+        100
+    ],
+    "southKey": [
+        115
+    ],
+    "jumpKey": [
+        32
+    ],
+    "runKey": [
+        304,
+        303
+    ],
+    "menuKey": [
+        27
+    ],
+    "interactKey": [
+        122
+    ],
+    "skipKey": [
+        120
+    ],
+    "canZoom": true,
+    "canPivot": true,
+    "canRotate": true,
+    "cameraPos": {
+        "x": 8.607107162475586,
+        "y": 1.1713595390319825,
+        "z": -0.4423656463623047
+    },
+    "cameraAngle": {
+        "x": 0.16320855915546418,
+        "y": -0.16277217864990235,
+        "z": 0.027311746031045915,
+        "w": 0.9726881980895996
+    }
+}
