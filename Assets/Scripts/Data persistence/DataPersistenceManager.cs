@@ -1,19 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-using System.Collections;
-using UnityEditor.PackageManager;
 
 public class DataPersistenceManager : MonoBehaviour
 {
-    private FileDataHandler fileDataHandler;
+    FileDataHandler fileDataHandler;
 
     // Referenced scripts
-    [SerializeField] private PlayerProperties playerProperties;
-    [SerializeField] private CameraProperties camProperties;
-    [SerializeField] private MapProperties mapProperties;
+    [SerializeField] PlayerProperties playerProperties;
+    [SerializeField] CameraProperties camProperties;
+    [SerializeField] MapProperties mapProperties;
 
     public static DataPersistenceManager instance
     {

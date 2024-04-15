@@ -51,6 +51,52 @@ public class EquipmentController : MonoBehaviour
     List<GearItem> selectorItemList = new List<GearItem>();
     List<GameObject> selectorSlotList = new List<GameObject>();
 
+    // Stat icons
+    [SerializeField] Sprite iconHP;
+    [SerializeField] Sprite iconMP;
+    [SerializeField] Sprite iconATK;
+    [SerializeField] Sprite iconDFN;
+    [SerializeField] Sprite iconMAG;
+    [SerializeField] Sprite iconDFL;
+    [SerializeField] Sprite iconSPI;
+    [SerializeField] Sprite iconACC;
+    [SerializeField] Sprite iconCR;
+    [SerializeField] Sprite iconCD;
+    [SerializeField] Sprite iconSPD;
+    [SerializeField] Sprite iconMOV;
+    [SerializeField] Sprite iconP;
+    [SerializeField] Sprite iconA;
+    [SerializeField] Sprite iconF;
+    [SerializeField] Sprite iconH;
+    [SerializeField] Sprite typeSTR;
+    [SerializeField] Sprite typeRES;
+
+    // Stat slots
+    [SerializeField] Image statImg1;
+    [SerializeField] Image statImg2;
+    [SerializeField] Image statImg3;
+    [SerializeField] Image statImg4;
+    [SerializeField] Image statImg5;
+    [SerializeField] Image statImg6;
+    [SerializeField] Image statImg7;
+    [SerializeField] Image statImg8;
+    [SerializeField] TextMeshProUGUI statTxt1;
+    [SerializeField] TextMeshProUGUI statTxt2;
+    [SerializeField] TextMeshProUGUI statTxt3;
+    [SerializeField] TextMeshProUGUI statTxt4;
+    [SerializeField] TextMeshProUGUI statTxt5;
+    [SerializeField] TextMeshProUGUI statTxt6;
+    [SerializeField] TextMeshProUGUI statTxt7;
+    [SerializeField] TextMeshProUGUI statTxt8;
+    [SerializeField] Image typeImg1;
+    [SerializeField] Image typeImg2;
+    [SerializeField] Image typeImg3;
+    [SerializeField] Image typeImg4;
+    [SerializeField] Image typeImg5;
+    [SerializeField] Image typeImg6;
+    [SerializeField] Image typeImg7;
+    [SerializeField] Image typeImg8;
+
     public void Awake()
     {
         // Slot observation
@@ -94,13 +140,170 @@ public class EquipmentController : MonoBehaviour
         LoadSelection(type);
     }
 
+    void SetStatSlot(int position, string name, float value)
+    {
+        Sprite nameIcon = emptyIcon;
+        int intValue = 0;
+        bool affSTR = false;
+        bool affRES = false;
+
+        switch (name)
+        {
+            case "HP": nameIcon = iconHP; intValue = (int)value; break;
+            case "MP": nameIcon = iconMP; intValue = (int)value; break;
+            case "ATK": nameIcon = iconATK; intValue = (int)value; break;
+            case "DFN": nameIcon = iconDFN; intValue = (int)value; break;
+            case "MAG": nameIcon = iconMAG; intValue = (int)value; break;
+            case "DFL": nameIcon = iconDFL; intValue = (int)value; break;
+            case "SPI": nameIcon = iconSPI; intValue = (int)value; break;
+            case "ACC": nameIcon = iconACC; break;
+            case "CR": nameIcon = iconCR; break;
+            case "CD": nameIcon = iconCD; break;
+            case "SPD": nameIcon = iconSPD; intValue = (int)value; break;
+            case "MOV": nameIcon = iconMOV; intValue = (int)value; break;
+            case "PSA": nameIcon = iconP; affSTR = true; break;
+            case "PRA": nameIcon = iconP; affRES = true; break;
+            case "ASA": nameIcon = iconA; affSTR = true; break;
+            case "ARA": nameIcon = iconA; affRES = true; break;
+            case "FSA": nameIcon = iconF; affSTR = true; break;
+            case "FRA": nameIcon = iconF; affRES = true; break;
+            case "HSA": nameIcon = iconH; affSTR = true; break;
+            case "HRA": nameIcon = iconH; affRES = true; break;
+        }
+
+        switch (position)
+        {
+            case 0:
+
+                statImg1.sprite = nameIcon;
+
+                if (intValue == 0) statTxt1.SetText(value.ToString() + "%");
+                else statTxt1.SetText(intValue.ToString());
+
+                if (affSTR) typeImg1.sprite = typeSTR;
+                else if (affRES) typeImg1.sprite = typeRES;
+
+                break;
+
+            case 1:
+
+                statImg2.sprite = nameIcon;
+
+                if (intValue == 0) statTxt2.SetText(value.ToString() + "%");
+                else statTxt2.SetText(intValue.ToString());
+
+                if (affSTR) typeImg2.sprite = typeSTR;
+                else if (affRES) typeImg2.sprite = typeRES;
+
+                break;
+
+            case 2:
+
+                statImg3.sprite = nameIcon;
+
+                if (intValue == 0) statTxt3.SetText(value.ToString() + "%");
+                else statTxt3.SetText(intValue.ToString());
+
+                if (affSTR) typeImg3.sprite = typeSTR;
+                else if (affRES) typeImg3.sprite = typeRES;
+
+                break;
+
+            case 3:
+
+                statImg4.sprite = nameIcon;
+
+                if (intValue == 0) statTxt4.SetText(value.ToString() + "%");
+                else statTxt4.SetText(intValue.ToString());
+
+                if (affSTR) typeImg4.sprite = typeSTR;
+                else if (affRES) typeImg4.sprite = typeRES;
+
+                break;
+
+            case 4:
+
+                statImg5.sprite = nameIcon;
+
+                if (intValue == 0) statTxt5.SetText(value.ToString() + "%");
+                else statTxt5.SetText(intValue.ToString());
+
+                if (affSTR) typeImg5.sprite = typeSTR;
+                else if (affRES) typeImg5.sprite = typeRES;
+
+                break;
+
+            case 5:
+
+                statImg6.sprite = nameIcon;
+
+                if (intValue == 0) statTxt6.SetText(value.ToString() + "%");
+                else statTxt6.SetText(intValue.ToString());
+
+                if (affSTR) typeImg6.sprite = typeSTR;
+                else if (affRES) typeImg6.sprite = typeRES;
+
+                break;
+
+            case 6:
+
+                statImg7.sprite = nameIcon;
+
+                if (intValue == 0) statTxt7.SetText(value.ToString() + "%");
+                else statTxt2.SetText(intValue.ToString());
+
+                if (affSTR) typeImg7.sprite = typeSTR;
+                else if (affRES) typeImg7.sprite = typeRES;
+
+                break;
+
+            case 7:
+
+                statImg8.sprite = nameIcon;
+
+                if (intValue == 0) statTxt8.SetText(value.ToString() + "%");
+                else statTxt8.SetText(intValue.ToString());
+
+                if (affSTR) typeImg8.sprite = typeSTR;
+                else if (affRES) typeImg8.sprite = typeRES;
+
+                break;
+
+        }
+    }
+
+    void ClearStatSlots()
+    {
+        statImg1.sprite = emptyIcon; statImg2.sprite = emptyIcon; statImg3.sprite = emptyIcon; statImg4.sprite = emptyIcon;
+        statImg5.sprite = emptyIcon; statImg6.sprite = emptyIcon; statImg7.sprite = emptyIcon; statImg8.sprite = emptyIcon;
+
+        typeImg1.sprite = emptyIcon; typeImg2.sprite = emptyIcon; typeImg3.sprite = emptyIcon; typeImg4.sprite = emptyIcon;
+        typeImg5.sprite = emptyIcon; typeImg6.sprite = emptyIcon; typeImg7.sprite = emptyIcon; typeImg8.sprite = emptyIcon;
+
+        statTxt1.SetText(""); statTxt2.SetText(""); statTxt3.SetText(""); statTxt4.SetText(""); statTxt5.SetText(""); statTxt6.SetText(""); statTxt7.SetText(""); statTxt8.SetText("");
+    }
+
     public void Select(GearItem item)
     {
+        int shownStats = 0;
         if (item != null)
         {
             shownIcon.sprite = item.icon;
             shownName.text = item.name;
             shownDescription.text = item.description;
+
+            foreach (string statName in item.statByName.Keys)
+            {
+                if (item.statByName.ContainsKey(statName))
+                {
+                    float value = item.statByName.GetValueOrDefault(statName);
+                    if (item.statByName.GetValueOrDefault(statName) != 0)
+                    {
+                        SetStatSlot(shownStats, statName, value);
+                        if (shownStats++ >= 8) break;
+                    }
+                }
+            }
         }
     }
 
@@ -162,6 +365,8 @@ public class EquipmentController : MonoBehaviour
 
     public void Deselect()
     {
+        ClearStatSlots();
+
         shownIcon.sprite = emptyIcon;
         shownName.text = "";
         shownDescription.text = "";
@@ -287,27 +492,13 @@ public class EquipmentController : MonoBehaviour
             // Depending on the direction of the drag, remove or add to the list
             if (fromSelector && toEquipment)
             {
-                Debug.Log("from SELECTOR to SLOTS");
-                Debug.Log(gearItems[ogIndex].name);
                 gearItems.Remove(gearItems[ogIndex]);
-                if (switched)
-                {
-                    Debug.Log("SWITCH with");
-                    Debug.Log(switchedItem.name);
-                    gearItems.Add(switchedItem);
-                }
+                if (switched) gearItems.Add(switchedItem);
             }
             if (!fromSelector && !toEquipment)
             {
-                Debug.Log("from SLOTS to SELECTOR");
-                Debug.Log(itemDragger.GetComponentInChildren<SlotController>().item.name);
                 gearItems.Add((GearItem)itemDragger.GetComponentInChildren<SlotController>().item);
-                if (switched)
-                {
-                    Debug.Log("SWITCH with");
-                    Debug.Log(switchedItem.name);
-                    gearItems.Remove(switchedItem);
-                }
+                if (switched) gearItems.Remove(switchedItem);
             }
         }
 

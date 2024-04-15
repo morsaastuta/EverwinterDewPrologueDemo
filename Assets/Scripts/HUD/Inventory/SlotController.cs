@@ -1,14 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Search;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Unity.VisualScripting.ReorderableList.ReorderableListControl;
 
 public class SlotController : MonoBehaviour, IPointerClickHandler, IBeginDragHandler
 {

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class GearItem : Item
 {
@@ -34,8 +32,36 @@ public abstract class GearItem : Item
     public float statHSA = 0;
     public float statHRA = 0;
 
+    public List<string> statNames = new List<string>();
+    public Dictionary<string,float> statByName = new Dictionary<string, float>();
+
     public GearItem()
     {
         stackable = false;
+
+        statNames.Add("HP");
+        statNames.Add("MP");
+
+        statNames.Add("ATK");
+        statNames.Add("DFN");
+        statNames.Add("MAG");
+        statNames.Add("DFL");
+        statNames.Add("SPI");
+
+        statNames.Add("ACC");
+        statNames.Add("CR");
+        statNames.Add("CD");
+
+        statNames.Add("SPD");
+        statNames.Add("MOV");
+
+        statNames.Add("PSA");
+        statNames.Add("ASA");
+        statNames.Add("FSA");
+        statNames.Add("HSA");
+        statNames.Add("PRA");
+        statNames.Add("ARA");
+        statNames.Add("FRA");
+        statNames.Add("HRA");
     }
 }

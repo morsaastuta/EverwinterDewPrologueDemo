@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldFloe : ShieldItem
@@ -15,5 +13,7 @@ public class ShieldFloe : ShieldItem
         statDFN = 20;
         statACC = 20;
         statPSA = 25;
+
+        GenStatList();
     }
 }

@@ -1,33 +1,58 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class PartyController : MonoBehaviour
 {
     public Profile currentProfile;
     List<Profile> party = new List<Profile>();
 
+    // Section panes
+    [SerializeField] GameObject statusPane;
+    [SerializeField] GameObject equipmentPane;
+    [SerializeField] GameObject skillsPane;
+
     // Controllers
+    [SerializeField] StatusController statusController;
     [SerializeField] EquipmentController equipmentController;
+    [SerializeField] SkillsController skillsController;
 
     void Awake()
     {
-        party.Add(new Nikolaos());
-        SelectCharacter(typeof(Nikolaos));
+        Nikolaos nikolaos = new Nikolaos();
+        party.Add(nikolaos);
+
+        foreach (Profile profile in party) if (profile.GetType().Equals(typeof(Nikolaos))) SelectCharacter(profile);
     }
 
-    public void SelectCharacter(Type type)
+    public void CloseAll()
     {
-        foreach(Profile profile in party)
-        {
-            if (profile.GetType().Equals(type))
-            {
-                currentProfile = profile;
-            }
-        }
+        statusPane.SetActive(false);
+        equipmentPane.SetActive(false);
+        skillsPane.SetActive(false);
+    }
+
+    public void Status()
+    {
+        CloseAll();
+        statusPane.SetActive(true);
+        statusController.LoadStats();
+    }
+
+    public void Equipment()
+    {
+        CloseAll();
+        equipmentPane.SetActive(true);
+    }
+
+    public void Skills()
+    {
+        CloseAll();
+        skillsPane.SetActive(true);
+    }
+
+    public void SelectCharacter(Profile profile)
+    {
+        currentProfile = profile;
 
         UpdateHUD();
     }
@@ -35,76 +60,5 @@ public class PartyController : MonoBehaviour
     public void UpdateHUD()
     {
         equipmentController.LoadGearSlots(currentProfile);
-    }
-
-    public void EditStat(string stat, int value)
-    {
-        switch(stat)
-        {
-            case "HP":
-                currentProfile.statHP = value;
-                break;
-            case "MP":
-                currentProfile.statMP = value;
-                break;
-
-            case "ATK":
-                currentProfile.statATK = value;
-                break;
-            case "DFN":
-                currentProfile.statDFN = value;
-                break;
-            case "MAG":
-                currentProfile.statMAG = value;
-                break;
-            case "DFL":
-                currentProfile.statDFL = value;
-                break;
-            case "SPI":
-                currentProfile.statSPI = value;
-                break;
-
-            case "ACC":
-                currentProfile.statACC = value;
-                break;
-            case "CR":
-                currentProfile.statCR = value;
-                break;
-            case "CD":
-                currentProfile.statCD = value;
-                break;
-
-            case "SPD":
-                currentProfile.statSPD = value;
-                break;
-            case "MOV":
-                currentProfile.statMOV = value;
-                break;
-
-            case "PSA":
-                currentProfile.statPSA = value;
-                break;
-            case "PRA":
-                currentProfile.statPRA = value;
-                break;
-            case "ASA":
-                currentProfile.statASA = value;
-                break;
-            case "ARA":
-                currentProfile.statARA = value;
-                break;
-            case "FSA":
-                currentProfile.statFSA = value;
-                break;
-            case "FRA":
-                currentProfile.statFRA = value;
-                break;
-            case "HSA":
-                currentProfile.statHSA = value;
-                break;
-            case "HRA":
-                currentProfile.statHRA = value;
-                break;
-        }
     }
 }

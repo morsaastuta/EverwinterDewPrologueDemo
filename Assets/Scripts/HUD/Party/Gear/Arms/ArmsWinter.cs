@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmsWinter : ArmsItem
@@ -13,5 +11,7 @@ public class ArmsWinter : ArmsItem
 
         statDFN = 6;
         statDFL = 3;
+
+        GenStatList();
     }
 }

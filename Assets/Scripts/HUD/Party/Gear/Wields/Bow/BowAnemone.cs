@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BowAnemone : BowItem
@@ -15,5 +13,7 @@ public class BowAnemone : BowItem
         statSPD = 10;
         statACC = -10;
         statASA = 15;
+
+        GenStatList();
     }
 }

@@ -14,5 +14,7 @@ public class LegsWinter : LegsItem
         statDFN = 6;
         statDFL = 3;
         statSPD = 3;
+
+        GenStatList();
     }
 }

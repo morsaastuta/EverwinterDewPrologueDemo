@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static Unity.Collections.Unicode;
 
 [System.Serializable]
 public class SlotData : Data

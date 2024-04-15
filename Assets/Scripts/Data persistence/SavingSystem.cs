@@ -1,25 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SavingSystem : MonoBehaviour
 {
-    [SerializeField] private PlayerProperties properties;
-    [SerializeField] private CameraProperties camProperties;
-    [SerializeField] private MapProperties mapProperties;
-    [SerializeField] private DataPersistenceManager dpm;
+    [SerializeField] PlayerProperties properties;
+    [SerializeField] CameraProperties camProperties;
+    [SerializeField] MapProperties mapProperties;
+    [SerializeField] DataPersistenceManager dpm;
 
-    [SerializeField] private GameObject savePane;
-    [SerializeField] private GameObject optionPane;
-    [SerializeField] private GameObject slotPane;
-    [SerializeField] private List<GameObject> slots;
+    [SerializeField] GameObject savePane;
+    [SerializeField] GameObject optionPane;
+    [SerializeField] GameObject slotPane;
+    [SerializeField] List<GameObject> slots;
 
-    private int selectedSlot;
-    private string mode;
+    int selectedSlot;
+    string mode;
 
-    [SerializeField] private PromptController promptController;
+    [SerializeField] PromptController promptController;
 
     public void Initialize()
     {

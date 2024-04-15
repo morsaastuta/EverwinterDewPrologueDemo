@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using TMPro;
-using Unity.Collections;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
-using Random = UnityEngine.Random;
 
 public class SlotGenerator : MonoBehaviour
 {

@@ -13,5 +13,7 @@ public class BodyWinter : BodyItem
 
         statDFN = 10;
         statDFL = 5;
+
+        GenStatList();
     }
 }

@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class FileDataHandler
 {
-    private string root = ".";
-    private string globalPath = "sav";
+    string root = ".";
+    string globalPath = "sav";
 
-    private string slotFile = "slot_";
-    private string settingsFile = "settings_";
+    string slotFile = "slot_";
+    string settingsFile = "settings_";
 
-    private string slotPath;
-    private string settingsPath;
+    string slotPath;
+    string settingsPath;
 
     public FileDataHandler(int slot)
     {

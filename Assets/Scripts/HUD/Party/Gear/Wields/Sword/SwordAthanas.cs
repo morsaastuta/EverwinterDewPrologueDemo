@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordAthanas : SwordItem
@@ -14,5 +12,7 @@ public class SwordAthanas : SwordItem
         statATK = 10;
         statACC = -5;
         statPSA = 25;
+
+        GenStatList();
     }
 }
