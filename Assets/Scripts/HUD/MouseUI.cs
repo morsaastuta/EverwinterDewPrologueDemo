@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemDragger : MonoBehaviour
+public class MouseUI : MonoBehaviour
 {
     [SerializeField] Canvas canvas;
 
