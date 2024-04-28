@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RimeForest.unity
+    path: Assets/Scenes/Thrascias/ThrasciasForest_Overworld.unity
     guid: 330d9bab2d8b8b0438ceff403f035a78
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity

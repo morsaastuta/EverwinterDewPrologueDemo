@@ -32,8 +32,8 @@ public class StatusStatNamesHelper : MonoBehaviour
     [SerializeField] GameObject iconPRA;
     [SerializeField] GameObject iconASA;
     [SerializeField] GameObject iconARA;
-    [SerializeField] GameObject iconFSA;
-    [SerializeField] GameObject iconFRA;
+    [SerializeField] GameObject iconSSA;
+    [SerializeField] GameObject iconSRA;
     [SerializeField] GameObject iconHSA;
     [SerializeField] GameObject iconHRA;
 
@@ -90,11 +90,11 @@ public class StatusStatNamesHelper : MonoBehaviour
         statNames.Add(iconARA, "Aeras Resistance Affinity");
         statDescriptions.Add(iconARA, "Represents a character's resistance to the Aeras element. Inversely proportional to total damage input from Aeras skills.");
 
-        statNames.Add(iconFSA, "Floga Strength Affinity");
-        statDescriptions.Add(iconFSA, "Represents a character's strength using the Floga element. Directly proportional to total damage output from Floga skills.");
+        statNames.Add(iconSSA, "Spitha Strength Affinity");
+        statDescriptions.Add(iconSSA, "Represents a character's strength using the Spitha element. Directly proportional to total damage output from Spitha skills.");
 
-        statNames.Add(iconFRA, "Floga Resistance Affinity");
-        statDescriptions.Add(iconFRA, "Represents a character's resistance to the Floga element. Inversely proportional to total damage input from Floga skills.");
+        statNames.Add(iconSRA, "Spitha Resistance Affinity");
+        statDescriptions.Add(iconSRA, "Represents a character's resistance to the Spitha element. Inversely proportional to total damage input from Spitha skills.");
 
         statNames.Add(iconHSA, "Homa Strength Affinity");
         statDescriptions.Add(iconHSA, "Represents a character's strength using the Homa element. Directly proportional to total damage output from Homa skills.");

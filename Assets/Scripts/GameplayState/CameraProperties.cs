@@ -25,8 +25,7 @@ public class CameraProperties : MonoBehaviour
 
     public void LoadStatus()
     {
-        transform.position = cameraPos;
-        transform.rotation = cameraAngle;
+        transform.SetPositionAndRotation(cameraPos, cameraAngle);
     }
 
     public void SetActive(bool state)

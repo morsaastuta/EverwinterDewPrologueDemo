@@ -1,3 +1,4 @@
+using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,13 +28,9 @@ public class FileDataHandler
             // Create directory to save files
             if (!Directory.Exists(Path.GetDirectoryName(slotPath))) Directory.CreateDirectory(Path.GetDirectoryName(slotPath));
 
-            // Set writer
-            StreamWriter writer = new StreamWriter(new FileStream(slotPath, FileMode.Create));
-
             // Write file
-            writer.Write(JsonUtility.ToJson(slotData, true));
-            writer.Flush();
-            writer.Close();
+            byte[] bytes = SerializationUtility.SerializeValue(slotData, DataFormat.JSON);
+            File.WriteAllBytes(slotPath, bytes);
         }
         catch (Exception e)
         {
@@ -46,12 +43,9 @@ public class FileDataHandler
         SlotData slotData = null;
         try
         {
-            // Set reader
-            StreamReader reader = new StreamReader(new FileStream(slotPath, FileMode.Open));
-
             // Read file
-            slotData = JsonUtility.FromJson<SlotData>(reader.ReadToEnd());
-            reader.Close();
+            byte[] bytes = File.ReadAllBytes(slotPath);
+            slotData = SerializationUtility.DeserializeValue<SlotData>(bytes, DataFormat.JSON);
         }
         catch (Exception e)
         {

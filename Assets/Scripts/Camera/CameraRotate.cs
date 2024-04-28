@@ -1,10 +1,4 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CameraRotate : MonoBehaviour
 {
@@ -14,6 +8,14 @@ public class CameraRotate : MonoBehaviour
     private float prevTurnY;
     public float verTop = 30f;
     public float verBot = -10f;
+
+    void Start()
+    {
+        if (cam == null)
+        {
+            cam = Camera.main.GetComponent<CameraProperties>();
+        }
+    }
 
     void Update()
     {

@@ -1,10 +1,13 @@
+using Sirenix.Serialization;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class SlotData : Data
 {
     // Player properties
+    public bool hasBeenInit;
     public bool canMove;
     public bool canJump;
     public bool canRun;
@@ -13,15 +16,26 @@ public class SlotData : Data
     public string sceneName;
     public Vector3 playerPos;
     public Quaternion playerAngle;
-    public List<KeyCode> northKey;
-    public List<KeyCode> westKey;
-    public List<KeyCode> eastKey;
-    public List<KeyCode> southKey;
-    public List<KeyCode> jumpKey;
-    public List<KeyCode> runKey;
-    public List<KeyCode> menuKey;
-    public List<KeyCode> interactKey;
-    public List<KeyCode> skipKey;
+    public List<Profile> party = new();
+    public Profile currentProfile;
+    public Dictionary<Item,int> inventory = new();
+    public List<ConsumableItem> consumableItems = new();
+    public int consumablesSize;
+    public List<MaterialItem> materialItems = new();
+    public int materialsSize;
+    public List<KeyItem> keyItems = new();
+    public int keysSize;
+    public List<GearItem> armory;
+    public int armorySize;
+    public List<KeyCode> northKey = new();
+    public List<KeyCode> westKey = new();
+    public List<KeyCode> eastKey = new();
+    public List<KeyCode> southKey = new();
+    public List<KeyCode> jumpKey = new();
+    public List<KeyCode> runKey = new();
+    public List<KeyCode> menuKey = new();
+    public List<KeyCode> interactKey = new();
+    public List<KeyCode> skipKey = new();
 
     // Camera properties
     public bool canZoom;
@@ -32,6 +46,7 @@ public class SlotData : Data
 
     public SlotData(PlayerProperties p, CameraProperties c)
     {
+        hasBeenInit = p.hasBeenInit;
         canMove = p.canMove;
         canJump = p.canJump;
         canRun = p.canRun;
@@ -40,6 +55,17 @@ public class SlotData : Data
         sceneName = p.sceneName;
         playerPos = p.playerPos;
         playerAngle = p.playerAngle;
+        party = p.party;
+        currentProfile = p.currentProfile;
+        inventory = p.inventory;
+        consumableItems = p.consumableItems;
+        consumablesSize = p.consumablesSize;
+        materialItems = p.materialItems;
+        materialsSize = p.materialsSize;
+        keyItems = p.keyItems;
+        keysSize = p.keysSize;
+        armory = p.armory;
+        armorySize = p.armorySize;
         northKey = p.northKey;
         westKey = p.westKey;
         eastKey = p.eastKey;
@@ -59,6 +85,7 @@ public class SlotData : Data
 
     public void LoadData(PlayerProperties p, CameraProperties c)
     {
+        p.hasBeenInit = hasBeenInit;
         p.canMove = canMove;
         p.canJump = canJump;
         p.canRun = canRun;
@@ -67,6 +94,17 @@ public class SlotData : Data
         p.sceneName = sceneName;
         p.playerPos = playerPos;
         p.playerAngle = playerAngle;
+        p.party = party;
+        p.currentProfile = currentProfile;
+        p.inventory = inventory;
+        p.consumableItems = consumableItems;
+        p.consumablesSize = consumablesSize;
+        p.materialItems = materialItems;
+        p.materialsSize = materialsSize;
+        p.keyItems = keyItems;
+        p.keysSize = keysSize;
+        p.armory = armory;
+        p.armorySize = armorySize;
         p.northKey = northKey;
         p.westKey = westKey;
         p.eastKey = eastKey;
