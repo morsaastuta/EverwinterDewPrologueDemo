@@ -331,18 +331,28 @@ public class EquipmentController : MonoBehaviour
     public void LoadGearSlots(Profile profile)
     {
         headSlot.GetComponent<GearController>().SetType(typeof(HeadItem));
-        bodySlot.GetComponent<GearController>().SetType(typeof(BodyItem));
-        armsSlot.GetComponent<GearController>().SetType(typeof(ArmsItem));
-        legsSlot.GetComponent<GearController>().SetType(typeof(LegsItem));
-        wield1Slot.GetComponent<GearController>().SetType(profile.GetWield(1));
-        wield2Slot.GetComponent<GearController>().SetType(profile.GetWield(2));
-        accessory1Slot.GetComponent<GearController>().SetType(typeof(AccessoryItem));
-        accessory2Slot.GetComponent<GearController>().SetType(typeof(AccessoryItem));
+        headSlot.GetComponent<GearController>().UpdateGear(profile.head);
 
-        foreach(GameObject slot in gearSlots)
-        {
-            slot.GetComponent<GearController>().Load();
-        }
+        bodySlot.GetComponent<GearController>().SetType(typeof(BodyItem));
+        bodySlot.GetComponent<GearController>().UpdateGear(profile.body);
+
+        armsSlot.GetComponent<GearController>().SetType(typeof(ArmsItem));
+        armsSlot.GetComponent<GearController>().UpdateGear(profile.arms);
+
+        legsSlot.GetComponent<GearController>().SetType(typeof(LegsItem));
+        legsSlot.GetComponent<GearController>().UpdateGear(profile.legs);
+
+        wield1Slot.GetComponent<GearController>().SetType(profile.GetWield(1));
+        wield1Slot.GetComponent<GearController>().UpdateGear(profile.wield1);
+
+        wield2Slot.GetComponent<GearController>().SetType(profile.GetWield(2));
+        wield2Slot.GetComponent<GearController>().UpdateGear(profile.wield2);
+
+        accessory1Slot.GetComponent<GearController>().SetType(typeof(AccessoryItem));
+        accessory1Slot.GetComponent<GearController>().UpdateGear(profile.accessory1);
+
+        accessory2Slot.GetComponent<GearController>().SetType(typeof(AccessoryItem));
+        accessory2Slot.GetComponent<GearController>().UpdateGear(profile.accessory2);
     }
 
     public void CloseSelector()

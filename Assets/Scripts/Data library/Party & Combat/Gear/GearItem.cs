@@ -1,41 +1,42 @@
 using System.Collections.Generic;
 using System;
+using Sirenix.Serialization;
 
 [Serializable]
 public abstract class GearItem : Item
 {
-    public int price = 0;
+    [OdinSerialize] public int price = 0;
 
     // Main stats (integer)
-    public int statHP = 0;
-    public int statMP = 0;
-    public int statATK = 0;
-    public int statDFN = 0;
-    public int statMAG = 0;
-    public int statDFL = 0;
-    public int statSPI = 0;
+    [OdinSerialize] public int statHP = 0;
+    [OdinSerialize] public int statMP = 0;
+    [OdinSerialize] public int statATK = 0;
+    [OdinSerialize] public int statDFN = 0;
+    [OdinSerialize] public int statMAG = 0;
+    [OdinSerialize] public int statDFL = 0;
+    [OdinSerialize] public int statSPI = 0;
 
     // Action stats (integer)
-    public int statSPD = 0;
-    public int statMOV = 0;
+    [OdinSerialize] public int statSPD = 0;
+    [OdinSerialize] public int statMOV = 0;
 
     // RNG stats (percentage)
-    public float statACC = 0;
-    public float statCR = 0;
-    public float statCD = 0;
+    [OdinSerialize] public float statACC = 0;
+    [OdinSerialize] public float statCR = 0;
+    [OdinSerialize] public float statCD = 0;
 
     // Affinity stats (percentage)
-    public float statPSA = 0;
-    public float statPRA = 0;
-    public float statASA = 0;
-    public float statARA = 0;
-    public float statSSA = 0;
-    public float statSRA = 0;
-    public float statHSA = 0;
-    public float statHRA = 0;
+    [OdinSerialize] public float statPSA = 0;
+    [OdinSerialize] public float statPRA = 0;
+    [OdinSerialize] public float statASA = 0;
+    [OdinSerialize] public float statARA = 0;
+    [OdinSerialize] public float statSSA = 0;
+    [OdinSerialize] public float statSRA = 0;
+    [OdinSerialize] public float statHSA = 0;
+    [OdinSerialize] public float statHRA = 0;
 
-    public List<string> statNames = new List<string>();
-    public Dictionary<string,float> statByName = new Dictionary<string, float>();
+    [OdinSerialize] public List<string> statNames = new();
+    [OdinSerialize] public Dictionary<string,float> statByName = new();
 
     public GearItem()
     {

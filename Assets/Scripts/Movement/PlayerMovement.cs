@@ -5,10 +5,10 @@ public class PlayerMovement : MonoBehaviour
     public PlayerProperties player;
 
     // Speed
-    public float walkSpeed = 1f;
-    public float runSpeed = 2f;
-    public float normalFactor = 1.5f;
-    public float speed;
+    float walkSpeed = 0.01f;
+    float runSpeed = 0.02f;
+    float normalFactor = 1.5f;
+    float speed;
     public int velocity;
 
     // Move
@@ -17,8 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private bool movingFront;
     public int direction;
 
-    private void Start()
+    // Visuals
+    public Animator animator;
+
+    void Start()
     {
+        animator = GetComponent<Animator>();
         speed = walkSpeed;
 
         movement = transform.localScale;
@@ -74,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             transform.position = movement;
+
+            if (animator.GetInteger("velocity") != velocity) animator.SetInteger("velocity", velocity);
+            if (animator.GetInteger("direction") != direction) animator.SetInteger("direction", direction);
         }
     }
 
@@ -90,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
         if (!movingSides && !movingFront) velocity = 0;
         else
         {
-            if (player.CompareKey(player.runKey)) velocity = 2;
-            else velocity = 1;
+            if (player.CompareKey(player.runKey)) velocity = 1;
+            else velocity = 1; // actually 2 but the animator does not contain run animations
         }
     }
 }

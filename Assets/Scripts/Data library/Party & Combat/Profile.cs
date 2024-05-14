@@ -1,31 +1,32 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.Serialization;
 
 [Serializable]
 public abstract class Profile : Combatant
 {
     // General info
-    public string fullname;
-    public Job job;
-    public Job subjob;
+    [OdinSerialize] public string fullname;
+    [OdinSerialize] public Job job;
+    [OdinSerialize] public Job subjob;
 
     // Point meters
-    public int currentJP;
+    [OdinSerialize] public int currentJP;
 
     // Equipment
-    public HeadItem head;
-    public BodyItem body;
-    public ArmsItem arms;
-    public LegsItem legs;
-    public WieldItem wield1;
-    public WieldItem wield2;
-    public AccessoryItem accessory1;
-    public AccessoryItem accessory2;
+    [OdinSerialize] public HeadItem head;
+    [OdinSerialize] public BodyItem body;
+    [OdinSerialize] public ArmsItem arms;
+    [OdinSerialize] public LegsItem legs;
+    [OdinSerialize] public WieldItem wield1;
+    [OdinSerialize] public WieldItem wield2;
+    [OdinSerialize] public AccessoryItem accessory1;
+    [OdinSerialize] public AccessoryItem accessory2;
 
-    public WieldItem currentWield;
+    [OdinSerialize] public WieldItem currentWield;
 
-    public List<GearItem> gearItems = new List<GearItem>();
-    public List<WieldItem> wieldItems = new List<WieldItem>();
+    [OdinSerialize] public List<GearItem> gearItems = new();
+    [OdinSerialize] public List<WieldItem> wieldItems = new();
 
     public Profile()
     {
@@ -88,9 +89,9 @@ public abstract class Profile : Combatant
     {
         InitializeLists();
 
-        statAP = baseAP;
         statHP = baseHP;
         statMP = baseMP;
+        statAP = baseAP;
 
         statATK = baseATK;
         statDFN = baseDFN;

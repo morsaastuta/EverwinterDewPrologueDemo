@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 
 [Serializable]
@@ -12,6 +11,7 @@ public class RationI : ConsumableItem
         description = "Heals 100 HP to one party member.";
         price = 15;
         stackable = true;
+        range = 1;
     }
 
     public override bool Consume(CellController target, CellController user)

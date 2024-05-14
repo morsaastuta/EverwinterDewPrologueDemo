@@ -1,16 +1,25 @@
+using Sirenix.Serialization;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public abstract class MagicalSkill : Skill
 {
-    public int costMP;
+    [OdinSerialize] public int costMP;
 
-    protected List<string> elements = new List<string>();
+    [OdinSerialize] protected List<string> elements = new();
 
-    protected void SpendPoints(Combatant combatant)
+    protected void SpendPoints(Combatant user)
     {
-        combatant.ChangeAP(-costAP);
-        combatant.ChangeMP(-costMP);
+        user.ChangeAP(-costAP);
+        user.ChangeMP(-costMP);
+    }
+
+    public void RecoverPoints(CellController cell)
+    {
+        cell.combatant.ChangeAP(costAP);
+        cell.combatant.ChangeMP(costMP);
     }
 
     protected int AttuneDamage(int damage, float userSTR, float foeRES)

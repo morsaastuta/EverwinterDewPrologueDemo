@@ -2,18 +2,13 @@ using UnityEngine;
 
 public class CameraPivot : MonoBehaviour
 {
-    public CameraProperties cam;
+    [SerializeField] CameraProperties cam;
 
-    public Transform CameraTarget;
-    public float pLerp;
-    public float rLerp;
+    [SerializeField] Transform CameraTarget;
 
     void Update()
     {
-        if (cam.canPivot)
-        {
-            transform.position = Vector3.Lerp(transform.position, CameraTarget.position, pLerp);
-            transform.rotation = Quaternion.Lerp(transform.rotation, CameraTarget.rotation, rLerp);
-        }
+        transform.position = Vector3.Lerp(transform.position, CameraTarget.position, 1);
+        if (cam.canPivot) transform.rotation = Quaternion.Lerp(transform.rotation, CameraTarget.rotation, 1);
     }
 }

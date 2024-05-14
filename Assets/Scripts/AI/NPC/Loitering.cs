@@ -1,20 +1,21 @@
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class Loitering : MonoBehaviour
 {
-    [SerializeField] private MapProperties mapProperties;
+    [SerializeField] MapProperties mapProperties;
 
     // Loiter mode
-    [SerializeField] private float speed;
-    [SerializeField] private int turnMax;
-    private int turn;
+    [SerializeField] float speed;
+    [SerializeField] int turnMax;
+    int turn;
 
     // Animation
     public int velocity;
     public int direction;
 
     // Interaction
-    [SerializeField] private Talk interaction;
+    [SerializeField] Talk interaction;
 
     private void Start()
     {
@@ -23,14 +24,13 @@ public class Loitering : MonoBehaviour
 
     void Update()
     {
-        if (!mapProperties.pausedGame && !interaction.interacting)
+        if (mapProperties.pausedGame) velocity = 0;
+        else if (interaction is not null)
         {
-            Loiter();
+            if (interaction.interacting) velocity = 0;
+            else Loiter();
         }
-        else
-        {
-            velocity = 0;
-        }
+        else Loiter();
     }
 
     void Loiter()

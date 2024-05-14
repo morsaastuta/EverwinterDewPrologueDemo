@@ -1,6 +1,6 @@
 using System;
-using UnityEngine;
 
+[Serializable]
 public class Skill_ShieldOnrush : PhysicalSkill
 {
     public Skill_ShieldOnrush()
@@ -22,14 +22,8 @@ public class Skill_ShieldOnrush : PhysicalSkill
         SpendPoints(user.combatant);
 
         int rallyMultiplier = 0;
-        if (user.posX != target.posX)
-        {
-            rallyMultiplier = (int)Math.Abs(target.posX - user.posX);
-        }
-        else if (user.posY != target.posY)
-        {
-            rallyMultiplier = (int)Math.Abs(target.posY - user.posY);
-        }
+        if (user.posX != target.posX) rallyMultiplier = Math.Abs(target.posX - user.posX);
+        else if (user.posY != target.posY) rallyMultiplier = Math.Abs(target.posY - user.posY);
 
         if (Roll(user.combatant.statACC))
         {

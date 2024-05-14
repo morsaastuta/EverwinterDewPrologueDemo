@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatusController : MonoBehaviour
 {
@@ -32,6 +33,12 @@ public class StatusController : MonoBehaviour
     [SerializeField] TextMeshProUGUI showcaseHSA;
     [SerializeField] TextMeshProUGUI showcaseHRA;
 
+    // Point sliders
+    [SerializeField] TextMeshProUGUI counterHP;
+    [SerializeField] Slider meterHP;
+    [SerializeField] TextMeshProUGUI counterMP;
+    [SerializeField] Slider meterMP;
+
     public void LoadStats()
     {
         Profile profile = partyController.playerProperties.currentProfile;
@@ -60,5 +67,13 @@ public class StatusController : MonoBehaviour
         showcaseSRA.SetText(profile.statSRA.ToString() + "%");
         showcaseHSA.SetText(profile.statHSA.ToString() + "%");
         showcaseHRA.SetText(profile.statHRA.ToString() + "%");
+
+        counterHP.SetText(profile.currentHP.ToString());
+        meterHP.maxValue = profile.statHP;
+        meterHP.value = profile.currentHP;
+
+        counterMP.SetText(profile.currentMP.ToString());
+        meterMP.maxValue = profile.statMP;
+        meterMP.value = profile.currentMP;
     }
 }

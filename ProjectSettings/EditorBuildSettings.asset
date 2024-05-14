@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 624dc81bc33360542a10233532e69dd3
+  - enabled: 1
     path: Assets/Scenes/Thrascias/ThrasciasForest_Overworld.unity
     guid: 330d9bab2d8b8b0438ceff403f035a78
   - enabled: 1
-    path: Assets/Scenes/TitleScreen.unity
-    guid: 624dc81bc33360542a10233532e69dd3
+    path: Assets/Scenes/Thrascias/ThrasciasForest_Combat.unity
+    guid: 4211b7029e635444d95226d99518d7b7
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab

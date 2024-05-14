@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
 {
-    public CameraProperties cam;
+    [SerializeField] CameraProperties cam;
 
-    public float speed;
-    public float furthest = 10;
-    public float closest = -2;
-    private float current = 0;
+    [SerializeField] float speed;
+    [SerializeField] float furthest = 10;
+    [SerializeField] float closest = -2;
+    float current = 0;
 
     void Update()
     {

@@ -1,6 +1,6 @@
-using UnityEngine;
-using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Skill_SpinCutter : PhysicalSkill
 {
     public Skill_SpinCutter()

@@ -1,15 +1,15 @@
+using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.VisualScripting;
 
 [Serializable]
 public abstract class Job
 {
-    public Sprite icon;
-    public string name;
-    public string description;
-    public Type wield1;
-    public Type wield2;
+    [OdinSerialize] public string name;
+    [OdinSerialize] public string description;
+    [OdinSerialize] public Type wield1;
+    [OdinSerialize] public Type wield2;
 
     public virtual List<Skill> SkillsByLevel(int level)
     {

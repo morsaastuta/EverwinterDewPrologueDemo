@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class Talk : MonoBehaviour
 {
-    [SerializeField] private MapProperties mapProperties;
-    [SerializeField] private PlayerProperties player;
+    [SerializeField] MapProperties mapProperties;
+    [SerializeField] PlayerProperties player;
 
-    [SerializeField] private List<string> messages;
+    [SerializeField] List<string> messages;
 
-    [SerializeField] private GameObject textHUD;
-    [SerializeField] private TextMeshProUGUI textBox;
-    [SerializeField] private CameraProperties cam;
-    [SerializeField] private Loitering npc;
-    [SerializeField] private Image profile;
-    [SerializeField] private Sprite face;
+    [SerializeField] GameObject textHUD;
+    [SerializeField] TextMeshProUGUI textBox;
+    [SerializeField] CameraProperties cam;
+    [SerializeField] Loitering npc;
+    [SerializeField] Image profile;
+    [SerializeField] Sprite face;
 
-    [SerializeField] private float range;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] float range;
+    [SerializeField] LayerMask playerLayer;
 
     public bool interacting = false;
-    private int currentMessage = 0;
+    int currentMessage = 0;
 
     void Update()
     {

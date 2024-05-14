@@ -8,7 +8,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     // Referenced scripts
     [SerializeField] PlayerProperties playerProperties;
-    [SerializeField] CameraProperties camProperties;
+    [SerializeField] CameraProperties cameraProperties;
     [SerializeField] MapProperties mapProperties;
 
     public static DataPersistenceManager instance
@@ -16,13 +16,17 @@ public class DataPersistenceManager : MonoBehaviour
         get; private set;
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instance != null)
         {
             Debug.LogError("More than one DPM in the scene");
         }
         instance = this;
+
+        LoadGame(0);
+
+        playerProperties.Initialize();
     }
 
     public void SaveGame(int slot)
@@ -30,53 +34,34 @@ public class DataPersistenceManager : MonoBehaviour
 
         // Save current position, rotation, scene...
         playerProperties.SaveStatus();
-        camProperties.SaveStatus();
+        cameraProperties.SaveStatus();
 
         // Instantiate data scripts
-        SlotData slotData = new SlotData(playerProperties, camProperties);
+        SlotData slotData = new(playerProperties, cameraProperties, mapProperties);
 
         // Save scripts as files
-        fileDataHandler = new FileDataHandler(slot);
+        fileDataHandler = new(slot);
         fileDataHandler.SaveSlot(slotData);
     }
 
     public void LoadGame(int slot)
     {
         // Get scripts from files
-        fileDataHandler = new FileDataHandler(slot);
+        fileDataHandler = new(slot);
         SlotData savfile = fileDataHandler.LoadSlot();
 
-        if (!playerProperties.sceneName.Equals(savfile.sceneName))
-        {
-            // Load data from file
-            savfile.LoadData(playerProperties, camProperties);
+        // Load data from file
+        List<MonoBehaviour> loadedProperties = savfile.LoadData();
+        playerProperties.Reload((PlayerProperties)loadedProperties[0]);
+        cameraProperties.Reload((CameraProperties)loadedProperties[1]);
+        mapProperties.Reload((MapProperties)loadedProperties[2]);
 
-            // Set data
-            camProperties.LoadStatus();
-            playerProperties.LoadStatus();
-
-            SaveGame(0);
-
-            SceneManager.LoadSceneAsync(savfile.sceneName);
-
-        } else
-        {
-
-            // Load data from file
-            savfile.LoadData(playerProperties, camProperties);
-
-            // Set data
-            camProperties.LoadStatus();
-            playerProperties.LoadStatus();
-
-            SaveGame(0);
-
-        }
+        if (!playerProperties.sceneName.Equals(savfile.sceneName) && slot != 0) SceneManager.LoadSceneAsync(savfile.sceneName);
     }
 
     public void DeleteGame(int slot)
     {
-        fileDataHandler = new FileDataHandler(slot);
+        fileDataHandler = new(slot);
         fileDataHandler.DeleteSlot();
     }
 

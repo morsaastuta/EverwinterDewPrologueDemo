@@ -1,6 +1,6 @@
-using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
+using System;
 
+[Serializable]
 public class Skill_Snowball : MagicalSkill
 {
     public Skill_Snowball()

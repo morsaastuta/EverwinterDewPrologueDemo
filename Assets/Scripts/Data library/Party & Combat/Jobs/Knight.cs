@@ -1,8 +1,7 @@
-
-
 using System.Collections.Generic;
-using Unity.Jobs;
+using System;
 
+[Serializable]
 public class Knight : Job
 {
     public Knight()

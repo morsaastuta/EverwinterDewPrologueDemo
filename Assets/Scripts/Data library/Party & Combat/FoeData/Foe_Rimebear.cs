@@ -1,11 +1,20 @@
+using System;
 
-
+[Serializable]
 public class Foe_Rimebear : FoeData
 {
     public Foe_Rimebear(int initLV)
     {
         name = "Rimebear";
         description = "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.";
+
+        iconPath = "Sprites/NPCs/Foes/Rimebear/iconsheet";
+        profilePath = "Sprites/NPCs/Foes/Rimebear/profilesheet";
+        facePath = "Sprites/NPCs/Foes/Rimebear/facesheet";
+        spritesheetOWPath = "Sprites/NPCs/Foes/Rimebear/OW_spritesheet";
+        spritesheetCSPath = "Sprites/NPCs/Foes/Rimebear/CS_spritesheet";
+        animatorOWPath = "Animations/NPCs/Foes/Rimebear/OW_controller";
+        animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_controller";
 
         level = initLV;
 
@@ -23,5 +32,6 @@ public class Foe_Rimebear : FoeData
         basePRA = 115;
 
         LoadStats();
+        FullRestore();
     }
 }

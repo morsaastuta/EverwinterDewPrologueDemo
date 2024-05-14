@@ -1,7 +1,9 @@
+using Sirenix.Serialization;
 using System;
+using Unity.VisualScripting;
 
 [Serializable]
 public abstract class WieldItem : GearItem
 {
-    public bool dual;
+    [OdinSerialize] public bool dual;
 }

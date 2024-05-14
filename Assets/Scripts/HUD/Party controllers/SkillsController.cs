@@ -34,7 +34,7 @@ public class SkillsController : MonoBehaviour
 
     // Skill list
     [SerializeField] SlotGenerator slotGenerator;
-    [SerializeField] RectTransform skilSelectionPane;
+    [SerializeField] RectTransform skillSelectionPane;
     List<GameObject> skillSlots = new();
 
     public void Physical()
@@ -48,7 +48,7 @@ public class SkillsController : MonoBehaviour
             if (skill.GetType().BaseType.Equals(typeof(PhysicalSkill)))
             {
                 GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(skilSelectionPane);
+                slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
                 slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);
@@ -66,7 +66,7 @@ public class SkillsController : MonoBehaviour
         {
             if (skill.GetType().BaseType.Equals(typeof(MagicalSkill))) {
                 GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(skilSelectionPane);
+                slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
                 slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);
@@ -85,7 +85,7 @@ public class SkillsController : MonoBehaviour
             if (skill.GetType().BaseType.Equals(typeof(MixedSkill)))
             {
                 GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(skilSelectionPane);
+                slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
                 slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);

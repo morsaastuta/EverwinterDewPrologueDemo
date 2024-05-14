@@ -11,16 +11,17 @@ public class EtherI : ConsumableItem
         description = "Recovers 25 MP to one party member.";
         price = 25;
         stackable = true;
+        range = 1;
     }
 
     public override bool Consume(CellController target, CellController user)
     {
-        target.combatant.statMP += 25;
+        target.combatant.ChangeMP(25);
         return true;
     }
 
     public override void Consume(Combatant user)
     {
-        user.statMP += 25;
+        user.ChangeMP(25);
     }
 }

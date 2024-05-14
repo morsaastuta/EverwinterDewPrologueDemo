@@ -4,43 +4,47 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
+    // Subsequent controllers
+    [SerializeField] PartyController partyController;
+    [SerializeField] InventoryController inventoryController;
+
     // External properties
-    [SerializeField] private PlayerProperties properties;
-    [SerializeField] private MapProperties mapProperties;
-    [SerializeField] private CameraProperties camProperties;
+    [SerializeField] PlayerProperties properties;
+    [SerializeField] MapProperties mapProperties;
+    [SerializeField] CameraProperties camProperties;
 
     // Internal properties
-    private int cooldownMax = 10;
-    private int cooldown;
-    private string task;
+    int cooldownMax = 10;
+    int cooldown;
+    string task;
 
     // Prompt controller
-    [SerializeField] private PromptController promptController;
+    [SerializeField] PromptController promptController;
 
     // Main menu
-    [SerializeField] private GameObject menuBox;
-    [SerializeField] private GameObject optParty;
-    [SerializeField] private GameObject optInventory;
-    [SerializeField] private GameObject optSettings;
-    [SerializeField] private GameObject optExit;
+    [SerializeField] GameObject menuBox;
+    [SerializeField] GameObject optParty;
+    [SerializeField] GameObject optInventory;
+    [SerializeField] GameObject optSettings;
+    [SerializeField] GameObject optExit;
 
     // Party submenu
-    [SerializeField] private GameObject infoBox;
-    [SerializeField] private GameObject optStatus;
-    [SerializeField] private GameObject optEquipment;
-    [SerializeField] private GameObject optSkills;
-    [SerializeField] private GameObject optFormation;
+    [SerializeField] GameObject infoBox;
+    [SerializeField] GameObject optStatus;
+    [SerializeField] GameObject optEquipment;
+    [SerializeField] GameObject optSkills;
+    [SerializeField] GameObject optFormation;
 
     // Inventory submenu
-    [SerializeField] private GameObject partyFrame;
-    [SerializeField] private GameObject inventoryFrame;
+    [SerializeField] GameObject partyFrame;
+    [SerializeField] GameObject inventoryFrame;
 
-    private void Start()
+    void Start()
     {
         cooldown = cooldownMax;
     }
 
-    private void Update()
+    void Update()
     {
         CheckMenu();
     }
@@ -55,6 +59,8 @@ public class PauseMenuController : MonoBehaviour
         // Open menu
         if (properties.canPause && cooldown == cooldownMax && !menuBox.activeSelf && properties.CompareKeyOnce(properties.menuKey, true))
         {
+            partyController.CloseAll();
+            inventoryController.CloseAll();
             menuBox.SetActive(true);
             properties.SetActive(false);
             mapProperties.SetPaused(true);

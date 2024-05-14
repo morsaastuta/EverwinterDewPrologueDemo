@@ -1,14 +1,16 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
+using Sirenix.Serialization;
 
 [Serializable]
 public abstract class Item
 {
-    public string name = "";
-    public string description = "";
-    protected string sheetPath = "Sprites/Empty";
-    protected int sheetIndex = -1;
-    public bool stackable = true;
+    [OdinSerialize] public string name = "";
+    [OdinSerialize] public string description = "";
+    [OdinSerialize] public string sheetPath = "Sprites/Empty";
+    [OdinSerialize] protected int sheetIndex = -1;
+    [OdinSerialize] public bool stackable = true;
 
     public Sprite GetIcon()
     {

@@ -57,11 +57,10 @@ public class InventoryController : MonoBehaviour
         LoadSection();
     }
 
-    public void Last()
+    public void CloseAll()
     {
         Deselect();
         DeleteSlots();
-        LoadSection();
     }
 
     public void DeleteSlots()
@@ -93,35 +92,34 @@ public class InventoryController : MonoBehaviour
         int materialsIndex = 0;
         int keysIndex = 0;
 
-        foreach (Item item in partyController.playerProperties.inventory.Keys)
+        foreach (ConsumableItem item in partyController.playerProperties.GetConsumableItems())
         {
-            if (item.GetType().BaseType.Equals(typeof(ConsumableItem)))
-            {
-                GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(inventoryPane);
-                slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
-                slot.GetComponent<SlotController>().index = consumablesIndex;
-                consumablesIndex++;
-                consumables.Add(slot);
-            }
-            if (item.GetType().BaseType.Equals(typeof(MaterialItem)))
-            {
-                GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(inventoryPane);
-                slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
-                slot.GetComponent<SlotController>().index = materialsIndex;
-                materialsIndex++;
-                materials.Add(slot);
-            }
-            if (item.GetType().BaseType.Equals(typeof(KeyItem)))
-            {
-                GameObject slot = slotGenerator.Generate();
-                slot.transform.SetParent(inventoryPane);
-                slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
-                slot.GetComponent<SlotController>().index = keysIndex;
-                keysIndex++;
-                keys.Add(slot);
-            }
+            GameObject slot = slotGenerator.Generate();
+            slot.transform.SetParent(inventoryPane);
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().index = consumablesIndex;
+            consumablesIndex++;
+            consumables.Add(slot);
+        }
+
+        foreach (MaterialItem item in partyController.playerProperties.GetMaterialItems())
+        {
+            GameObject slot = slotGenerator.Generate();
+            slot.transform.SetParent(inventoryPane);
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().index = materialsIndex;
+            materialsIndex++;
+            materials.Add(slot);
+        }
+
+        foreach (KeyItem item in partyController.playerProperties.GetKeyItems())
+        {
+            GameObject slot = slotGenerator.Generate();
+            slot.transform.SetParent(inventoryPane);
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().index = keysIndex;
+            keysIndex++;
+            keys.Add(slot);
         }
 
         while (consumables.Count < partyController.playerProperties.consumablesSize)

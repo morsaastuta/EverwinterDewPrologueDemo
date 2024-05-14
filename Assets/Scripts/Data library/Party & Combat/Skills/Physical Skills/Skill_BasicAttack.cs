@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 
+[Serializable]
 public class Skill_BasicAttack : PhysicalSkill
 {
     public Skill_BasicAttack()

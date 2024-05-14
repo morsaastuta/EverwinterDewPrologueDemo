@@ -33,12 +33,14 @@ public class PartyController : MonoBehaviour
     {
         CloseAll();
         equipmentFrame.SetActive(true);
+        equipmentController.LoadGearSlots(playerProperties.currentProfile);
     }
 
     public void Skills()
     {
         CloseAll();
         skillsFrame.SetActive(true);
+        skillsController.ClearSkills();
     }
 
     public void UpdateHUD()

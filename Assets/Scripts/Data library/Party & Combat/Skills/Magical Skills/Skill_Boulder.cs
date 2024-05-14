@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 
+[Serializable]
 public class Skill_Boulder : MagicalSkill
 {
     public Skill_Boulder()

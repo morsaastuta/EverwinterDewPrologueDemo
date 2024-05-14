@@ -1,5 +1,7 @@
-using UnityEngine;
+using System;
 
+
+[Serializable]
 public class Skill_Slash : PhysicalSkill
 {
     public Skill_Slash()

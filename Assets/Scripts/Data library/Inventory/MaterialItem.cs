@@ -1,7 +1,9 @@
+using Sirenix.Serialization;
 using System;
+using Unity.VisualScripting;
 
 [Serializable]
 public abstract class MaterialItem : Item
 {
-    public int price;
+    [OdinSerialize] public int price;
 }

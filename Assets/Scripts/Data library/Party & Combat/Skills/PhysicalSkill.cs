@@ -1,10 +1,13 @@
+using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public abstract class PhysicalSkill : Skill
 {
-    protected List<Type> wields = new List<Type>();
+    [OdinSerialize] protected List<Type> wields = new();
 
     protected List<Type> AnyWield()
     {
@@ -27,5 +30,22 @@ public abstract class PhysicalSkill : Skill
             else if (wields[index].Equals(typeof(BowItem))) return Resources.LoadAll<Sprite>("Sprites/HUD/Items/framesheet")[11];
         }
         return Resources.Load<Sprite>("Sprites/Empty");
+    }
+
+    public bool ContainsWield(WieldItem wieldItem)
+    {
+        foreach (Type type in wields)
+        {
+            if (wieldItem is null)
+            {
+                if (type is null) return true;
+            }
+            else if (type is not null)
+            {
+                if (wieldItem.GetType().BaseType.Equals(type)) return true;
+            }
+        }
+
+        return false;
     }
 }

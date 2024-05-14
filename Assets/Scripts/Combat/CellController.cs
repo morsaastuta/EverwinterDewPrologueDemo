@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
-using UnityEngine.UI;
 
 public class CellController : MonoBehaviour
 {
@@ -31,21 +26,36 @@ public class CellController : MonoBehaviour
     public int posX;
     public int posY;
     public bool selectable;
+    public bool selected = false;
+    public bool newlySelected = false;
 
     // Combat references
     CombatController scene;
+    TurnBarController card;
 
-    void Start()
+    void Update()
     {
-        UpdateReferences();
-
-        if (Random.Range(0, 1).Equals(0))
+        if (combatant is not null)
         {
-            ReceiveCombatant(scene.playerProperties.currentProfile);
+            if (combatant.KO) DismissCombatant();
         }
-        else
+    }
+
+    public void EnterHover()
+    {
+        if (!selected)
         {
-            DismissCombatant();
+            if (combatant == null) cursorLower.SetActive(true);
+            else cursorUpper.SetActive(true);
+        }
+    }
+
+    public void ExitHover()
+    {
+        if (!selected)
+        {
+            cursorLower.SetActive(false);
+            cursorUpper.SetActive(false);
         }
     }
 
@@ -55,50 +65,60 @@ public class CellController : MonoBehaviour
 
         if (selectable)
         {
-            scene.Deselect();
+            newlySelected = true;
+            scene.SelectCell(this);
+            newlySelected = false;
 
             cellType.color = new Color(cellType.color.r, cellType.color.b, cellType.color.g, .8f);
-
-            if (combatant != null) cursorUpper.SetActive(true);
-            else cursorLower.SetActive(true);
+            selected = true;
         }
     }
 
     public void Deselect()
     {
-        cursorUpper.SetActive(false);
-        cursorLower.SetActive(false);
+        if (!newlySelected)
+        {
+            cursorUpper.SetActive(false);
+            cursorLower.SetActive(false);
+        }
         cellType.color = new Color(cellType.color.r, cellType.color.b, cellType.color.g, .5f);
+        selected = false;
     }
 
     public void ReceiveCombatant(Combatant newCombatant)
     {
         combatant = newCombatant;
-        combatantProjection.sprite = newCombatant.spriteCS;
-        combatantAnimator = newCombatant.animatorCS;
+        combatantProjection.sprite = newCombatant.GetSpritesheetCS(0);
+        combatantAnimator.runtimeAnimatorController = newCombatant.GetAnimatorCS();
+        UpdateCombatantVisuals();
+        card = scene.EnterCombatant(newCombatant);
     }
 
     public void DismissCombatant()
     {
-        combatant = null;
         combatantProjection.sprite = emptySprite;
-        combatantAnimator = null;
+        combatant = null;
+        UpdateCombatantVisuals();
+        Destroy(card.gameObject);
     }
 
     public bool CheckEnergy()
     {
-        // If the combatant's current fatigue is still greater than 0, rest (substract SPD from FAT)
-        if (combatant.currentFAT > 0)
+        if (combatant != null)
         {
-            combatant.currentFAT -= combatant.statSPD;
-            return false;
+            // If the combatant's current fatigue is still greater than 0, substract SPD from FAT
+            if (combatant.currentFAT > 0)
+            {
+                combatant.ChangeFAT(-combatant.statSPD);
+                return false;
+            }
+            // If the combatant's current fatigue has reached 0, act (add MAX FAT to FAT)
+            else
+            {
+                return true;
+            }
         }
-        // If the combatant's current fatigue has reached 0, act (add MAX FAT to FAT)
-        else
-        {
-            combatant.currentFAT += combatant.statFAT;
-            return true;
-        }
+        else return false;
     }
 
     public void SelectSkill(Skill skill)
@@ -156,13 +176,13 @@ public class CellController : MonoBehaviour
                 else
                 {
                     // Check if the cell is inside the movement range of the combatant
-                    if (scene.CalcDistance(this, scene.actorCell) <= scene.actorCell.combatant.statMOV)
+                    if (scene.CalcDistance(this, scene.ActorCell()) <= scene.ActorCell().combatant.statMOV)
                     {
                         selectable = true;
                         cellType.sprite = safeDestination;
 
                         // Also check if it is inside the movement range of any foe
-                        foreach (CellController cell in scene.foeCells)
+                        foreach (CellController cell in scene.FoeCells())
                         {
                             if (scene.CalcDistance(this, cell) <= cell.combatant.statMOV + 1)
                             {
@@ -179,10 +199,22 @@ public class CellController : MonoBehaviour
             // If current mode is ACT
             case "act":
                 // If the cell is occupied...
-                if (combatant != null)
+                if (combatant is not null)
                 {
+                    selectable = true;
+
                     // Check if the cell has a companion or a foe
-                    if (combatant.GetType().BaseType.Equals(typeof(Profile))) cellType.sprite = selectCompanion;
+                    if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+                    {
+                        // Get everything ready
+                        cellType.sprite = selectCompanion;
+                        Profile profile = (Profile)combatant;
+
+                        // Change current animation depending on wield
+                        if (profile.currentWield == null) combatantAnimator.SetTrigger("barehand");
+                        else if (profile.currentWield.GetType().BaseType.Equals(typeof(SwordItem))) combatantAnimator.SetTrigger("sword");
+                        else if (profile.currentWield.GetType().BaseType.Equals(typeof(ShieldItem))) combatantAnimator.SetTrigger("shield");
+                    }
                     else if (combatant.GetType().BaseType.Equals(typeof(FoeData))) cellType.sprite = selectFoe;
                 }
                 // If the cell is NOT occupied...
@@ -194,28 +226,89 @@ public class CellController : MonoBehaviour
                 // If the cell is occupied...
                 if (combatant != null)
                 {
-                    // Varies on skill/item
+                    // Skill
                     if (scene.selectedSkill != null)
                     {
-                        // The cell must be in range
-                        if (scene.CalcDistance(this, scene.actorCell) <= scene.selectedSkill.range)
+                        // Negative skill
+                        if (!scene.selectedSkill.friendly)
                         {
-                            selectable = true;
-                            if (!scene.selectedSkill.friendly) cellType.sprite = castFoe;
-                            else cellType.sprite = castCompanion;
+                            // Is companion
+                            if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                cellType.sprite = selectCompanion;
+                            }
+                            // Is foe (in range)
+                            else if (scene.CalcDistance(this, scene.ActorCell()) <= scene.selectedSkill.range && combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                selectable = true;
+                                cellType.sprite = castFoe;
+                            }
+                            // Is foe (out of range)
+                            else if (combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                cellType.sprite = selectFoe;
+                            }
+                            else cellType.sprite = emptySprite;
                         }
-                        else cellType.sprite = emptySprite;
+                        // Positive skill
+                        else
+                        {
+                            // Is companion (in range)
+                            if (scene.CalcDistance(this, scene.ActorCell()) <= scene.selectedSkill.range && combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                selectable = true;
+                                cellType.sprite = castCompanion;
+                            }
+                            // Is companion (out of range)
+                            else if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                cellType.sprite = selectCompanion;
+                            }
+                            // Is foe
+                            else if (combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                cellType.sprite = selectFoe;
+                            }
+                            else cellType.sprite = emptySprite;
+                        }
                     }
+                    // Item
                     else if (scene.selectedItem != null)
                     {
-                        // The cell must be in range
-                        if (scene.CalcDistance(this, scene.actorCell) <= scene.selectedItem.range)
+                        if (!scene.selectedItem.friendly)
                         {
-                            selectable = true;
-                            if (!scene.selectedItem.friendly) cellType.sprite = castFoe;
-                            else cellType.sprite = castCompanion;
+                            if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                cellType.sprite = selectCompanion;
+                            }
+                            else if (scene.CalcDistance(this, scene.ActorCell()) <= scene.selectedItem.range && combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                selectable = true;
+                                cellType.sprite = castFoe;
+                            }
+                            else if (combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                cellType.sprite = selectFoe;
+                            }
+                            else cellType.sprite = emptySprite;
                         }
-                        else cellType.sprite = emptySprite;
+                        else
+                        {
+                            if (scene.CalcDistance(this, scene.ActorCell()) <= scene.selectedItem.range && combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                selectable = true;
+                                cellType.sprite = castCompanion;
+                            }
+                            else if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+                            {
+                                cellType.sprite = selectCompanion;
+                            }
+                            else if (combatant.GetType().BaseType.Equals(typeof(FoeData)))
+                            {
+                                cellType.sprite = selectFoe;
+                            }
+                            else cellType.sprite = emptySprite;
+                        }
                     }
                 }
                 break;
@@ -234,11 +327,33 @@ public class CellController : MonoBehaviour
                 else
                 {
                     // Check if the cell is inside the movement range of the combatant
-                    if (scene.CalcDistance(this, scene.actorCell) <= scene.actorCell.combatant.statMOV) cellType.sprite = combatantRange;
+                    if (scene.CalcDistance(this, scene.CheckedCell()) <= scene.CheckedCell().combatant.statMOV) cellType.sprite = combatantRange;
                     // If it is not, the cell does not matter and its type is left blank
                     else cellType.sprite = emptySprite;
                 }
                 break;
         }
+    }
+
+    public void UpdateCombatantVisuals()
+    {
+        UpdateReferences();
+
+        if (combatant != null)
+        {
+            // Check if the cell has a companion or a foe
+            if (combatant.GetType().BaseType.Equals(typeof(Profile)))
+            {
+                // Get everything ready
+                Profile profile = (Profile)combatant;
+
+                // Change current animation depending on wield
+                if (profile.currentWield == null) combatantAnimator.SetTrigger("barehand");
+                else if (profile.currentWield.GetType().BaseType.Equals(typeof(SwordItem))) combatantAnimator.SetTrigger("sword");
+                else if (profile.currentWield.GetType().BaseType.Equals(typeof(ShieldItem))) combatantAnimator.SetTrigger("shield");
+            }
+            else if (combatant.GetType().BaseType.Equals(typeof(FoeData))) cellType.sprite = selectFoe;
+        }
+        else combatantAnimator.SetTrigger("empty");
     }
 }

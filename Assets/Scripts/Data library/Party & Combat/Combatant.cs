@@ -1,3 +1,4 @@
+using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,75 +7,76 @@ using UnityEngine;
 public abstract class Combatant
 {
     // General info
-    public string name;
-    public string description;
-    public int level;
-    public bool KO;
+    [OdinSerialize] public string name;
+    [OdinSerialize] public string description;
+    [OdinSerialize] public int level;
+    [OdinSerialize] public bool KO;
 
     // Point meters
-    public int currentHP;
-    public int currentMP;
-    public int currentAP;
-    public int currentFAT;
+    [OdinSerialize] public int currentHP;
+    [OdinSerialize] public int currentMP;
+    [OdinSerialize] public int currentAP;
+    [OdinSerialize] public int currentFAT;
 
     // Visuals
-    public string iconPath;
-    public string profilePath;
-    public string facePath;
-    public string spriteSheetPath;
-    public string animatorOWPath;
-    public string animatorCSPath;
+    [OdinSerialize] public string iconPath;
+    [OdinSerialize] public string profilePath;
+    [OdinSerialize] public string facePath;
+    [OdinSerialize] public string spritesheetOWPath;
+    [OdinSerialize] public string spritesheetCSPath;
+    [OdinSerialize] public string animatorOWPath;
+    [OdinSerialize] public string animatorCSPath;
 
     // Skills
-    public List<Skill> skillset = new();
+    [OdinSerialize] public List<Skill> skillset = new();
 
     // Base stats
-    protected int baseAP = 0;
-    protected int baseFAT = 1000;
-    protected int baseHP = 0;
-    protected int baseMP = 0;
-    protected int baseATK = 0;
-    protected int baseDFN = 0;
-    protected int baseMAG = 0;
-    protected int baseDFL = 0;
-    protected int baseSPI = 0;
-    protected int baseSPD = 0;
-    protected int baseMOV = 0;
-    protected float baseACC = 100;
-    protected float baseCR = 5;
-    protected float baseCD = 50;
-    protected float basePSA = 100;
-    protected float basePRA = 100;
-    protected float baseASA = 100;
-    protected float baseARA = 100;
-    protected float baseSSA = 100;
-    protected float baseSRA = 100;
-    protected float baseHSA = 100;
-    protected float baseHRA = 100;
+    [OdinSerialize] protected int baseHP = 0;
+    [OdinSerialize] protected int baseMP = 0;
+    [OdinSerialize] protected int baseAP = 0;
+    [OdinSerialize] protected int baseFAT = 1000;
+    [OdinSerialize] protected int baseATK = 0;
+    [OdinSerialize] protected int baseDFN = 0;
+    [OdinSerialize] protected int baseMAG = 0;
+    [OdinSerialize] protected int baseDFL = 0;
+    [OdinSerialize] protected int baseSPI = 0;
+    [OdinSerialize] protected int baseSPD = 0;
+    [OdinSerialize] protected int baseMOV = 0;
+    [OdinSerialize] protected float baseACC = 100;
+    [OdinSerialize] protected float baseCR = 5;
+    [OdinSerialize] protected float baseCD = 50;
+    [OdinSerialize] protected float basePSA = 100;
+    [OdinSerialize] protected float basePRA = 100;
+    [OdinSerialize] protected float baseASA = 100;
+    [OdinSerialize] protected float baseARA = 100;
+    [OdinSerialize] protected float baseSSA = 100;
+    [OdinSerialize] protected float baseSRA = 100;
+    [OdinSerialize] protected float baseHSA = 100;
+    [OdinSerialize] protected float baseHRA = 100;
 
     // Actual stats
-    public int statAP;
-    public int statFAT;
-    public int statHP;
-    public int statMP;
-    public int statATK;
-    public int statDFN;
-    public int statMAG;
-    public int statDFL;
-    public int statSPI;
-    public int statSPD;
-    public int statMOV;
-    public float statACC;
-    public float statCR;
-    public float statCD;
-    public float statPSA;
-    public float statPRA;
-    public float statASA;
-    public float statARA;
-    public float statSSA;
-    public float statSRA;
-    public float statHSA;
-    public float statHRA;
+    [OdinSerialize] public int statAP;
+    [OdinSerialize] public int statFAT;
+    [OdinSerialize] public int statHP;
+    [OdinSerialize] public int statMP;
+    [OdinSerialize] public int statATK;
+    [OdinSerialize] public int statDFN;
+    [OdinSerialize] public int statMAG;
+    [OdinSerialize] public int statDFL;
+    [OdinSerialize] public int statSPI;
+    [OdinSerialize] public int statSPD;
+    [OdinSerialize] public int statMOV;
+    [OdinSerialize] public float statACC;
+    [OdinSerialize] public float statCR;
+    [OdinSerialize] public float statCD;
+    [OdinSerialize] public float statPSA;
+    [OdinSerialize] public float statPRA;
+    [OdinSerialize] public float statASA;
+    [OdinSerialize] public float statARA;
+    [OdinSerialize] public float statSSA;
+    [OdinSerialize] public float statSRA;
+    [OdinSerialize] public float statHSA;
+    [OdinSerialize] public float statHRA;
 
     public Combatant()
     {
@@ -83,9 +85,9 @@ public abstract class Combatant
 
     public void LoadStats()
     {
-        statAP = baseAP;
         statHP = baseHP;
         statMP = baseMP;
+        statAP = baseAP;
 
         statATK = baseATK;
         statDFN = baseDFN;
@@ -111,6 +113,18 @@ public abstract class Combatant
         statHRA = baseHRA;
     }
 
+    public void FullRestore()
+    {
+        currentHP = statHP;
+        currentMP = statMP;
+        currentAP = statAP;
+    }
+
+    public void MaxFatigue()
+    {
+        currentFAT = statFAT;
+    }
+
     public void ChangeHP(int quantity)
     {
         if (!KO)
@@ -121,6 +135,7 @@ public abstract class Combatant
                 currentHP = 0;
                 KnockOut();
             }
+            else currentHP += quantity;
         }
     }
 
@@ -128,12 +143,21 @@ public abstract class Combatant
     {
         if (currentMP + quantity > statMP) currentMP = statMP;
         else if (currentMP + quantity < 0) currentMP = 0;
+        else currentMP += quantity;
     }
 
     public void ChangeAP(int quantity)
     {
         if (currentAP + quantity > statAP) currentAP = statAP;
         else if (currentAP + quantity < 0) currentAP = 0;
+        else currentAP += quantity;
+    }
+
+    public void ChangeFAT(int quantity)
+    {
+        if (currentFAT + quantity > statFAT) currentFAT = statFAT;
+        else if (currentFAT + quantity < 0) currentFAT = 0;
+        else currentFAT += quantity;
     }
 
     public void KnockOut()
@@ -159,21 +183,26 @@ public abstract class Combatant
 
     public Sprite GetFace(int i)
     {
-        return Resources.LoadAll<Sprite>(profilePath)[i];
+        return Resources.LoadAll<Sprite>(facePath)[i];
     }
 
-    public Sprite GetSpriteSheet()
+    public Sprite GetSpritesheetOW(int i)
     {
-        return Resources.LoadAll<Sprite>(spriteSheetPath)[0];
+        return Resources.LoadAll<Sprite>(spritesheetOWPath)[i];
     }
 
-    public Animator GetAnimatorOW()
+    public Sprite GetSpritesheetCS(int i)
     {
-        return Resources.Load<Animator>(animatorOWPath);
+        return Resources.LoadAll<Sprite>(spritesheetCSPath)[i];
     }
 
-    public Animator GetAnimatorCS()
+    public RuntimeAnimatorController GetAnimatorOW()
     {
-        return Resources.Load<Animator>(animatorCSPath);
+        return Resources.Load<RuntimeAnimatorController>(animatorOWPath);
+    }
+
+    public RuntimeAnimatorController GetAnimatorCS()
+    {
+        return Resources.Load<RuntimeAnimatorController>(animatorCSPath);
     }
 }

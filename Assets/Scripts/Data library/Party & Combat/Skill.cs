@@ -1,21 +1,24 @@
+using Sirenix.Serialization;
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public abstract class Skill
 {
-    public bool friendly;
+    [OdinSerialize] public bool friendly;
 
-    public string name = "";
-    public string description = "";
-    protected string sheetPath = "Sprites/Empty";
-    protected int sheetIndex = -1;
+    [OdinSerialize] public string name = "";
+    [OdinSerialize] public string description = "";
+    [OdinSerialize] protected string sheetPath = "Sprites/Empty";
+    [OdinSerialize] protected int sheetIndex = -1;
 
-    public int costAP = 0;
-    public int range = 0;
-    public bool directional = false;
-    public bool squared = false;
-    public bool multitarget = false;
+    [OdinSerialize] public int costAP = 0;
+    [OdinSerialize] public int range = 0;
+    [OdinSerialize] public bool directional = false;
+    [OdinSerialize] public bool squared = false;
+    [OdinSerialize] public bool multitarget = false;
 
     public Sprite GetIcon()
     {
@@ -26,6 +29,11 @@ public abstract class Skill
     protected void SpendPoints(Combatant user)
     {
         user.ChangeAP(-costAP);
+    }
+
+    public void RecoverPoints(CellController cell)
+    {
+        cell.combatant.ChangeAP(costAP);
     }
 
     protected bool Roll(float rate)

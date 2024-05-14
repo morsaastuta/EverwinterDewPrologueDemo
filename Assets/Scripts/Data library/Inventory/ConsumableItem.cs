@@ -1,16 +1,17 @@
+using Sirenix.Serialization;
 using System;
 
 [Serializable]
 public abstract class ConsumableItem : Item
 {
-    public int price;
+    [OdinSerialize] public int price;
 
     // Use in combat
-    public bool friendly;
-    public int range = 0;
-    public bool directional = false;
-    public bool squared = false;
-    public bool multitarget = false;
+    [OdinSerialize] public bool friendly = true;
+    [OdinSerialize] public int range = 0;
+    [OdinSerialize] public bool directional = false;
+    [OdinSerialize] public bool squared = false;
+    [OdinSerialize] public bool multitarget = false;
 
     public virtual bool Consume(CellController target, CellController user)
     {

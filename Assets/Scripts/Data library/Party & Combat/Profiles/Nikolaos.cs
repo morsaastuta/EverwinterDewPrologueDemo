@@ -13,9 +13,10 @@ public class Nikolaos : Profile
         iconPath = "Sprites/Characters/Nikolaos/iconsheet";
         profilePath = "Sprites/Characters/Nikolaos/profilesheet";
         facePath = "Sprites/Characters/Nikolaos/facesheet";
-        spriteSheetPath = "Sprites/Characters/Nikolaos/spritesheet";
-        animatorOWPath = "Animations/Characters/Nikolaos/overworldController";
-        animatorCSPath = "Animations/Characters/Nikolaos/combatController";
+        spritesheetOWPath = "Sprites/Characters/Nikolaos/OW_spritesheet";
+        spritesheetCSPath = "Sprites/Characters/Nikolaos/CS_spritesheet";
+        animatorOWPath = "Animations/Characters/Nikolaos/OW_controller";
+        animatorCSPath = "Animations/Characters/Nikolaos/CS_controller";
 
         level = 5;
 
@@ -31,6 +32,7 @@ public class Nikolaos : Profile
         baseMOV = 3;
 
         LoadStats();
+        FullRestore();
 
         LoadSkills();
 

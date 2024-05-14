@@ -10,15 +10,15 @@ public class FileDataHandler
     string globalPath = "sav";
 
     string slotFile = "slot_";
-    string settingsFile = "settings_";
+    string menuFile = "menu";
 
     string slotPath;
-    string settingsPath;
+    string menuPath;
 
     public FileDataHandler(int slot)
     {
         slotPath = Path.Combine(root, globalPath, slotFile += slot);
-        settingsPath = Path.Combine(root, globalPath, settingsFile += slot);
+        menuPath = Path.Combine(root, globalPath, menuFile);
     }
 
     public void SaveSlot(SlotData slotData)
