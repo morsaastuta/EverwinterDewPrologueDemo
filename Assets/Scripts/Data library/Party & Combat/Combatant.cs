@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public abstract class Combatant
+public abstract class Combatant : Character
 {
     // General info
-    [OdinSerialize] public string name;
-    [OdinSerialize] public string description;
     [OdinSerialize] public int level;
     [OdinSerialize] public bool KO;
 
@@ -19,12 +17,7 @@ public abstract class Combatant
     [OdinSerialize] public int currentFAT;
 
     // Visuals
-    [OdinSerialize] public string iconPath;
-    [OdinSerialize] public string profilePath;
-    [OdinSerialize] public string facePath;
-    [OdinSerialize] public string spritesheetOWPath;
     [OdinSerialize] public string spritesheetCSPath;
-    [OdinSerialize] public string animatorOWPath;
     [OdinSerialize] public string animatorCSPath;
 
     // Skills
@@ -78,28 +71,43 @@ public abstract class Combatant
     [OdinSerialize] public float statHSA;
     [OdinSerialize] public float statHRA;
 
+    // Stat increment rates
+    [OdinSerialize] protected float incrHP = 0;
+    [OdinSerialize] protected float incrMP = 0;
+    [OdinSerialize] protected float incrATK = 0;
+    [OdinSerialize] protected float incrDFN = 0;
+    [OdinSerialize] protected float incrMAG = 0;
+    [OdinSerialize] protected float incrDFL = 0;
+    [OdinSerialize] protected float incrSPI = 0;
+    [OdinSerialize] protected float incrSPD = 0;
+
     public Combatant()
     {
         LoadStats();
     }
 
-    public void LoadStats()
+    public virtual void LoadStats()
     {
-        statHP = baseHP;
-        statMP = baseMP;
+        LoadBaseStats();
+    }
+
+    protected void LoadBaseStats()
+    {
+        statHP = baseHP + (int)(incrHP * level);
+        statMP = baseMP + (int)(incrMP * level);
         statAP = baseAP;
 
-        statATK = baseATK;
-        statDFN = baseDFN;
-        statMAG = baseMAG;
-        statDFL = baseDFL;
-        statSPI = baseSPI;
+        statATK = baseATK + (int)(incrATK * level);
+        statDFN = baseDFN + (int)(incrDFN * level);
+        statMAG = baseMAG + (int)(incrMAG * level);
+        statDFL = baseDFL + (int)(incrDFL * level);
+        statSPI = baseSPI + (int)(incrSPI * level);
 
         statACC = baseACC;
         statCR = baseCR;
         statCD = baseCD;
 
-        statSPD = baseSPD;
+        statSPD = baseSPD + (int)(incrSPD * level);
         statMOV = baseMOV;
         statFAT = baseFAT;
 
@@ -171,34 +179,9 @@ public abstract class Combatant
         ChangeHP(healing);
     }
 
-    public Sprite GetIcon(int i)
-    {
-        return Resources.LoadAll<Sprite>(iconPath)[i];
-    }
-
-    public Sprite GetProfile(int i)
-    {
-        return Resources.LoadAll<Sprite>(profilePath)[i];
-    }
-
-    public Sprite GetFace(int i)
-    {
-        return Resources.LoadAll<Sprite>(facePath)[i];
-    }
-
-    public Sprite GetSpritesheetOW(int i)
-    {
-        return Resources.LoadAll<Sprite>(spritesheetOWPath)[i];
-    }
-
     public Sprite GetSpritesheetCS(int i)
     {
         return Resources.LoadAll<Sprite>(spritesheetCSPath)[i];
-    }
-
-    public RuntimeAnimatorController GetAnimatorOW()
-    {
-        return Resources.Load<RuntimeAnimatorController>(animatorOWPath);
     }
 
     public RuntimeAnimatorController GetAnimatorCS()

@@ -1,13 +1,11 @@
 using Sirenix.Serialization;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
 public abstract class Skill
 {
-    [OdinSerialize] public bool friendly;
+    [OdinSerialize] public bool friendly = false;
 
     [OdinSerialize] public string name = "";
     [OdinSerialize] public string description = "";
@@ -26,12 +24,12 @@ public abstract class Skill
         else return Resources.Load<Sprite>(sheetPath);
     }
 
-    protected void SpendPoints(Combatant user)
+    protected virtual void SpendPoints(Combatant user)
     {
         user.ChangeAP(-costAP);
     }
 
-    public void RecoverPoints(CellController cell)
+    public virtual void RecoverPoints(CellController cell)
     {
         cell.combatant.ChangeAP(costAP);
     }
@@ -42,23 +40,23 @@ public abstract class Skill
         else return false;
     }
 
-    protected int FormulateDamage(int userSTR, int foeRES, float multiplier)
+    protected int Formulate(float power, float resistance)
     {
-        // Simple DMG = STR^ - RES^
-        float value = userSTR * multiplier - foeRES;
+        // Simple DMG = POWER - RESISTANCE
+        float value = power - resistance;
 
         if (value >= 0) return (int)value;
         else return 0;
     }
 
-    protected int FormulateDamage(int userSTR, int foeRES, float multiplier, float userCR, float userCD)
+    protected int FormulateCrit(float power, float resistance, float rate, float multiplier)
     {
-        float value = FormulateDamage(userSTR, foeRES, multiplier);
+        float value = Formulate(power, resistance);
 
-        if (Roll(userCR))
+        if (Roll(rate))
         {
             // Critical DMG = DMG + DMG * CD
-            value += value * userCD;
+            value += value * multiplier;
         }
 
         if (value >= 0) return (int)value;

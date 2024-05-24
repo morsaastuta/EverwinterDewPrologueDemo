@@ -64,7 +64,8 @@ public class SkillsController : MonoBehaviour
 
         foreach (Skill skill in partyController.playerProperties.currentProfile.skillset)
         {
-            if (skill.GetType().BaseType.Equals(typeof(MagicalSkill))) {
+            if (skill.GetType().BaseType.Equals(typeof(MagicalSkill)))
+            {
                 GameObject slot = slotGenerator.Generate();
                 slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class EtherI : ConsumableItem
@@ -14,14 +15,20 @@ public class EtherI : ConsumableItem
         range = 1;
     }
 
-    public override bool Consume(CellController target, CellController user)
+    public override bool Consume(CellController target, CellController user, PlayerProperties player)
     {
         target.combatant.ChangeMP(25);
+        player.inventory.Remove(this);
         return true;
     }
 
-    public override void Consume(Combatant user)
+    public override void Consume(PlayerProperties player)
     {
-        user.ChangeMP(25);
+        player.currentProfile.ChangeMP(25);
+    }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new EtherI());
     }
 }

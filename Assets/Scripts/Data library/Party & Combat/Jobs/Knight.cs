@@ -14,7 +14,7 @@ public class Knight : Job
 
     public override List<Skill> SkillsByLevel(int level)
     {
-        List<Skill> output = new List<Skill>();
+        List<Skill> output = new();
         level++;
 
         switch (level)

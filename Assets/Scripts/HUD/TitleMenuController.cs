@@ -3,17 +3,17 @@ using UnityEngine.UI;
 
 public class TitleMenuController : MonoBehaviour
 {
-    [SerializeField] private string startScene = "RimeForest";
+    [SerializeField] string startScene = "RimeForest";
 
-    private string task;
+    string task;
 
-    [SerializeField] private GameObject optNew;
-    [SerializeField] private GameObject optSlots;
-    [SerializeField] private GameObject optSettings;
-    [SerializeField] private GameObject optExit;
+    [SerializeField] GameObject optNew;
+    [SerializeField] GameObject optSlots;
+    [SerializeField] GameObject optSettings;
+    [SerializeField] GameObject optExit;
 
-    [SerializeField] private SavingSystem savingSystem;
-    [SerializeField] private DataPersistenceManager dpm;
+    [SerializeField] SavingSystem savingSystem;
+    [SerializeField] DataPersistenceManager dpm;
 
     private void Awake()
     {
@@ -40,6 +40,9 @@ public class TitleMenuController : MonoBehaviour
         {
             switch (task)
             {
+                case "newgame":
+                    OptNew();
+                    break;
                 case "exit":
                     OptExit();
                     break;
@@ -49,6 +52,7 @@ public class TitleMenuController : MonoBehaviour
 
     public void OptNew()
     {
+        dpm.NewGame();
     }
 
     public void OptSlots()

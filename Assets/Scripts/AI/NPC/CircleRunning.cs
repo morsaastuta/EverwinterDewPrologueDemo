@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class CircleRunning : MonoBehaviour
 {
-    public MapProperties mapProperties;
+    WorldProperties mapProperties;
 
     // Circling vars
-    public float speed;
-    public float angle;
+    [SerializeField] float speed;
+    [SerializeField] float angle;
 
     // Animation
     public int velocity;
@@ -19,6 +19,7 @@ public class CircleRunning : MonoBehaviour
     {
         velocity = 0;
         interacting = false;
+        mapProperties = GetComponentInParent<WorldProperties>();
     }
 
     void Update()

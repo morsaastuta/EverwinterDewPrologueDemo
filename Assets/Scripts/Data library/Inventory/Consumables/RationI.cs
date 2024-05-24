@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class RationI : ConsumableItem
@@ -14,14 +15,20 @@ public class RationI : ConsumableItem
         range = 1;
     }
 
-    public override bool Consume(CellController target, CellController user)
+    public override bool Consume(CellController target, CellController user, PlayerProperties player)
     {
         target.combatant.ChangeHP(100);
+        player.inventory.Remove(this);
         return true;
     }
 
-    public override void Consume(Combatant user)
+    public override void Consume(PlayerProperties player)
     {
-        user.ChangeHP(100);
+        player.currentProfile.ChangeHP(100);
+    }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new RationI());
     }
 }

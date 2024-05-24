@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Skill_Boulder : MagicalSkill
@@ -25,7 +26,7 @@ public class Skill_Boulder : MagicalSkill
             target.combatant.ChangeHP(-(
                 AttuneDamage(
                     // Magical damage
-                    FormulateDamage(user.combatant.statMAG, target.combatant.statDFL, 1.5f, user.combatant.statCR, user.combatant.statCD),
+                    FormulateCrit(user.combatant.statMAG * 2.0f, target.combatant.statDFL * 0.8f, user.combatant.statCR, user.combatant.statCD),
                     // Homa attunement
                     user.combatant.statHSA, target.combatant.statHRA)
                 ));

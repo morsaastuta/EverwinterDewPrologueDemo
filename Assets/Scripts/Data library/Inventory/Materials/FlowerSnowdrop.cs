@@ -11,6 +11,10 @@ public class FlowerSnowdrop : MaterialItem
         description = "Snowdrop gathered from the northern land of Heimonas.";
         price = 6;
         stackable = true;
+    }
 
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new FlowerSnowdrop());
     }
 }

@@ -11,4 +11,9 @@ public class Galanthus : KeyItem
         description = "Still waiting for the first dew drop after Everwinter.";
         stackable = false;
     }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new Galanthus());
+    }
 }

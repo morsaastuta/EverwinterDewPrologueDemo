@@ -1,4 +1,6 @@
+using Autodesk.Fbx;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class CellController : MonoBehaviour
 {
@@ -6,9 +8,16 @@ public class CellController : MonoBehaviour
     [SerializeField] SpriteRenderer cellFrame;
     [SerializeField] SpriteRenderer cellType;
     [SerializeField] SpriteRenderer combatantProjection;
+    [SerializeField] public Transform combatantDirector;
     [SerializeField] Animator combatantAnimator;
     [SerializeField] GameObject cursorLower;
     [SerializeField] GameObject cursorUpper;
+    [SerializeField] Transform projections;
+
+    // When damaged, alter sprite hue
+    Color combatantHue;
+    bool affected = false;
+    bool isPositive = false;
 
     // Sprite resources
     [SerializeField] Sprite emptySprite;
@@ -22,6 +31,7 @@ public class CellController : MonoBehaviour
     [SerializeField] Sprite closeCombatant;
 
     // Cell info
+    Vector3 popupHeight = new(0f, .7f, 0f);
     public Combatant combatant = null;
     public int posX;
     public int posY;
@@ -29,15 +39,68 @@ public class CellController : MonoBehaviour
     public bool selected = false;
     public bool newlySelected = false;
 
+    // Combatant info
+    int prevHP = -1;
+    int prevMP = -1;
+    int prevAP = -1;
+
     // Combat references
     CombatController scene;
     TurnBarController card;
+    PopupController popup;
 
     void Update()
     {
         if (combatant is not null)
         {
-            if (combatant.KO) DismissCombatant();
+            if (combatant.currentHP != prevHP && prevHP >= 0)
+            {
+                popup.FullLaunch(combatant.currentHP - prevHP, "HP", transform.position + popupHeight, projections);
+            }
+
+            if (combatant.currentMP != prevMP && prevMP >= 0)
+            {
+                popup.FullLaunch(combatant.currentMP - prevMP, "MP", transform.position + popupHeight, projections);
+            }
+
+            if (combatant.currentAP != prevAP && prevAP >= 0)
+            {
+                popup.FullLaunch(combatant.currentAP - prevAP, "AP", transform.position + popupHeight, projections);
+            }
+
+            prevHP = combatant.currentHP;
+            prevMP = combatant.currentMP;
+            prevAP = combatant.currentAP;
+
+            if (combatant.KO)
+            {
+                DismissCombatant();
+                scene.UpdateVisuals();
+            }
+
+            if (affected)
+            {
+                if (isPositive)
+                {
+                    combatantHue.r += Time.deltaTime;
+                    combatantHue.b += Time.deltaTime;
+                }
+                else
+                {
+                    combatantHue.g += Time.deltaTime;
+                    combatantHue.b += Time.deltaTime;
+                }
+
+                if (combatantHue.r >= 255 && combatantHue.g >= 255 && combatantHue.b >= 255)
+                {
+                    combatantHue.r = 255;
+                    combatantHue.g = 255;
+                    combatantHue.b = 255;
+                    affected = false;
+                }
+
+                combatantProjection.color = combatantHue;
+            }
         }
     }
 
@@ -89,6 +152,7 @@ public class CellController : MonoBehaviour
     {
         combatant = newCombatant;
         combatantProjection.sprite = newCombatant.GetSpritesheetCS(0);
+        if (scene.turn != 0) combatantDirector.rotation = scene.ActorCell().combatantDirector.rotation;
         combatantAnimator.runtimeAnimatorController = newCombatant.GetAnimatorCS();
         UpdateCombatantVisuals();
         card = scene.EnterCombatant(newCombatant);
@@ -96,10 +160,14 @@ public class CellController : MonoBehaviour
 
     public void DismissCombatant()
     {
-        combatantProjection.sprite = emptySprite;
         combatant = null;
+        combatantProjection.sprite = emptySprite;
         UpdateCombatantVisuals();
         Destroy(card.gameObject);
+
+        prevHP = -1;
+        prevMP = -1;
+        prevAP = -1;
     }
 
     public bool CheckEnergy()
@@ -139,6 +207,31 @@ public class CellController : MonoBehaviour
     {
         UpdateReferences();
 
+        Quaternion combatantRotation = combatantDirector.rotation;
+        Vector3 rotationAngles = combatantRotation.eulerAngles;
+
+        int disX = Mathf.Abs(targetCell.posX - posX);
+        int disY = Mathf.Abs(targetCell.posY - posY);
+
+        if (disX > disY)
+        {
+            if (targetCell.posX > posX) rotationAngles.y = 90;
+            else rotationAngles.y = 270;
+        }
+        else if (disX < disY)
+        {
+            if (targetCell.posY > posY) rotationAngles.y = 0;
+            else rotationAngles.y = 180;
+        }
+        else
+        {
+            if (targetCell.posX > posX) rotationAngles.y = 90;
+            else rotationAngles.y = 270;
+        }
+
+        combatantRotation.eulerAngles = rotationAngles;
+        combatantDirector.rotation = combatantRotation;
+
         return scene.CastSkill(targetCell);
     }
 
@@ -152,6 +245,7 @@ public class CellController : MonoBehaviour
     public void UpdateReferences()
     {
         scene = GetComponentInParent<CombatController>();
+        popup = GetComponentInParent<PopupController>();
     }
 
     public void UpdateVisuals()
@@ -332,6 +426,20 @@ public class CellController : MonoBehaviour
                     else cellType.sprite = emptySprite;
                 }
                 break;
+
+            // If current mode is ENEMY
+            case "enemy":
+                cellType.sprite = emptySprite;
+                if (scene.ActorCell().Equals(this))
+                {
+                    cellType.sprite = selectFoe;
+                }
+                break;
+
+            // If current mode is EMPTY (turn has ended)
+            case "":
+                cellType.sprite = emptySprite;
+                break;
         }
     }
 
@@ -352,8 +460,37 @@ public class CellController : MonoBehaviour
                 else if (profile.currentWield.GetType().BaseType.Equals(typeof(SwordItem))) combatantAnimator.SetTrigger("sword");
                 else if (profile.currentWield.GetType().BaseType.Equals(typeof(ShieldItem))) combatantAnimator.SetTrigger("shield");
             }
-            else if (combatant.GetType().BaseType.Equals(typeof(FoeData))) cellType.sprite = selectFoe;
+            else if (combatant.GetType().BaseType.Equals(typeof(FoeData)))
+            {
+                combatantAnimator.SetTrigger("physical");
+            }
         }
         else combatantAnimator.SetTrigger("empty");
+    }
+
+    public void Affect(bool isBeneficial)
+    {
+        combatantHue = combatantProjection.color;
+        if (isBeneficial)
+        {
+            combatantHue.r = 0;
+            combatantHue.b = 0;
+        }
+        else
+        {
+            combatantHue.g = 0;
+            combatantHue.b = 0;
+        }
+        affected = true;
+        isPositive = isBeneficial;
+    }
+
+    public void RestoreColor()
+    {
+        affected = false;
+        combatantHue.r = 255;
+        combatantHue.g = 255;
+        combatantHue.b = 255;
+        combatantProjection.color = combatantHue;
     }
 }

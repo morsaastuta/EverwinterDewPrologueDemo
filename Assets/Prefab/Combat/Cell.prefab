@@ -374,9 +374,11 @@ MonoBehaviour:
   cellFrame: {fileID: 3597042360148356545}
   cellType: {fileID: 3707520116416999265}
   combatantProjection: {fileID: 4583906736376047338}
+  combatantDirector: {fileID: 7498223669970424617}
   combatantAnimator: {fileID: 7844166212821987324}
   cursorLower: {fileID: 6329651998561919747}
   cursorUpper: {fileID: 7731489228989872413}
+  projections: {fileID: 6127728111064920150}
   emptySprite: {fileID: 21300000, guid: 11af0d46bbb37774e9350c220dfbd434, type: 3}
   selectCompanion: {fileID: -1690617990, guid: 8ddfb354e9c6d874384ad33df057c98e, type: 3}
   selectFoe: {fileID: -1486996372, guid: 8ddfb354e9c6d874384ad33df057c98e, type: 3}
@@ -539,7 +541,7 @@ GameObject:
   - component: {fileID: 5636406632128578924}
   - component: {fileID: 4583906736376047338}
   - component: {fileID: 7844166212821987324}
-  - component: {fileID: 1455858696782305888}
+  - component: {fileID: 796699426704511426}
   m_Layer: 0
   m_Name: Combatant
   m_TagString: Untagged
@@ -635,7 +637,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1455858696782305888
+--- !u!114 &796699426704511426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -647,8 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826827094b816974c956ba1d38fac1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 7498223669970424617}
-  direction: 0
+  projectionDirector: {fileID: 7498223669970424617}
 --- !u!1 &7731489228989872413
 GameObject:
   m_ObjectHideFlags: 0

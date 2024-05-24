@@ -25,7 +25,7 @@ public class Skill_Slash : PhysicalSkill
         {
             target.combatant.ChangeHP(-(
                 // Physical damage
-                FormulateDamage(user.combatant.statATK, target.combatant.statDFN, 1.2f, user.combatant.statCR, user.combatant.statCD)
+                FormulateCrit(user.combatant.statATK * 2.4f, target.combatant.statDFN * 0.8f, user.combatant.statCR, user.combatant.statCD)
                 ));
 
             return true;

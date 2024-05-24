@@ -28,9 +28,9 @@ public class Skill_IcyEdge : MixedSkill
             target.combatant.ChangeHP(-(
                 AttuneDamage(
                     // Physical damage
-                    FormulateDamage(user.combatant.statATK, target.combatant.statDFN, 1.5f, user.combatant.statCR, user.combatant.statCD) +
+                    FormulateCrit(user.combatant.statATK * 1.6f, target.combatant.statDFN * 0.8f, user.combatant.statCR, user.combatant.statCD) +
                     // Magical damage
-                    FormulateDamage(user.combatant.statMAG, target.combatant.statDFL, 1.1f),
+                    Formulate(user.combatant.statMAG * 1.2f, target.combatant.statDFL * 0.8f),
                     // Pagos attunement
                     user.combatant.statPSA, target.combatant.statPRA)
                 ));

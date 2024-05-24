@@ -6,27 +6,24 @@ using UnityEngine;
 [Serializable]
 public class SlotData
 {
-    [OdinSerialize] public string sceneName;
+    [OdinSerialize] PlayerProperties player;
+    [OdinSerialize] CameraProperties camera;
+    [OdinSerialize] WorldProperties world;
 
-    [OdinSerialize] PlayerProperties playerProperties;
-    [OdinSerialize] CameraProperties cameraProperties;
-    [OdinSerialize] MapProperties mapProperties;
-
-    public SlotData(PlayerProperties p, CameraProperties c, MapProperties m)
+    public SlotData(PlayerProperties p, CameraProperties c, WorldProperties w)
     {
-        sceneName = p.sceneName;
-        playerProperties = p;
-        cameraProperties = c;
-        mapProperties = m;
+        player = p;
+        camera = c;
+        world = w;
     }
 
     public List<MonoBehaviour> LoadData()
     {
         List<MonoBehaviour> properties = new()
         {
-            playerProperties,
-            cameraProperties,
-            mapProperties
+            player,
+            camera,
+            world
         };
         return properties;
     }

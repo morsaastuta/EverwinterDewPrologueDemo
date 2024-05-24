@@ -1,77 +1,32 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Talk : MonoBehaviour
 {
-    [SerializeField] MapProperties mapProperties;
-    [SerializeField] PlayerProperties player;
+    DataHUB dataHUB;
+    DialogueController dialogueController;
 
-    [SerializeField] List<string> messages;
-
-    [SerializeField] GameObject textHUD;
-    [SerializeField] TextMeshProUGUI textBox;
-    [SerializeField] CameraProperties cam;
-    [SerializeField] Loitering npc;
-    [SerializeField] Image profile;
-    [SerializeField] Sprite face;
+    [SerializeField] DialogueData dialogueData;
 
     [SerializeField] float range;
     [SerializeField] LayerMask playerLayer;
 
-    public bool interacting = false;
-    int currentMessage = 0;
+    void Start()
+    {
+        dialogueController = GetComponentInParent<DialogueController>();
+        dataHUB = GetComponentInParent<DataHUB>();
+    }
 
     void Update()
     {
-        if (!mapProperties.pausedGame)
+        if (!dataHUB.world.pausedGame && !dataHUB.player.isInteracting)
         {
-            if (!interacting)
+            if (Physics.CheckSphere(transform.position, range, playerLayer))
             {
-                if (Physics.CheckSphere(transform.position, range, playerLayer))
+                if (dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true))
                 {
-                    if (player.CompareKeyOnce(player.interactKey, true))
-                    {
-                        StartInteraction();
-                        Interact();
-                    }
+                    dialogueController.StartInteraction(dialogueData);
                 }
             }
-            // In case it IS interacting...
-            else if (player.CompareKeyOnce(player.interactKey, true)) Interact();
-            else if (player.CompareKeyOnce(player.skipKey, true)) EndInteraction();
         }
-    }
-
-    void StartInteraction()
-    {
-        if(player.canInteract)
-        {
-            interacting = true;
-            cam.SetActive(false);
-            player.SetActive(false);
-            textHUD.SetActive(true);
-            currentMessage = 0;
-            profile.sprite = face;
-        }
-    }
-
-    void Interact()
-    {
-        foreach (string message in messages)
-        {
-            if (currentMessage > messages.Capacity - 1) EndInteraction();
-            else if (currentMessage == messages.IndexOf(message)) textBox.text = message;
-        }
-        currentMessage++;
-    }
-
-    void EndInteraction()
-    {
-        textHUD.SetActive(false);
-        cam.SetActive(true);
-        player.SetActive(true);
-        interacting = false;
     }
 }

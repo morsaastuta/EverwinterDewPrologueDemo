@@ -6,17 +6,17 @@ using UnityEngine;
 [Serializable]
 public abstract class MagicalSkill : Skill
 {
-    [OdinSerialize] public int costMP;
+    [OdinSerialize] public int costMP = 0;
 
     [OdinSerialize] protected List<string> elements = new();
 
-    protected void SpendPoints(Combatant user)
+    protected override void SpendPoints(Combatant user)
     {
         user.ChangeAP(-costAP);
         user.ChangeMP(-costMP);
     }
 
-    public void RecoverPoints(CellController cell)
+    public override void RecoverPoints(CellController cell)
     {
         cell.combatant.ChangeAP(costAP);
         cell.combatant.ChangeMP(costMP);

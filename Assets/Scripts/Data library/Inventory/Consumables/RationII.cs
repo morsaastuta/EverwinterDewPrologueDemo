@@ -14,14 +14,20 @@ public class RationII : ConsumableItem
         range = 1;
     }
 
-    public override bool Consume(CellController target, CellController user)
+    public override bool Consume(CellController target, CellController user, PlayerProperties player)
     {
         target.combatant.ChangeHP(200);
+        player.inventory.Remove(this);
         return true;
     }
 
-    public override void Consume(Combatant user)
+    public override void Consume(PlayerProperties player)
     {
-        user.ChangeHP(200);
+        player.currentProfile.ChangeHP(200);
+    }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new RationII());
     }
 }

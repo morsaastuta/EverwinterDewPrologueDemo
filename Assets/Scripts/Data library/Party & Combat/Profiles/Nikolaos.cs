@@ -30,6 +30,17 @@ public class Nikolaos : Profile
         baseSPI = 2;
         baseSPD = 5;
         baseMOV = 3;
+        basePSA = 150;
+        basePRA = 150;
+
+        incrHP = 6.0f;
+        incrMP = 0.8f;
+        incrATK = 1.6f;
+        incrDFN = 1.6f;
+        incrMAG = 0.8f;
+        incrDFL = 1.2f;
+        incrSPI = 0.6f;
+        incrSPD = 0.8f;
 
         LoadStats();
         FullRestore();
@@ -37,5 +48,6 @@ public class Nikolaos : Profile
         LoadSkills();
 
         skillset.Add(new Skill_Snowball());
+        skillset.Add(new Skill_TreatWounds());
     }
 }

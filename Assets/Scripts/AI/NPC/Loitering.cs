@@ -3,7 +3,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 public class Loitering : MonoBehaviour
 {
-    [SerializeField] MapProperties mapProperties;
+    DataHUB dataHUB;
 
     // Loiter mode
     [SerializeField] float speed;
@@ -14,22 +14,15 @@ public class Loitering : MonoBehaviour
     public int velocity;
     public int direction;
 
-    // Interaction
-    [SerializeField] Talk interaction;
-
-    private void Start()
+    void Start()
     {
         turn = turnMax;
+        dataHUB = GetComponentInParent<DataHUB>();
     }
 
     void Update()
     {
-        if (mapProperties.pausedGame) velocity = 0;
-        else if (interaction is not null)
-        {
-            if (interaction.interacting) velocity = 0;
-            else Loiter();
-        }
+        if (dataHUB.world.pausedGame || dataHUB.player.isInteracting) velocity = 0;
         else Loiter();
     }
 
@@ -40,7 +33,7 @@ public class Loitering : MonoBehaviour
         turn--;
         if (turn <= 0)
         {
-            transform.localRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            transform.localRotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
             if (transform.localRotation.y > -135)
             {
                 if (transform.localRotation.y > -45)

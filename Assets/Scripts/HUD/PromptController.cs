@@ -8,15 +8,15 @@ public class PromptController : MonoBehaviour
     string menu;
 
     // UI elements
-    [SerializeField] private GameObject pane;
-    [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private GameObject optYes;
-    [SerializeField] private GameObject optNo;
+    [SerializeField] GameObject pane;
+    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] GameObject optYes;
+    [SerializeField] GameObject optNo;
 
     // Inherited controllers
-    [SerializeField] private TitleMenuController titleMenu;
-    [SerializeField] private SavingSystem saveMenu;
-    [SerializeField] private PauseMenuController pauseMenu;
+    [SerializeField] TitleMenuController titleMenu;
+    [SerializeField] SavingSystem saveMenu;
+    [SerializeField] PauseMenuController pauseMenu;
 
     public void InitPrompt(string question, string menu)
     {

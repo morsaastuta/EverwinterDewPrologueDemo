@@ -8,7 +8,7 @@ public class CombatController : MonoBehaviour
     // Master info
     [SerializeField] public PlayerProperties playerProperties;
     [SerializeField] public CameraProperties cameraProperties;
-    [SerializeField] public MapProperties mapProperties;
+    [SerializeField] public WorldProperties mapProperties;
     [SerializeField] ExitCombat exitCombat;
 
     // Action info
@@ -63,13 +63,15 @@ public class CombatController : MonoBehaviour
     // "act": Current combatant must select a skill/item to use
     // "use": Current combatant must select a target on which use the skill/item
     // "check": Player is checking a combatant other than the current turn's combatant
-    public string mode;
+    public string mode = "";
     public List<string> modeHistory = new();
 
     void Start()
     {
         ClearHUD();
         cameraProperties.SetPivot(false);
+
+        UpdateReferences();
 
         // Assign coordinates
         int totalCells = AllCells().Count;
@@ -96,7 +98,7 @@ public class CombatController : MonoBehaviour
         foreach (Profile profile in party) SetRandomPos(profile, 0, 0, 0, 5);
 
         // Load Foes
-        foreach (FoeData foe in mapProperties.GetCurrentEncounter().GetFoes())
+        foreach (FoeData foe in mapProperties.activeEncounter.GetFoes())
         {
             foe.MaxFatigue();
             foes.Add(foe);
@@ -104,10 +106,11 @@ public class CombatController : MonoBehaviour
         foreach (FoeData foe in foes) SetRandomPos(foe, 5, 5, 0, 5);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // As soon as there are no foes OR companions left, exit the combat (add WIN bool)
-        if (FoeCells().Count <= 0 || PartyCells().Count <= 0) exitCombat.Exit();
+        if (FoeCells().Count <= 0) exitCombat.Victory();
+        else if (PartyCells().Count <= 0) exitCombat.Defeat();
 
         // If there are ready combatants AND a turn has not been initialized yet
         if (!initTurn)
@@ -119,6 +122,11 @@ public class CombatController : MonoBehaviour
                 ReorganizeCells();
             }
         }
+    }
+
+    void UpdateReferences()
+    {
+        foreach (CellController cell in AllCells()) cell.UpdateReferences();
     }
 
     public void LoadProfile(Combatant combatant)
@@ -213,8 +221,8 @@ public class CombatController : MonoBehaviour
         bool done = false;
         while (done == false)
         {
-            int actX = Random.Range(minX, maxX);
-            int actY = Random.Range(minY, maxY);
+            int actX = Random.Range(minX, maxX + 1);
+            int actY = Random.Range(minY, maxY + 1);
             foreach (CellController cell in AllCells())
             {
                 if (cell.combatant == null)
@@ -233,33 +241,33 @@ public class CombatController : MonoBehaviour
     public void ReorganizeCells()
     {
         // All the received cells must be reorganized in case of a tie between characters
-        // List<CellController> reorganizingCells.AddRange(readyCells);
+        // List<CellController> reorganizingCells = ReadyCells();
         // readyCells.Clear();
     }
 
     public void NewTurn(CellController turnCell)
     {
+        // Set cell and turn
         actorCell = turnCell.gameObject;
         turn++;
-        phase = 1;
-        InitMode("move");
-        /*
+
+        // Restore 1 AP when the turn starts
+        turnCell.combatant.ChangeAP(1);
+
+        // Decide behaviour (Profile - Manual, Foe - Auto)
         if (ActorCell().combatant.GetType().BaseType.Equals(typeof(Profile)))
         {
+            phase = 1;
+            InitMode("move");
         }
-        else
-        {
-            AutoTurn();
-        }
-        */
+        else AutoTurn();
     }
 
     public void EndTurn()
     {
         ClearHUD();
-        ActorCell()
-            .combatant
-            .ChangeFAT(ActorCell().combatant.statFAT);
+        SwitchMode("", false);
+        ActorCell().combatant.ChangeFAT(ActorCell().combatant.statFAT);
         initTurn = false;
         phase = 0;
     }
@@ -473,9 +481,7 @@ public class CombatController : MonoBehaviour
         // If the skill is not multitarget
         if (!selectedSkill.multitarget)
         {
-            success = selectedSkill.Cast(
-                ActorCell(), 
-                    target);
+            success = selectedSkill.Cast(ActorCell(), target);
         }
         // If the skill is multitarget
         else
@@ -567,7 +573,7 @@ public class CombatController : MonoBehaviour
 
         bool returnedVal = false;
 
-        if (!selectedItem.multitarget) returnedVal = selectedItem.Consume(ActorCell(), target);
+        if (!selectedItem.multitarget) returnedVal = selectedItem.Consume(ActorCell(), target, playerProperties);
         else
         {
             List<CellController> affectedCells = new();
@@ -611,15 +617,15 @@ public class CombatController : MonoBehaviour
                         }
                     }
 
-                    if (willHit) returnedVal = selectedItem.Consume(ActorCell(), cell);
+                    if (willHit) returnedVal = selectedItem.Consume(ActorCell(), cell, playerProperties);
                 }
                 else if (selectedItem.squared)
                 {
-                    if (CalcDistanceX(ActorCell(), cell) <= selectedItem.range && CalcDistanceY(ActorCell(), cell) <= selectedItem.range) returnedVal = selectedItem.Consume(ActorCell(), cell);
+                    if (CalcDistanceX(ActorCell(), cell) <= selectedItem.range && CalcDistanceY(ActorCell(), cell) <= selectedItem.range) returnedVal = selectedItem.Consume(ActorCell(), cell, playerProperties);
                 }
                 else
                 {
-                    if (CalcDistance(ActorCell(), cell) <= selectedItem.range) returnedVal = selectedItem.Consume(ActorCell(), cell);
+                    if (CalcDistance(ActorCell(), cell) <= selectedItem.range) returnedVal = selectedItem.Consume(ActorCell(), cell, playerProperties);
                 }
             }
         }
@@ -633,12 +639,17 @@ public class CombatController : MonoBehaviour
         SwitchMode(initMode, true);
     }
 
+    public void UpdateVisuals()
+    {
+        foreach (CellController cell in AllCells()) cell.UpdateVisuals();
+    }
+
     public void SwitchMode(string newMode, bool forward)
     {
         if (forward) modeHistory.Add(mode);
         mode = newMode;
 
-        foreach (CellController cell in AllCells()) cell.UpdateVisuals();
+        UpdateVisuals();
 
         ClearHUD();
         switch (mode)
@@ -660,6 +671,10 @@ public class CombatController : MonoBehaviour
                 statusFrame.SetActive(true);
                 returnButton.SetActive(true);
                 LoadProfile(CheckedCell().combatant);
+                break;
+            case "enemy":
+                statusFrame.SetActive(true);
+                LoadProfile(ActorCell().combatant);
                 break;
         }
 
@@ -717,13 +732,8 @@ public class CombatController : MonoBehaviour
     {
         List<CellController> returnedCells = new();
 
-        foreach (CellController cell in AllCells())
-        {
-            if (cell.combatant != null)
-            {
-                returnedCells.Add(cell);
-            }
-        }
+        foreach (CellController cell in AllCells()) if (cell.combatant != null) returnedCells.Add(cell);
+
         return returnedCells;
     }
 
@@ -731,13 +741,8 @@ public class CombatController : MonoBehaviour
     {
         List<CellController> returnedCells = new();
 
-        foreach (CellController cell in AllCells())
-        {
-            if (cell.combatant == null)
-            {
-                returnedCells.Add(cell);
-            }
-        }
+        foreach (CellController cell in AllCells()) if (cell.combatant == null) returnedCells.Add(cell);
+
         return returnedCells;
     }
 
@@ -745,13 +750,8 @@ public class CombatController : MonoBehaviour
     {
         List<CellController> returnedCells = new();
 
-        foreach (CellController cell in OccupiedCells())
-        {
-            if (cell.combatant.GetType().BaseType.Equals(typeof(Profile)))
-            {
-                returnedCells.Add(cell);
-            }
-        }
+        foreach (CellController cell in OccupiedCells()) if (cell.combatant.GetType().BaseType.Equals(typeof(Profile))) returnedCells.Add(cell);
+
         return returnedCells;
     }
 
@@ -759,13 +759,8 @@ public class CombatController : MonoBehaviour
     {
         List<CellController> returnedCells = new();
 
-        foreach (CellController cell in OccupiedCells())
-        {
-            if (cell.combatant.GetType().BaseType.Equals(typeof(FoeData)))
-            {
-                returnedCells.Add(cell);
-            }
-        }
+        foreach (CellController cell in OccupiedCells()) if (cell.combatant.GetType().BaseType.Equals(typeof(FoeData))) returnedCells.Add(cell);
+
         return returnedCells;
     }
 
@@ -816,15 +811,30 @@ public class CombatController : MonoBehaviour
 
     public void AutoTurn()
     {
+        SwitchMode("enemy", false);
+
+        StartCoroutine(((FoeData)ActorCell().combatant).AutoTurn(this));
+    }
+
+    public bool CheckExistingCell(int posX, int posY)
+    {
         foreach (CellController cell in AllCells())
         {
-            if (cell.combatant is not null)
-            {
-                if (cell.combatant.GetType().BaseType.Equals(typeof(Profile)))
-                {
-
-                }
-            }
+            if (cell.posX == posX && cell.posY == posY) return true;
         }
+
+        return false;
+    }
+
+    public void TryEscape()
+    {
+        float partySpeed = 0;
+        foreach (CellController cell in PartyCells()) partySpeed += cell.combatant.statSPD;
+        float enemySpeed = 0;
+        foreach (CellController cell in FoeCells()) enemySpeed += cell.combatant.statSPD;
+        float chance = partySpeed / enemySpeed / 2f;
+
+        if (1 >= Random.Range(0f, 1f)) exitCombat.Escape();
+        else EndTurn();
     }
 }

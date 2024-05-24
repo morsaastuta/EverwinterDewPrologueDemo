@@ -33,7 +33,7 @@ public class ItemSlotController : MonoBehaviour
         icon.sprite = item.GetIcon();
         name.SetText(item.name);
 
-        int itemStock = GetComponentInParent<ItemFrameController>().scene.playerProperties.inventory.GetValueOrDefault(item);
+        int itemStock = GetComponentInParent<ItemFrameController>().scene.playerProperties.inventory.GetQty(item);
         if (itemStock > 0)
         {
             qty.SetText(itemStock.ToString());

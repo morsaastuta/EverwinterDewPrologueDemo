@@ -11,6 +11,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] SlotGenerator slotGenerator;
     [SerializeField] RectTransform inventoryPane;
     [SerializeField] Sprite emptyIcon;
+    SlotController selectedSlot;
 
     // Item dragger
     [SerializeField] GameObject itemDragger;
@@ -96,7 +97,7 @@ public class InventoryController : MonoBehaviour
         {
             GameObject slot = slotGenerator.Generate();
             slot.transform.SetParent(inventoryPane);
-            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetQty(item));
             slot.GetComponent<SlotController>().index = consumablesIndex;
             consumablesIndex++;
             consumables.Add(slot);
@@ -106,7 +107,7 @@ public class InventoryController : MonoBehaviour
         {
             GameObject slot = slotGenerator.Generate();
             slot.transform.SetParent(inventoryPane);
-            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetQty(item));
             slot.GetComponent<SlotController>().index = materialsIndex;
             materialsIndex++;
             materials.Add(slot);
@@ -116,7 +117,7 @@ public class InventoryController : MonoBehaviour
         {
             GameObject slot = slotGenerator.Generate();
             slot.transform.SetParent(inventoryPane);
-            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetValueOrDefault(item));
+            slot.GetComponent<SlotController>().UpdateItem(item, partyController.playerProperties.inventory.GetQty(item));
             slot.GetComponent<SlotController>().index = keysIndex;
             keysIndex++;
             keys.Add(slot);
@@ -150,18 +151,50 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void UseItem()
+    {
+        selectedSlot.UseItem();
+        ReSelect();
+    }
+
+    public void DropItem()
+    {
+        selectedSlot.DropItem();
+        ReSelect();
+    }
+
     public void Select(int index)
     {
-        Item item = activeList[index].GetComponent<SlotController>().item;
-        
-        shownIcon.sprite = item.GetIcon();
-        shownName.text = item.name;
-        shownDescription.text = item.description;
+        selectedSlot = activeList[index].GetComponent<SlotController>();
 
-        if (item.stackable)
+        shownIcon.sprite = selectedSlot.item.GetIcon();
+        shownName.text = selectedSlot.item.name;
+        shownDescription.text = selectedSlot.item.description;
+
+        if (selectedSlot.item.stackable)
         {
             stockBox.SetActive(true);
-            shownStock.text = activeList[index].GetComponent<SlotController>().stock.ToString();
+            shownStock.text = selectedSlot.stock.ToString();
+        }
+    }
+
+    public void ReSelect()
+    {
+        if (selectedSlot.occupied)
+        {
+            shownIcon.sprite = selectedSlot.item.GetIcon();
+            shownName.text = selectedSlot.item.name;
+            shownDescription.text = selectedSlot.item.description;
+
+            if (selectedSlot.item.stackable)
+            {
+                stockBox.SetActive(true);
+                shownStock.text = selectedSlot.stock.ToString();
+            }
+        }
+        else
+        {
+            Deselect();
         }
     }
 
@@ -173,7 +206,18 @@ public class InventoryController : MonoBehaviour
         shownStock.text = "";
         stockBox.SetActive(false);
 
-        if (activeList != null) foreach (GameObject obj in activeList) obj.GetComponent<SlotController>().Deselect();
+        if (activeList != null)
+        {
+            List<SlotController> itemsToReload = new();
+
+            foreach (GameObject obj in activeList)
+            {
+                obj.GetComponent<SlotController>().Deselect();
+                if (obj.GetComponent<SlotController>().occupied) itemsToReload.Add(obj.GetComponent<SlotController>());
+            }
+
+            partyController.playerProperties.ReorganizeInventory(itemsToReload);
+        }
     }
 
     public void InitDrag(SlotController slot)

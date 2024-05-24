@@ -6,7 +6,7 @@ public class SavingSystem : MonoBehaviour
 {
     [SerializeField] PlayerProperties properties;
     [SerializeField] CameraProperties camProperties;
-    [SerializeField] MapProperties mapProperties;
+    [SerializeField] WorldProperties mapProperties;
     [SerializeField] DataPersistenceManager dpm;
 
     [SerializeField] GameObject savePane;

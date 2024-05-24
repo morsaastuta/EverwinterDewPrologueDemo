@@ -13,12 +13,32 @@ public abstract class ConsumableItem : Item
     [OdinSerialize] public bool squared = false;
     [OdinSerialize] public bool multitarget = false;
 
-    public virtual bool Consume(CellController target, CellController user)
+    public virtual bool Consume(CellController target, CellController user, PlayerProperties player)
     {
+        player.inventory.Remove(this);
         return false;
     }
 
-    public virtual void Consume(Combatant user)
+    public virtual void Consume(PlayerProperties player)
     {
+    }
+
+    public void Drop(PlayerProperties player)
+    {
+        player.inventory.Remove(this);
+    }
+
+    public ConsumableItem SpecializedRegeneration(ConsumableItem item)
+    {
+        BasicRegeneration(item);
+
+        item.price = price;
+        item.friendly = friendly;
+        item.range = range;
+        item.directional = directional;
+        item.squared = squared;
+        item.multitarget = multitarget;
+
+        return item;
     }
 }

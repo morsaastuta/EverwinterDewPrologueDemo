@@ -25,7 +25,7 @@ public class Skill_Snowball : MagicalSkill
             target.combatant.ChangeHP(-(
                 AttuneDamage(
                     // Magical damage
-                    FormulateDamage(user.combatant.statMAG, target.combatant.statDFL, 1.2f, user.combatant.statCR, user.combatant.statCD),
+                    FormulateCrit(user.combatant.statMAG * 1.2f, target.combatant.statDFL * 0.8f, user.combatant.statCR, user.combatant.statCD),
                     // Pagos attunement
                     user.combatant.statPSA, target.combatant.statPRA)
                 ));

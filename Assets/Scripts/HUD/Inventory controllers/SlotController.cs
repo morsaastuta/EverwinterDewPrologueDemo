@@ -208,4 +208,16 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IBeginDragHan
             GetComponentInParent<EquipmentController>().EndOperation();
         }
     }
+
+    public void UseItem()
+    {
+        ConsumableItem consumableItem = (ConsumableItem)item;
+        consumableItem.Consume(GetComponentInParent<DataHUB>().player);
+        UpdateStock(stock - 1);
+    }
+
+    public void DropItem()
+    {
+        UpdateStock(stock - 1);
+    }
 }

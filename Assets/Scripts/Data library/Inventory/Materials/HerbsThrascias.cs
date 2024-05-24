@@ -12,4 +12,9 @@ public class HerbsThrascias : MaterialItem
         price = 3;
         stackable = true;
     }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new HerbsThrascias());
+    }
 }

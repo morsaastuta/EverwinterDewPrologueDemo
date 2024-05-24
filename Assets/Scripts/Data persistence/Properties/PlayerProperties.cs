@@ -1,7 +1,9 @@
 using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class PlayerProperties : MonoBehaviour
@@ -21,7 +23,7 @@ public class PlayerProperties : MonoBehaviour
     [OdinSerialize] public Profile currentProfile;
 
     // Inventory & Armory
-    [OdinSerialize] public Dictionary<Item, int> inventory = new();
+    [OdinSerialize] public Inventory inventory = new();
     [OdinSerialize] public List<ConsumableItem> consumableItems = new();
     [OdinSerialize] public int consumablesSize = 15;
     [OdinSerialize] public List<MaterialItem> materialItems = new();
@@ -43,9 +45,10 @@ public class PlayerProperties : MonoBehaviour
     [OdinSerialize] public List<KeyCode> skipKey = new();
     [OdinSerialize] public List<KeyCode> holdKey = new();
 
-    // Player info
+    // Player status
     [OdinSerialize] public Vector3 playerPos;
     [OdinSerialize] public Quaternion playerAngle;
+    public bool isInteracting;
 
     // Visuals
     Animator animator;
@@ -84,7 +87,7 @@ public class PlayerProperties : MonoBehaviour
                     case 4: item = new HerbsThrascias(); break;
                     case 5: item = new ClawRimebear(); break;
                     case 6: item = new PeltRimebear(); break;
-                    case 7: item = new Galanthus(); break;
+                    case 7: item = new Galanthus(); stock = 1; break;
                 }
                 AddItem(item, stock);
             }
@@ -198,11 +201,29 @@ public class PlayerProperties : MonoBehaviour
         materialItems.Clear();
         keyItems.Clear();
 
-        foreach (Item item in inventory.Keys)
+        foreach (Item item in inventory.items)
         {
             if (item.GetType().BaseType.Equals(typeof(ConsumableItem))) consumableItems.Add((ConsumableItem)item);
             else if (item.GetType().BaseType.Equals(typeof(MaterialItem))) materialItems.Add((MaterialItem)item);
             else if (item.GetType().BaseType.Equals(typeof(KeyItem))) keyItems.Add((KeyItem)item);
+        }
+    }
+
+    public void ReorganizeInventory(List<SlotController> itemsToReorganize)
+    {
+        if (itemsToReorganize.Count > 0)
+        {
+            Type typeToReorganize = itemsToReorganize[0].item.GetType().BaseType;
+
+            // Remove all relevant items
+            for (int i = inventory.GetSize(); i > 0; i--)
+            {
+                Item checkedItem = inventory.items.ElementAt(i - 1);
+                if (checkedItem.GetType().BaseType.Equals(typeToReorganize)) inventory.Delete(checkedItem);
+            }
+
+            // Fill with new set of items
+            foreach (SlotController slot in itemsToReorganize) AddItem(slot.item.Regenerate(), slot.stock);
         }
     }
 

@@ -1,14 +1,31 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ExitCombat : MonoBehaviour
 {
     [SerializeField] DataPersistenceManager dpm;
-    [SerializeField] MapProperties mapProperties;
+    [SerializeField] CameraProperties camera;
+    [SerializeField] WorldProperties world;
 
-    public void Exit()
+    public void Escape()
     {
-        SceneManager.LoadScene(mapProperties.overworldScene, LoadSceneMode.Single);
-        dpm.LoadGame(0);
+        world.activeEncounter.fled = true;
+        Exit();
+    }
+
+    public void Victory()
+    {
+        world.activeEncounter.defeated = true;
+        Exit();
+    }
+
+    public void Defeat()
+    {
+        world.ExitToTitle();
+    }
+
+    void Exit()
+    {
+        camera.SetPivot(true);
+        dpm.ChangeScene(world.currentScene);
     }
 }

@@ -29,9 +29,9 @@ public class Skill_ShieldOnrush : PhysicalSkill
         {
             target.combatant.ChangeHP(-(
                 // Physical damage
-                FormulateDamage(user.combatant.statATK, target.combatant.statDFN, 1.5f, user.combatant.statCR, user.combatant.statCD) +
+                FormulateCrit(user.combatant.statATK * 2.0f, target.combatant.statDFN * 0.8f, user.combatant.statCR, user.combatant.statCD) +
                 // Bonus rally damage
-                FormulateDamage(user.combatant.statDFN, target.combatant.statDFN, .5f * rallyMultiplier)
+                Formulate(user.combatant.statDFN * (0.5f * rallyMultiplier), target.combatant.statDFN)
                 ));
 
             return true;

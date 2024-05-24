@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class SavingPuddle : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] Animator animator;
 
-    [SerializeField] private PlayerProperties properties;
-    [SerializeField] private SavingSystem savingSystem;
+    DataHUB dataHUB;
 
-    [SerializeField] private float range;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] float range;
+    [SerializeField] LayerMask playerLayer;
 
-    private void Update()
+    private void Start()
+    {
+        dataHUB = GetComponentInParent<DataHUB>();
+    }
+
+    void Update()
     {
         // Change animation on proximity
         if(!animator.GetBool("active") && Physics.CheckSphere(transform.position, range, playerLayer)) {
@@ -25,9 +29,9 @@ public class SavingPuddle : MonoBehaviour
         }
 
         // Allow save on proximity
-        if (properties.canPause && animator.GetBool("active") && properties.CompareKey(properties.interactKey))
+        if (dataHUB.player.canPause && animator.GetBool("active") && dataHUB.player.CompareKey(dataHUB.player.interactKey))
         {
-            savingSystem.Initialize();
+            dataHUB.savingSystem.Initialize();
         }
     }
 }

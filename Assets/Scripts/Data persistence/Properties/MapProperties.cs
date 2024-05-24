@@ -1,33 +1,59 @@
 using Sirenix.Serialization;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class MapProperties : MonoBehaviour
 {
-    [OdinSerialize] Encounter activeEncounter;
     [OdinSerialize] public string overworldScene;
-    [OdinSerialize] public bool pausedGame;
+    [OdinSerialize] public List<EncounterData> persistedEncounters = new();
 
     public void Reload(MapProperties m)
     {
-        activeEncounter = new Encounter(m.activeEncounter.GetFoes());
-        overworldScene = m.overworldScene;
-        pausedGame = m.pausedGame;
+        persistedEncounters = m.persistedEncounters;
     }
 
-    public void SetPaused(bool state)
+    public void Reload(MapProperties m, EncounterData exitedEncounter)
     {
-        pausedGame = state;
+        persistedEncounters = m.persistedEncounters;
+        foreach (EncounterData encounter in persistedEncounters)
+        {
+            if (encounter.GetHashCode().Equals(exitedEncounter.GetHashCode()))
+            {
+                encounter.UpdateData(exitedEncounter);
+                break;
+            }
+        }
     }
 
-    public void SetCurrentEncounter(Encounter encounter)
+    void Start()
     {
-        activeEncounter = encounter;
+        LoadEncounters();
     }
 
-    public Encounter GetCurrentEncounter()
+    void LoadEncounters()
     {
-        return activeEncounter;
+        // Set all encounters
+        List<Encounter> allEncounters = new();
+        allEncounters.AddRange(GetComponentsInChildren<Encounter>());
+
+        if (persistedEncounters.Count <= 0)
+        {
+            foreach (Encounter encounter in allEncounters) persistedEncounters.Add(encounter.data);
+        }
+        else
+        {
+            foreach(Encounter encounter in allEncounters)
+            {
+                encounter.data = persistedEncounters[allEncounters.IndexOf(encounter)];
+                UpdateEncounters(allEncounters);
+            }
+        }
+    }
+
+    public void UpdateEncounters(List<Encounter> encounters)
+    {
+        foreach (Encounter encounter in encounters) encounter.UpdateState();
     }
 }

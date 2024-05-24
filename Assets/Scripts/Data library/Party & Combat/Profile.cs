@@ -85,35 +85,11 @@ public abstract class Profile : Combatant
         wieldItems.Add(wield2);
     }
 
-    public void LoadStats()
+    public override void LoadStats()
     {
         InitializeLists();
 
-        statHP = baseHP;
-        statMP = baseMP;
-        statAP = baseAP;
-
-        statATK = baseATK;
-        statDFN = baseDFN;
-        statMAG = baseMAG;
-        statDFL = baseDFL;
-        statSPI = baseSPI;
-
-        statACC = baseACC;
-        statCR = baseCR;
-        statCD = baseCD;
-
-        statSPD = baseSPD;
-        statMOV = baseMOV;
-
-        statPSA = basePSA;
-        statPRA = basePRA;
-        statASA = baseASA;
-        statARA = baseARA;
-        statSSA = baseSSA;
-        statSRA = baseSRA;
-        statHSA = baseHSA;
-        statHRA = baseHRA;
+        LoadBaseStats();
 
         foreach (GearItem gearItem in gearItems)
         {

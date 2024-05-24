@@ -12,4 +12,9 @@ public class ClawRimebear : MaterialItem
         price = 8;
         stackable = true;
     }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new ClawRimebear());
+    }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 using Sirenix.Serialization;
 
 [Serializable]
@@ -16,5 +15,19 @@ public abstract class Item
     {
         if (sheetIndex >= 0) return Resources.LoadAll<Sprite>(sheetPath)[sheetIndex];
         else return Resources.Load<Sprite>(sheetPath);
+    }
+
+    public virtual Item Regenerate()
+    {
+        return null;
+    }
+
+    protected void BasicRegeneration(Item item)
+    {
+        item.name = name;
+        item.description = description;
+        item.sheetPath = sheetPath;
+        item.sheetIndex = sheetIndex;
+        item.stackable = stackable;
     }
 }

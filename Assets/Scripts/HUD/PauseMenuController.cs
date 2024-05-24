@@ -9,9 +9,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] InventoryController inventoryController;
 
     // External properties
-    [SerializeField] PlayerProperties properties;
-    [SerializeField] MapProperties mapProperties;
-    [SerializeField] CameraProperties camProperties;
+    [SerializeField] DataHUB dataHUB;
 
     // Internal properties
     int cooldownMax = 10;
@@ -57,25 +55,25 @@ public class PauseMenuController : MonoBehaviour
     public void CheckMenu()
     {
         // Open menu
-        if (properties.canPause && cooldown == cooldownMax && !menuBox.activeSelf && properties.CompareKeyOnce(properties.menuKey, true))
+        if (dataHUB.player.canPause && cooldown == cooldownMax && !menuBox.activeSelf && dataHUB.player.CompareKeyOnce(dataHUB.player.menuKey, true))
         {
             partyController.CloseAll();
             inventoryController.CloseAll();
             menuBox.SetActive(true);
-            properties.SetActive(false);
-            mapProperties.SetPaused(true);
-            camProperties.SetActive(false);
+            dataHUB.player.SetActive(false);
+            dataHUB.world.SetPaused(true);
+            dataHUB.camera.SetActive(false);
             cooldown = 0;
         }
 
         // Close menu
-        if (cooldown == cooldownMax && menuBox.activeSelf && properties.CompareKeyOnce(properties.menuKey, true))
+        if (cooldown == cooldownMax && menuBox.activeSelf && dataHUB.player.CompareKeyOnce(dataHUB.player.menuKey, true))
         {
             CloseAll();
             menuBox.SetActive(false);
-            properties.SetActive(true);
-            mapProperties.SetPaused(false);
-            camProperties.SetActive(true);
+            dataHUB.player.SetActive(true);
+            dataHUB.world.SetPaused(false);
+            dataHUB.camera.SetActive(true);
             cooldown = 0;
         }
 
@@ -125,7 +123,7 @@ public class PauseMenuController : MonoBehaviour
 
     private void OptExit()
     {
-        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+        dataHUB.world.ExitToTitle();
     }
 
     // Executed each time the menu changes its view or is closed

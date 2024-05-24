@@ -13,4 +13,9 @@ public class PeltRimebear : MaterialItem
         price = 10;
         stackable = true;
     }
+
+    public override Item Regenerate()
+    {
+        return SpecializedRegeneration(new PeltRimebear());
+    }
 }
