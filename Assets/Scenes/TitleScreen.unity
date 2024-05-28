@@ -1765,9 +1765,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6cee5c8a7d63cb4592db3f06d4afd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProperties: {fileID: 830817703}
-  cameraProperties: {fileID: 830817705}
-  mapProperties: {fileID: 830817704}
+  player: {fileID: 830817703}
+  camera: {fileID: 830817705}
+  world: {fileID: 830817704}
 --- !u!114 &830817702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1812,6 +1812,8 @@ MonoBehaviour:
   canRun: 0
   canInteract: 0
   canPause: 0
+  inventory:
+    stock: 
   consumablesSize: 15
   materialsSize: 30
   keysSize: 5
@@ -1841,8 +1843,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22bdc76f03b6454285807e2ca234f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overworldScene: 
+  activeEncounter:
+    defeated: 0
+    fled: 0
   pausedGame: 0
+  savedMaps: []
+  currentScene: 
 --- !u!114 &830817705
 MonoBehaviour:
   m_ObjectHideFlags: 0

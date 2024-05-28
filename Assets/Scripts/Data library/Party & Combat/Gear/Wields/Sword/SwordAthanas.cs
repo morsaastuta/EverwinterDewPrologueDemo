@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 
 [Serializable]
@@ -12,7 +11,7 @@ public class SwordAthanas : SwordItem
         description = "Sword forged with great skill just for the Athanas bloodline to wield.";
         price = 0;
 
-        statATK = 10;
+        statATK = 1000;
         statACC = -5;
         statPSA = 25;
 

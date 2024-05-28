@@ -1,17 +1,16 @@
+using Sirenix.Serialization;
 using System;
 using System.Collections.Generic;
-using Sirenix.Serialization;
 
 [Serializable]
 public abstract class Profile : Combatant
 {
     // General info
     [OdinSerialize] public string fullname;
-    [OdinSerialize] public Job job;
-    [OdinSerialize] public Job subjob;
-
-    // Point meters
-    [OdinSerialize] public int currentJP;
+    [OdinSerialize] public int experience = 0;
+    [OdinSerialize] public Job mainJob;
+    [OdinSerialize] public Job subJob;
+    [OdinSerialize] public List<Job> unlockedJobs = new();
 
     // Equipment
     [OdinSerialize] public HeadItem head;
@@ -30,15 +29,8 @@ public abstract class Profile : Combatant
 
     public Profile()
     {
+        NewSkill(new Skill_BasicAttack());
         LoadStats();
-    }
-
-    public void LoadSkills()
-    {
-        skillset.Clear();
-        skillset.Add(new Skill_BasicAttack());
-
-        for (int i = 0; i < level; i++) skillset.AddRange(job.SkillsByLevel(i));
     }
 
     public Type GetWield(int slot)
@@ -47,10 +39,10 @@ public abstract class Profile : Combatant
         switch (slot)
         {
             case 1:
-                wield = job.wield1;
+                wield = mainJob.wield1;
                 break;
             case 2:
-                wield = job.wield2;
+                wield = mainJob.wield2;
                 break;
         }
         return wield;
@@ -170,6 +162,55 @@ public abstract class Profile : Combatant
             case 2:
                 currentWield = wield2;
                 break;
+        }
+    }
+
+    public virtual void CheckNewSkills()
+    {
+    }
+
+    public void ObtainXP(int experience)
+    {
+        this.experience += experience;
+        XPThresholdIndex.CheckCharacterLevel(this);
+
+        if (mainJob is not null)
+        {
+            mainJob.experience += experience / 2;
+            XPThresholdIndex.CheckJobLevel(this, mainJob);
+        }
+
+        if (subJob is not null)
+        {
+            subJob.experience += experience / 3;
+            XPThresholdIndex.CheckJobLevel(this, subJob);
+        }
+    }
+
+    public void LevelUp()
+    {
+        level++;
+        CheckNewSkills();
+    }
+
+    public void NewJob(Job newJob)
+    {
+        bool isNew = true;
+
+        foreach (Job job in unlockedJobs) if (job.GetType().Equals(newJob.GetType())) isNew = false;
+
+        if (isNew) unlockedJobs.Add(newJob);
+    }
+
+    public void SetJob(Type setJob, bool main)
+    {
+        foreach (Job job in unlockedJobs)
+        {
+            if (job.GetType().Equals(setJob))
+            {
+                if (main) mainJob = job;
+                else subJob = job;
+            }
         }
     }
 }

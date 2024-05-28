@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 [Serializable]
 public class WorldProperties : MonoBehaviour
 {
-    [OdinSerialize] public EncounterData activeEncounter;
+    [OdinSerialize] public EncounterData activeEncounter = null;
     [OdinSerialize] public bool pausedGame = false;
     [OdinSerialize] public List<MapProperties> savedMaps = new();
     [OdinSerialize] public string currentScene;
@@ -20,19 +21,33 @@ public class WorldProperties : MonoBehaviour
         pausedGame = w.pausedGame;
         savedMaps = w.savedMaps;
 
-        foreach (MapProperties map in savedMaps)
+        if (GetComponent<DataHUB>())
         {
-            if (GetComponent<DataHUB>())
+            foreach (MapProperties map in savedMaps)
             {
                 if (map.overworldScene.Equals(GetComponent<DataHUB>().map.overworldScene))
                 {
-                    if (activeEncounter is not null) GetComponent<DataHUB>().map.Reload(map, activeEncounter);
-                    else GetComponent<DataHUB>().map.Reload(map);
+                    if (w.activeEncounter is not null) GetComponent<DataHUB>().map.Reload(map, activeEncounter); 
+                    else GetComponent<DataHUB>().map.Reload(map, true);
                     break;
                 }
             }
         }
+    }
 
+    public void SaveState()
+    {
+        if (GetComponent<DataHUB>())
+        {
+            foreach (MapProperties map in savedMaps)
+            {
+                if (map.overworldScene.Equals(GetComponent<DataHUB>().map.overworldScene))
+                {
+                    map.Reload(GetComponent<DataHUB>().map.SaveState(), false);
+                    break;
+                }
+            }
+        }
     }
 
     void Start()
@@ -41,7 +56,17 @@ public class WorldProperties : MonoBehaviour
         {
             activeEncounter = null;
             currentScene = GetComponent<DataHUB>().map.overworldScene;
-            if (!savedMaps.Contains(GetComponent<DataHUB>().map)) savedMaps.Add(GetComponent<DataHUB>().map);
+
+            bool newMap = true;
+            foreach (MapProperties map in savedMaps)
+            {
+                if (map.overworldScene.Equals(GetComponent<DataHUB>().map.overworldScene))
+                {
+                    newMap = false;
+                    break;
+                }
+            }
+            if (newMap) savedMaps.Add(GetComponent<DataHUB>().map);
         }
 
         foreach (Encounter encounter in GetComponentsInChildren<Encounter>())

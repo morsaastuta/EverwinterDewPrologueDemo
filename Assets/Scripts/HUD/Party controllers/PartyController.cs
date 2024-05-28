@@ -26,7 +26,7 @@ public class PartyController : MonoBehaviour
     {
         CloseAll();
         statusFrame.SetActive(true);
-        statusController.LoadStats();
+        statusController.LoadCharacterData();
     }
 
     public void Equipment()

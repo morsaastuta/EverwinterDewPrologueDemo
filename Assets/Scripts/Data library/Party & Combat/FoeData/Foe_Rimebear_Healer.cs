@@ -13,13 +13,14 @@ public class Foe_Rimebear_Healer : FoeData
 
         iconPath = "Sprites/NPCs/Foes/Rimebear/iconsheet";
         profilePath = "Sprites/NPCs/Foes/Rimebear/profilesheet";
-        facePath = "Sprites/NPCs/Foes/Rimebear/facesheet";
+        facePath = "Sprites/NPCs/Foes/Rimebear/facesheet_healer";
         spritesheetOWPath = "Sprites/NPCs/Foes/Rimebear/OW_spritesheet";
-        spritesheetCSPath = "Sprites/NPCs/Foes/Rimebear/CS_spritesheet";
+        spritesheetCSPath = "Sprites/NPCs/Foes/Rimebear/CS_healer";
         animatorOWPath = "Animations/NPCs/Foes/Rimebear/OW_controller";
-        animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_controller";
+        animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_healer";
 
         level = initLV;
+        lootXP = 4 + (int)(0.6 * initLV);
 
         baseAP = 2;
         baseHP = 100;
@@ -31,8 +32,8 @@ public class Foe_Rimebear_Healer : FoeData
         baseSPI = 5;
         baseSPD = 3;
         baseMOV = 2;
-        basePSA = 115;
-        basePRA = 115;
+        basePSA = 125;
+        basePRA = 150;
 
         incrHP = 8.0f;
         incrMP = 0.8f;
@@ -48,6 +49,12 @@ public class Foe_Rimebear_Healer : FoeData
 
         AddSkill("basic", new Skill_BasicAttack());
         AddSkill("heal", new Skill_TreatWounds());
+
+        lootItems.Add(new ClawRimebear(), 0.3f);
+        lootItems.Add(new PeltRimebear(), 0.6f);
+        lootItems.Add(new HerbsThrascias(), 0.6f);
+        lootItems.Add(new FlowerSnowdrop(), 0.1f);
+        lootItems.Add(new RationI(), 0.2f);
     }
 
     public override IEnumerator AutoTurn(CombatController scene)
@@ -73,7 +80,7 @@ public class Foe_Rimebear_Healer : FoeData
             }
         }
 
-        // Get Heal target (INFINITE LOOP)
+        // Get Heal target
         foreach (CellController cell in scene.AllCells())
         {
             if (cell.combatant is not null)
@@ -84,7 +91,6 @@ public class Foe_Rimebear_Healer : FoeData
                     {
                         lowestHP = cell.combatant.currentHP / cell.combatant.statHP;
                         healTarget = cell;
-                        Debug.Log(healTarget.combatant.name);
                     }
                 }
             }
@@ -164,7 +170,8 @@ public class Foe_Rimebear_Healer : FoeData
 
                 scene.EndTurn();
             }
-            else if (target is not null) BasicAttack(scene, target);
+            else if (target is not null) scene.StartCoroutine(BasicAttack(scene, target));
+            else scene.EndTurn();
         }
         else scene.EndTurn();
     }

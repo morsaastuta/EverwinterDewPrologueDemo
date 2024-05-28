@@ -15,6 +15,7 @@ public abstract class Combatant : Character
     [OdinSerialize] public int currentMP;
     [OdinSerialize] public int currentAP;
     [OdinSerialize] public int currentFAT;
+    [OdinSerialize] public int initAP = 1;
 
     // Visuals
     [OdinSerialize] public string spritesheetCSPath;
@@ -125,7 +126,11 @@ public abstract class Combatant : Character
     {
         currentHP = statHP;
         currentMP = statMP;
-        currentAP = statAP;
+    }
+
+    public void ReloadAP()
+    {
+        currentAP = initAP;
     }
 
     public void MaxFatigue()
@@ -187,5 +192,14 @@ public abstract class Combatant : Character
     public RuntimeAnimatorController GetAnimatorCS()
     {
         return Resources.Load<RuntimeAnimatorController>(animatorCSPath);
+    }
+
+    public void NewSkill(Skill newSkill)
+    {
+        bool isNew = true;
+
+        foreach (Skill skill in skillset) if (skill.GetType().Equals(newSkill.GetType())) isNew = false;
+
+        if (isNew) skillset.Add(newSkill);
     }
 }

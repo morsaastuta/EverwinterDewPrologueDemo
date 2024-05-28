@@ -25,7 +25,7 @@ public class CameraProperties : MonoBehaviour
         LoadStatus();
     }
 
-    public void SaveStatus()
+    public void SaveState()
     {
         cameraPos = transform.position;
         cameraAngle = transform.rotation;

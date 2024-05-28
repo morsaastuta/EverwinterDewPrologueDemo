@@ -13,15 +13,16 @@ public class Foe_Rimebear_Mage : FoeData
 
         iconPath = "Sprites/NPCs/Foes/Rimebear/iconsheet";
         profilePath = "Sprites/NPCs/Foes/Rimebear/profilesheet";
-        facePath = "Sprites/NPCs/Foes/Rimebear/facesheet";
+        facePath = "Sprites/NPCs/Foes/Rimebear/facesheet_mage";
         spritesheetOWPath = "Sprites/NPCs/Foes/Rimebear/OW_spritesheet";
-        spritesheetCSPath = "Sprites/NPCs/Foes/Rimebear/CS_spritesheet";
+        spritesheetCSPath = "Sprites/NPCs/Foes/Rimebear/CS_mage";
         animatorOWPath = "Animations/NPCs/Foes/Rimebear/OW_controller";
-        animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_controller";
+        animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_mage";
 
         level = initLV;
+        lootXP = 5 + (int)(0.6 * initLV);
 
-        baseAP = 2;
+        baseAP = 1;
         baseHP = 60;
         baseMP = 8;
         baseATK = 1;
@@ -31,8 +32,8 @@ public class Foe_Rimebear_Mage : FoeData
         baseSPI = 2;
         baseSPD = 3;
         baseMOV = 1;
-        basePSA = 115;
-        basePRA = 115;
+        basePSA = 150;
+        basePRA = 125;
 
         incrHP = 4.0f;
         incrMP = 1.0f;
@@ -48,6 +49,11 @@ public class Foe_Rimebear_Mage : FoeData
 
         AddSkill("basic", new Skill_BasicAttack());
         AddSkill("ranged", new Skill_Boulder());
+
+        lootItems.Add(new ClawRimebear(), 0.2f);
+        lootItems.Add(new PeltRimebear(), 0.3f);
+        lootItems.Add(new FlowerSnowdrop(), 0.1f);
+        lootItems.Add(new EtherI(), 0.2f);
     }
 
     public override IEnumerator AutoTurn(CombatController scene)

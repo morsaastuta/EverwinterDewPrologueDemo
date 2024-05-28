@@ -391,9 +391,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7886559861318351899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40f9f31434892d4aa911187836b7673, type: 3}
+  m_Script: {fileID: 11500000, guid: 806d5b014e2286e428584784eca72b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    defeated: 0
+    fled: 0
   foeNames: []
   foeLevels: 
   combatScene: 
+  ready: 0

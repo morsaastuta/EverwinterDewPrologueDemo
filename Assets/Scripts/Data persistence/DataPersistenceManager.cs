@@ -20,8 +20,9 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveGame(int slot)
     {
         // Save current position, rotation, scene...
-        player.SaveStatus();
-        camera.SaveStatus();
+        player.SaveState();
+        camera.SaveState();
+        world.SaveState();
 
         // Instantiate data scripts
         SlotData slotData = new(player, camera, world);

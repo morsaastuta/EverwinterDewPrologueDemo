@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class PauseMenuController : MonoBehaviour
     // Subsequent controllers
     [SerializeField] PartyController partyController;
     [SerializeField] InventoryController inventoryController;
+    [SerializeField] HelpCall helper;
 
     // External properties
     [SerializeField] DataHUB dataHUB;
@@ -70,6 +72,7 @@ public class PauseMenuController : MonoBehaviour
         if (cooldown == cooldownMax && menuBox.activeSelf && dataHUB.player.CompareKeyOnce(dataHUB.player.menuKey, true))
         {
             CloseAll();
+            helper.Dismiss();
             menuBox.SetActive(false);
             dataHUB.player.SetActive(true);
             dataHUB.world.SetPaused(false);
@@ -130,6 +133,7 @@ public class PauseMenuController : MonoBehaviour
     private void CloseAll()
     {
         partyFrame.SetActive(false);
+        inventoryController.CloseAll();
         inventoryFrame.SetActive(false);
     }
 

@@ -36,11 +36,14 @@ public class CombatController : MonoBehaviour
     // Act HUD: Combatant info
     [SerializeField] GameObject statusFrame;
     [SerializeField] TextMeshProUGUI combatantName;
+    [SerializeField] TextMeshProUGUI combatantLevel;
     [SerializeField] Image combatantProfile;
     [SerializeField] TextMeshProUGUI combatantHP;
     [SerializeField] TextMeshProUGUI combatantMP;
     [SerializeField] Slider barHealth;
     [SerializeField] Slider barMana;
+    [SerializeField] GameObject meterAP;
+    [SerializeField] Sprite actionSprite;
 
     // Act HUD: Action selector
     [SerializeField] GameObject actionFrame;
@@ -132,13 +135,22 @@ public class CombatController : MonoBehaviour
     public void LoadProfile(Combatant combatant)
     {
         combatantName.SetText(combatant.name);
+        combatantLevel.SetText(combatant.level.ToString());
         combatantProfile.sprite = combatant.GetFace(0);
+
         barHealth.maxValue = combatant.statHP;
         barHealth.value = combatant.currentHP;
         combatantHP.SetText(combatant.currentHP.ToString());
         barMana.maxValue = combatant.statMP;
         barMana.value = combatant.currentMP;
         combatantMP.SetText(combatant.currentMP.ToString());
+
+        List<GameObject> points = new();
+        foreach (Transform point in meterAP.transform) points.Add(point.gameObject);
+
+        foreach (GameObject point in points) point.GetComponent<Animator>().SetInteger("state", 0);
+        for (int i = 0; i < combatant.statAP; i++) points[i].GetComponent<Animator>().SetInteger("state", 1);
+        for (int i = 0; i < combatant.currentAP; i++) points[i].GetComponent<Animator>().SetInteger("state", 2);
     }
 
     public void TurnCards(bool show)

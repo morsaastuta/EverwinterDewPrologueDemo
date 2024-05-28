@@ -8,4 +8,5 @@ public class DataHUB : MonoBehaviour
     [SerializeField] public MapProperties map;
 
     [SerializeField] public SavingSystem savingSystem;
+    [SerializeField] public ItemGatherer itemGatherer;
 }

@@ -11,8 +11,28 @@ public class Inventory
 
     public void Add(Item item, int qty)
     {
-        items.Add(item);
-        stock.Add(qty);
+        bool isNew = true;
+
+        foreach(Item hadItem in items)
+        {
+            if (hadItem.GetType().Equals(item.GetType()))
+            {
+                AddStock(items.IndexOf(hadItem), qty);
+                isNew = false;
+            }
+        }
+
+        if (isNew)
+        {
+            items.Add(item);
+            stock.Add(qty);
+        }
+    }
+
+    public void AddStock(int index, int qty)
+    {
+        stock[index] += qty;
+        if (stock[index] <= 0) Delete(items[index]);
     }
 
     public void Clear()
@@ -23,13 +43,7 @@ public class Inventory
 
     public int GetQty(Item item)
     {
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (items[i].Equals(item))
-            {
-                return stock[i];
-            }
-        }
+        for (int i = 0; i < items.Count; i++) if (items[i].Equals(item)) return stock[i];
 
         return 0;
     }

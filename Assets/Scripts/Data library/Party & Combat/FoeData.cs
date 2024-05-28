@@ -7,7 +7,9 @@ using UnityEngine;
 [Serializable]
 public abstract class FoeData : Combatant
 {
-    [OdinSerialize] protected Dictionary<string, Skill> skillID = new(); 
+    [OdinSerialize] protected Dictionary<string, Skill> skillID = new();
+    [OdinSerialize] protected int lootXP;
+    [OdinSerialize] protected Dictionary<Item, float> lootItems = new();
 
     public virtual IEnumerator AutoTurn(CombatController scene)
     {
@@ -115,5 +117,19 @@ public abstract class FoeData : Combatant
     {
         scene.selectedSkill = skill;
         scene.ActorCell().CastSkill(target);
+    }
+
+    public void GetLoot(PlayerProperties player)
+    {
+        foreach (Profile character in player.party) character.ObtainXP(lootXP);
+
+        foreach (Item item in lootItems.Keys)
+        {
+            if (UnityEngine.Random.Range(0f, 1f) >= lootItems.GetValueOrDefault(item))
+            {
+                player.AddItem(item, 1);
+            }
+        }
+
     }
 }

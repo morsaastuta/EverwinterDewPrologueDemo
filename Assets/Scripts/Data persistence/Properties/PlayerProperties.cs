@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [Serializable]
 public class PlayerProperties : MonoBehaviour
@@ -65,15 +64,15 @@ public class PlayerProperties : MonoBehaviour
             SelectCharacter(typeof(Nikolaos));
 
             // Test items
-            AddGear(new BodyWinter());
-            AddGear(new ArmsWinter());
-            AddGear(new LegsWinter());
-            AddGear(new AccessoryChrysanthemumCorola());
-            AddGear(new AccessoryBellSouvenir());
-            AddGear(new SwordAthanas());
-            AddGear(new SwordBell());
-            AddGear(new ShieldFloe());
-            AddGear(new BowAnemone());
+            AddItem(new BodyWinter(), 1);
+            AddItem(new ArmsWinter(), 1);
+            AddItem(new LegsWinter(), 1);
+            AddItem(new AccessoryChrysanthemumCorola(), 2);
+            AddItem(new AccessoryBellSouvenir(), 2);
+            AddItem(new SwordAthanas(), 1);
+            AddItem(new SwordBell(), 1);
+            AddItem(new ShieldFloe(), 1);
+            AddItem(new BowAnemone(), 1);
             for (int i = 0; i < UnityEngine.Random.Range(15, 31); i++)
             {
                 Item item = null;
@@ -145,7 +144,12 @@ public class PlayerProperties : MonoBehaviour
         UpdateVisuals();
     }
 
-    public void SaveStatus()
+    void Start()
+    {
+        foreach (Profile character in party) character.ChangeWield(0);
+    }
+
+    public void SaveState()
     {
         playerPos = transform.position;
         playerAngle = transform.rotation;
@@ -259,6 +263,18 @@ public class PlayerProperties : MonoBehaviour
             ReloadInventory();
             return true;
         }
+        else if (type.BaseType.Equals(typeof(GearItem)) || type.BaseType.Equals(typeof(WieldItem)))
+        {
+            bool returnedVal = true;
+
+            for (int i = 0; i < qty; i++)
+            {
+                returnedVal = AddGear((GearItem)newItem);
+                if (!returnedVal) break;
+            }
+
+            return returnedVal;
+        }
         else
         {
             ReloadInventory();
@@ -266,7 +282,7 @@ public class PlayerProperties : MonoBehaviour
         }
     }
 
-    public bool AddGear(GearItem newItem)
+    bool AddGear(GearItem newItem)
     {
         if (armory.Count < armorySize)
         {
@@ -293,6 +309,16 @@ public class PlayerProperties : MonoBehaviour
     public void RestoreParty()
     {
         foreach (Profile profile in party) profile.FullRestore();
+    }
+
+    public void InitializeAP()
+    {
+        foreach (Profile profile in party) profile.ReloadAP();
+    }
+
+    public void MaximizeAP()
+    {
+        foreach (Profile profile in party) profile.ChangeAP(profile.statAP);
     }
 
     public void UpdateVisuals()

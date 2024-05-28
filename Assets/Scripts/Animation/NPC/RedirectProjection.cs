@@ -20,10 +20,7 @@ public class RedirectProjection : MonoBehaviour
 
         if (GetComponent<Animator>().runtimeAnimatorController is not null)
         {
-            if (GetComponent<Animator>().GetInteger("direction") != direction)
-            {
-                GetComponent<Animator>().SetInteger("direction", direction);
-            }
+            if (GetComponent<Animator>().GetInteger("direction") != direction) GetComponent<Animator>().SetInteger("direction", direction);
         }
     }
 }

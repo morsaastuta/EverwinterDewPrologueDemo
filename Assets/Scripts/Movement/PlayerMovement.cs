@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
         speed = walkSpeed;
 
         movement = transform.localScale;

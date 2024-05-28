@@ -8,7 +8,6 @@ public class Nikolaos : Profile
         name = "Nikolaos";
         fullname = "Nikolaos Athanas";
         description = "The crown prince of Pantheos. Of 23 years of age already, he just started his Snowforcing pilgrimage. He was blessed by Khione, the Pagos goddess, in his early years, and as such he can change the flow of the Pagos winds at will. His swordsmanship is still on the works, but he's already an expert in sword dancing.";
-        job = new Knight();
 
         iconPath = "Sprites/Characters/Nikolaos/iconsheet";
         profilePath = "Sprites/Characters/Nikolaos/profilesheet";
@@ -18,9 +17,11 @@ public class Nikolaos : Profile
         animatorOWPath = "Animations/Characters/Nikolaos/OW_controller";
         animatorCSPath = "Animations/Characters/Nikolaos/CS_controller";
 
-        level = 5;
+        level = 0;
+        NewJob(new Knight(0));
+        SetJob(typeof(Knight), true);
 
-        baseAP = 3;
+        baseAP = 2;
         baseHP = 160;
         baseMP = 10;
         baseATK = 5;
@@ -45,9 +46,20 @@ public class Nikolaos : Profile
         LoadStats();
         FullRestore();
 
-        LoadSkills();
+        CheckNewSkills();
+        mainJob.CheckNewSkills(this);
+    }
 
-        skillset.Add(new Skill_Snowball());
-        skillset.Add(new Skill_TreatWounds());
+    public override void CheckNewSkills()
+    {
+        switch (level)
+        {
+            case 1:
+                NewSkill(new Skill_TreatWounds());
+                break;
+            case 4:
+                NewSkill(new Skill_Snowball());
+                break;
+        }
     }
 }

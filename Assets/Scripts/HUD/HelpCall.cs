@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class HelpCall : MonoBehaviour
@@ -17,6 +15,7 @@ public class HelpCall : MonoBehaviour
 
     public void Dismiss()
     {
+        ClearHelper();
         area.SetActive(false);
     }
 
@@ -24,7 +23,7 @@ public class HelpCall : MonoBehaviour
     {
         foreach (Transform child in area.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
     }
 }

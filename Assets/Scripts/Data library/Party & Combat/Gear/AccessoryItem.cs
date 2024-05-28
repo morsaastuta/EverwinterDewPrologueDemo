@@ -15,11 +15,11 @@ public abstract class AccessoryItem : GearItem
         statByName.Add("DFN", statDFN);
         statByName.Add("DFL", statDFL);
 
-        statByName.Add("SPD", statMOV);
+        statByName.Add("SPD", statSPD);
         statByName.Add("MOV", statMOV);
 
-        statByName.Add("CR", statMOV);
-        statByName.Add("CD", statMOV);
+        statByName.Add("CR", statCR);
+        statByName.Add("CD", statCD);
 
         statByName.Add("PSA", statPRA);
         statByName.Add("ASA", statARA);

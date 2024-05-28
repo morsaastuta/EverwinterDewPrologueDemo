@@ -9,12 +9,6 @@ public class EncounterData
     [OdinSerialize] public bool defeated = false;
     [OdinSerialize] public bool fled = false;
 
-    public EncounterData(List<FoeData> newFoes)
-    {
-        foes.Clear();
-        foes.AddRange(newFoes);
-    }
-
     public List<FoeData> GetFoes()
     {
         return foes;
@@ -25,5 +19,10 @@ public class EncounterData
         foes = e.foes;
         defeated = e.defeated;
         fled = e.fled;
+    }
+
+    public void UpdateEncounter(List<FoeData> newFoes)
+    {
+        foes = newFoes;
     }
 }

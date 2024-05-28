@@ -687,7 +687,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5414908899200996268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07291d4aa773f244d85e3eb1b4372b89, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc9164f43fbabe419be81bcfbb9647e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   emptyIcon: {fileID: 21300000, guid: 11af0d46bbb37774e9350c220dfbd434, type: 3}
@@ -697,7 +697,6 @@ MonoBehaviour:
   animIcon: {fileID: 880669115725741849}
   stock: {fileID: 4053816328201160568}
   qty: {fileID: 8494907367322348888}
-  elementNull: {fileID: 0}
 --- !u!114 &4692570949326107994
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,8 +37,10 @@ public class StatusStatNamesHelper : MonoBehaviour
     [SerializeField] GameObject iconHSA;
     [SerializeField] GameObject iconHRA;
 
-    Dictionary<GameObject, string> statNames = new Dictionary<GameObject, string>();
-    Dictionary<GameObject, string> statDescriptions = new Dictionary<GameObject, string>();
+    [SerializeField] GameObject iconAP;
+
+    Dictionary<GameObject, string> statNames = new();
+    Dictionary<GameObject, string> statDescriptions = new();
 
     void Start()
     {
@@ -102,10 +104,11 @@ public class StatusStatNamesHelper : MonoBehaviour
         statNames.Add(iconHRA, "Homa Resistance Affinity");
         statDescriptions.Add(iconHRA, "Represents a character's resistance to the Homa element. Inversely proportional to total damage input from Homa skills.");
 
+        statNames.Add(iconAP, "Action Points");
+        statDescriptions.Add(iconAP, "Maximum AP a character can have at any given point during combat.");
+
         // Determine texts
-
         TextMeshProUGUI[] texts = pane.GetComponentsInChildren<TextMeshProUGUI>();
-
         name = texts[0];
         description = texts[1];
     }
@@ -115,5 +118,10 @@ public class StatusStatNamesHelper : MonoBehaviour
         name.SetText(statNames.GetValueOrDefault(stat));
         description.SetText(statDescriptions.GetValueOrDefault(stat));
         helper.CallForHelp(pane);
+    }
+
+    public void Dismiss()
+    {
+        helper.Dismiss();
     }
 }

@@ -19,8 +19,9 @@ public class Foe_Rimebear_Assailant : FoeData
         animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_controller";
 
         level = initLV;
+        lootXP = 4 + (int)(0.5 * initLV);
 
-        baseAP = 2;
+        baseAP = 3;
         baseHP = 80;
         baseMP = 6;
         baseATK = 5;
@@ -30,8 +31,8 @@ public class Foe_Rimebear_Assailant : FoeData
         baseSPI = 1;
         baseSPD = 4;
         baseMOV = 3;
-        basePSA = 115;
-        basePRA = 115;
+        basePSA = 125;
+        basePRA = 125;
 
         incrHP = 6.0f;
         incrMP = 0.5f;
@@ -46,6 +47,9 @@ public class Foe_Rimebear_Assailant : FoeData
         FullRestore();
 
         AddSkill("basic", new Skill_BasicAttack());
+
+        lootItems.Add(new ClawRimebear(), 0.8f);
+        lootItems.Add(new PeltRimebear(), 0.6f);
     }
 
     public override IEnumerator AutoTurn(CombatController scene)

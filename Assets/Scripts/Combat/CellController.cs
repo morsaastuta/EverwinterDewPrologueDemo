@@ -1,6 +1,4 @@
-using Autodesk.Fbx;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 public class CellController : MonoBehaviour
 {
@@ -43,6 +41,9 @@ public class CellController : MonoBehaviour
     int prevHP = -1;
     int prevMP = -1;
     int prevAP = -1;
+    bool alteredHP = false;
+    bool alteredMP = false;
+    bool alteredAP = false;
 
     // Combat references
     CombatController scene;
@@ -72,12 +73,6 @@ public class CellController : MonoBehaviour
             prevMP = combatant.currentMP;
             prevAP = combatant.currentAP;
 
-            if (combatant.KO)
-            {
-                DismissCombatant();
-                scene.UpdateVisuals();
-            }
-
             if (affected)
             {
                 if (isPositive)
@@ -101,6 +96,28 @@ public class CellController : MonoBehaviour
 
                 combatantProjection.color = combatantHue;
             }
+
+            if (combatant.KO)
+            {
+                DismissCombatant();
+                scene.UpdateVisuals();
+            }
+        }
+    }
+
+    public void PointsAltered(string type)
+    {
+        switch (type)
+        {
+            case "HP":
+                alteredHP = true;
+                break;
+            case "MP":
+                alteredMP = true;
+                break;
+            case "AP":
+                alteredAP = true;
+                break;
         }
     }
 
@@ -168,6 +185,12 @@ public class CellController : MonoBehaviour
         prevHP = -1;
         prevMP = -1;
         prevAP = -1;
+
+        combatantHue.r = 255;
+        combatantHue.g = 255;
+        combatantHue.b = 255;
+        affected = false;
+        combatantProjection.color = combatantHue;
     }
 
     public bool CheckEnergy()

@@ -1,0 +1,3176 @@
+{
+    "$id": 0,
+    "$type": "0|SlotData, Assembly-CSharp",
+    "player": {
+        "$id": 1,
+        "$type": "1|PlayerProperties, Assembly-CSharp",
+        "sceneName": "ThrasciasForest_Overworld",
+        "hasBeenInit": true,
+        "canMove": true,
+        "canJump": true,
+        "canRun": true,
+        "canInteract": true,
+        "canPause": true,
+        "party": {
+            "$id": 2,
+            "$type": "2|System.Collections.Generic.List`1[[Profile, Assembly-CSharp]], mscorlib",
+            "$rlength": 1,
+            "$rcontent": [
+                {
+                    "$id": 3,
+                    "$type": "3|Nikolaos, Assembly-CSharp",
+                    "name": "Nikolaos",
+                    "description": "The crown prince of Pantheos. Of 23 years of age already, he just started his Snowforcing pilgrimage. He was blessed by Khione, the Pagos goddess, in his early years, and as such he can change the flow of the Pagos winds at will. His swordsmanship is still on the works, but he's already an expert in sword dancing.",
+                    "iconPath": "Sprites/Characters/Nikolaos/iconsheet",
+                    "profilePath": "Sprites/Characters/Nikolaos/profilesheet",
+                    "facePath": "Sprites/Characters/Nikolaos/facesheet",
+                    "spritesheetOWPath": "Sprites/Characters/Nikolaos/OW_spritesheet",
+                    "animatorOWPath": "Animations/Characters/Nikolaos/OW_controller",
+                    "level": 0,
+                    "KO": false,
+                    "currentHP": 160,
+                    "currentMP": 10,
+                    "currentAP": 0,
+                    "currentFAT": 0,
+                    "initAP": 1,
+                    "spritesheetCSPath": "Sprites/Characters/Nikolaos/CS_spritesheet",
+                    "animatorCSPath": "Animations/Characters/Nikolaos/CS_controller",
+                    "skillset": {
+                        "$id": 4,
+                        "$type": "4|System.Collections.Generic.List`1[[Skill, Assembly-CSharp]], mscorlib",
+                        "$rlength": 1,
+                        "$rcontent": [
+                            {
+                                "$id": 5,
+                                "$type": "5|Skill_BasicAttack, Assembly-CSharp",
+                                "friendly": false,
+                                "name": "Attack",
+                                "description": "Basic physical attack.",
+                                "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                "sheetIndex": 0,
+                                "costAP": 0,
+                                "range": 1,
+                                "directional": false,
+                                "squared": false,
+                                "multitarget": false,
+                                "wields": {
+                                    "$id": 6,
+                                    "$type": "6|System.Collections.Generic.List`1[[System.Type, mscorlib]], mscorlib",
+                                    "$rlength": 4,
+                                    "$rcontent": [
+                                        null,
+                                        {
+                                            "$id": 7,
+                                            "$type": "7|System.RuntimeType, mscorlib",
+                                            "SwordItem, Assembly-CSharp"
+                                        },
+                                        {
+                                            "$id": 8,
+                                            "$type": 7,
+                                            "ShieldItem, Assembly-CSharp"
+                                        },
+                                        {
+                                            "$id": 9,
+                                            "$type": 7,
+                                            "BowItem, Assembly-CSharp"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "baseHP": 160,
+                    "baseMP": 10,
+                    "baseAP": 2,
+                    "baseFAT": 1000,
+                    "baseATK": 5,
+                    "baseDFN": 5,
+                    "baseMAG": 4,
+                    "baseDFL": 4,
+                    "baseSPI": 2,
+                    "baseSPD": 5,
+                    "baseMOV": 3,
+                    "baseACC": 100,
+                    "baseCR": 5,
+                    "baseCD": 50,
+                    "basePSA": 150,
+                    "basePRA": 150,
+                    "baseASA": 100,
+                    "baseARA": 100,
+                    "baseSSA": 100,
+                    "baseSRA": 100,
+                    "baseHSA": 100,
+                    "baseHRA": 100,
+                    "statAP": 2,
+                    "statFAT": 1000,
+                    "statHP": 160,
+                    "statMP": 10,
+                    "statATK": 5,
+                    "statDFN": 27,
+                    "statMAG": 4,
+                    "statDFL": 25,
+                    "statSPI": 2,
+                    "statSPD": 18,
+                    "statMOV": 3,
+                    "statACC": 100,
+                    "statCR": 5,
+                    "statCD": 50,
+                    "statPSA": 150,
+                    "statPRA": 150,
+                    "statASA": 110,
+                    "statARA": 130,
+                    "statSSA": 100,
+                    "statSRA": 100,
+                    "statHSA": 100,
+                    "statHRA": 100,
+                    "incrHP": 6,
+                    "incrMP": 0.8,
+                    "incrATK": 1.6,
+                    "incrDFN": 1.6,
+                    "incrMAG": 0.8,
+                    "incrDFL": 1.2,
+                    "incrSPI": 0.6,
+                    "incrSPD": 0.8,
+                    "fullname": "Nikolaos Athanas",
+                    "experience": 0,
+                    "mainJob": {
+                        "$id": 10,
+                        "$type": "8|Knight, Assembly-CSharp",
+                        "name": "Knight",
+                        "description": "Knights have sworn to protect their allies from any danger. They master the sword and shield, being able to block their foes while attacking at a close range.",
+                        "level": 0,
+                        "experience": 0,
+                        "wield1": $iref:7,
+                        "wield2": $iref:8
+                    },
+                    "subJob": null,
+                    "unlockedJobs": {
+                        "$id": 11,
+                        "$type": "9|System.Collections.Generic.List`1[[Job, Assembly-CSharp]], mscorlib",
+                        "$rlength": 1,
+                        "$rcontent": [
+                            $iref:10
+                        ]
+                    },
+                    "head": null,
+                    "body": {
+                        "$id": 12,
+                        "$type": "10|BodyWinter, Assembly-CSharp",
+                        "name": "Winter Coat",
+                        "description": "Coat crafted from rimebear leather. It is of common use in the southern regions of Heimonas.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 0,
+                        "stackable": false,
+                        "price": 80,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 0,
+                        "statDFN": 10,
+                        "statMAG": 0,
+                        "statDFL": 5,
+                        "statSPI": 0,
+                        "statSPD": 0,
+                        "statMOV": 0,
+                        "statACC": 0,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 0,
+                        "statPRA": 0,
+                        "statASA": 0,
+                        "statARA": 0,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 13,
+                            "$type": "11|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib",
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 14,
+                            "$type": "12|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Single, mscorlib]], mscorlib",
+                            "comparer": {
+                                "$id": 15,
+                                "$type": "13|System.Collections.Generic.GenericEqualityComparer`1[[System.String, mscorlib]], mscorlib"
+                            },
+                            "$rlength": 9,
+                            "$rcontent": [
+                                {
+                                    "$k": "DFN",
+                                    "$v": 10
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 5
+                                },
+                                {
+                                    "$k": "MOV",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                }
+                            ]
+                        }
+                    },
+                    "arms": {
+                        "$id": 16,
+                        "$type": "14|ArmsWinter, Assembly-CSharp",
+                        "name": "Winter Gloves",
+                        "description": "Gloves crafted from rimebear leather. They are of common use in the southern regions of Heimonas.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 1,
+                        "stackable": false,
+                        "price": 50,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 0,
+                        "statDFN": 6,
+                        "statMAG": 0,
+                        "statDFL": 3,
+                        "statSPI": 0,
+                        "statSPD": 0,
+                        "statMOV": 0,
+                        "statACC": 0,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 0,
+                        "statPRA": 0,
+                        "statASA": 0,
+                        "statARA": 0,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 17,
+                            "$type": 11,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 18,
+                            "$type": 12,
+                            "comparer": $iref:15,
+                            "$rlength": 18,
+                            "$rcontent": [
+                                {
+                                    "$k": "ATK",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MAG",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPI",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFN",
+                                    "$v": 6
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 3
+                                },
+                                {
+                                    "$k": "ACC",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CR",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ASA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                }
+                            ]
+                        }
+                    },
+                    "legs": {
+                        "$id": 19,
+                        "$type": "15|LegsWinter, Assembly-CSharp",
+                        "name": "Winter Boots",
+                        "description": "Boots crafted from rimebear leather. They are of common use in the southern regions of Heimonas.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 2,
+                        "stackable": false,
+                        "price": 65,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 0,
+                        "statDFN": 6,
+                        "statMAG": 0,
+                        "statDFL": 3,
+                        "statSPI": 0,
+                        "statSPD": 3,
+                        "statMOV": 0,
+                        "statACC": 0,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 0,
+                        "statPRA": 0,
+                        "statASA": 0,
+                        "statARA": 0,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 20,
+                            "$type": 11,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 21,
+                            "$type": 12,
+                            "comparer": $iref:15,
+                            "$rlength": 10,
+                            "$rcontent": [
+                                {
+                                    "$k": "SPD",
+                                    "$v": 3
+                                },
+                                {
+                                    "$k": "MOV",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFN",
+                                    "$v": 6
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 3
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                }
+                            ]
+                        }
+                    },
+                    "wield1": {
+                        "$id": 22,
+                        "$type": "16|SwordAthanas, Assembly-CSharp",
+                        "name": "Athanas Sword",
+                        "description": "Sword forged with great skill just for the Athanas bloodline to wield.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 5,
+                        "stackable": false,
+                        "price": 0,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 1000,
+                        "statDFN": 0,
+                        "statMAG": 0,
+                        "statDFL": 0,
+                        "statSPI": 0,
+                        "statSPD": 0,
+                        "statMOV": 0,
+                        "statACC": -5,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 25,
+                        "statPRA": 0,
+                        "statASA": 0,
+                        "statARA": 0,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 23,
+                            "$type": 11,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 24,
+                            "$type": 12,
+                            "comparer": $iref:15,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                {
+                                    "$k": "ATK",
+                                    "$v": 1000
+                                },
+                                {
+                                    "$k": "MAG",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ACC",
+                                    "$v": -5
+                                },
+                                {
+                                    "$k": "CR",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PSA",
+                                    "$v": 25
+                                },
+                                {
+                                    "$k": "ASA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPI",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MOV",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFN",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                }
+                            ]
+                        },
+                        "dual": false
+                    },
+                    "wield2": {
+                        "$id": 25,
+                        "$type": "17|ShieldFloe, Assembly-CSharp",
+                        "name": "Floe Shield",
+                        "description": "Durable and sturdy shield made by Nikolaos himself with extreme care.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 7,
+                        "stackable": false,
+                        "price": 0,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 10,
+                        "statDFN": 20,
+                        "statMAG": 0,
+                        "statDFL": 0,
+                        "statSPI": 0,
+                        "statSPD": 0,
+                        "statMOV": 0,
+                        "statACC": 20,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 25,
+                        "statPRA": 0,
+                        "statASA": 0,
+                        "statARA": 0,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 26,
+                            "$type": 11,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 27,
+                            "$type": 12,
+                            "comparer": $iref:15,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                {
+                                    "$k": "ATK",
+                                    "$v": 10
+                                },
+                                {
+                                    "$k": "MAG",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFN",
+                                    "$v": 20
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ACC",
+                                    "$v": 20
+                                },
+                                {
+                                    "$k": "CR",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PSA",
+                                    "$v": 25
+                                },
+                                {
+                                    "$k": "ASA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPI",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MOV",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                }
+                            ]
+                        },
+                        "dual": false
+                    },
+                    "accessory1": {
+                        "$id": 28,
+                        "$type": "18|AccessoryChrysanthemumCorola, Assembly-CSharp",
+                        "name": "Chrysanthemum Corola",
+                        "description": "Hair tie decorated with chrysanthemum petals by Theron. Resembles a golden corola.",
+                        "sheetPath": "Sprites/HUD/Items/gearsheet",
+                        "sheetIndex": 3,
+                        "stackable": false,
+                        "price": 0,
+                        "statHP": 0,
+                        "statMP": 0,
+                        "statATK": 0,
+                        "statDFN": 0,
+                        "statMAG": 0,
+                        "statDFL": 5,
+                        "statSPI": 0,
+                        "statSPD": 5,
+                        "statMOV": 0,
+                        "statACC": 0,
+                        "statCR": 0,
+                        "statCD": 0,
+                        "statPSA": 0,
+                        "statPRA": 0,
+                        "statASA": 5,
+                        "statARA": 15,
+                        "statSSA": 0,
+                        "statSRA": 0,
+                        "statHSA": 0,
+                        "statHRA": 0,
+                        "statNames": {
+                            "$id": 29,
+                            "$type": 11,
+                            "$rlength": 20,
+                            "$rcontent": [
+                                "HP",
+                                "MP",
+                                "ATK",
+                                "DFN",
+                                "MAG",
+                                "DFL",
+                                "SPI",
+                                "ACC",
+                                "CR",
+                                "CD",
+                                "SPD",
+                                "MOV",
+                                "PSA",
+                                "ASA",
+                                "SSA",
+                                "HSA",
+                                "PRA",
+                                "ARA",
+                                "SRA",
+                                "HRA"
+                            ]
+                        },
+                        "statByName": {
+                            "$id": 30,
+                            "$type": 12,
+                            "comparer": $iref:15,
+                            "$rlength": 19,
+                            "$rcontent": [
+                                {
+                                    "$k": "HP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MP",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ATK",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "MAG",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "SPI",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFN",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "DFL",
+                                    "$v": 5
+                                },
+                                {
+                                    "$k": "SPD",
+                                    "$v": 5
+                                },
+                                {
+                                    "$k": "MOV",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CR",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "CD",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ASA",
+                                    "$v": 15
+                                },
+                                {
+                                    "$k": "SSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HSA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "PRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "ARA",
+                                    "$v": 15
+                                },
+                                {
+                                    "$k": "SRA",
+                                    "$v": 0
+                                },
+                                {
+                                    "$k": "HRA",
+                                    "$v": 0
+                                }
+                            ]
+                        }
+                    },
+                    "accessory2": $iref:28,
+                    "currentWield": null,
+                    "gearItems": {
+                        "$id": 31,
+                        "$type": "19|System.Collections.Generic.List`1[[GearItem, Assembly-CSharp]], mscorlib",
+                        "$rlength": 6,
+                        "$rcontent": [
+                            null,
+                            $iref:12,
+                            $iref:16,
+                            $iref:19,
+                            $iref:28,
+                            $iref:28
+                        ]
+                    },
+                    "wieldItems": {
+                        "$id": 32,
+                        "$type": "20|System.Collections.Generic.List`1[[WieldItem, Assembly-CSharp]], mscorlib",
+                        "$rlength": 2,
+                        "$rcontent": [
+                            $iref:22,
+                            $iref:25
+                        ]
+                    }
+                }
+            ]
+        },
+        "currentProfile": $iref:3,
+        "inventory": {
+            "$id": 33,
+            "$type": "21|Inventory, Assembly-CSharp",
+            "items": {
+                "$id": 34,
+                "$type": "22|System.Collections.Generic.List`1[[Item, Assembly-CSharp]], mscorlib",
+                "$rlength": 6,
+                "$rcontent": [
+                    {
+                        "$id": 35,
+                        "$type": "23|RationI, Assembly-CSharp",
+                        "name": "Small Ration",
+                        "description": "Heals 100 HP to one party member.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 0,
+                        "stackable": true,
+                        "price": 15,
+                        "friendly": true,
+                        "range": 1,
+                        "directional": false,
+                        "squared": false,
+                        "multitarget": false
+                    },
+                    {
+                        "$id": 36,
+                        "$type": "24|RationII, Assembly-CSharp",
+                        "name": "Medium Ration",
+                        "description": "Heals 200 HP to one party member.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 6,
+                        "stackable": true,
+                        "price": 30,
+                        "friendly": true,
+                        "range": 1,
+                        "directional": false,
+                        "squared": false,
+                        "multitarget": false
+                    },
+                    {
+                        "$id": 37,
+                        "$type": "25|HerbsThrascias, Assembly-CSharp",
+                        "name": "Thrascias Herbs",
+                        "description": "Herbs gathered from the cold forests of Thrascias.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 4,
+                        "stackable": true,
+                        "price": 3
+                    },
+                    {
+                        "$id": 38,
+                        "$type": "26|ClawRimebear, Assembly-CSharp",
+                        "name": "Rimebear Claw",
+                        "description": "Claw obtained from a Rimebear.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 5,
+                        "stackable": true,
+                        "price": 8
+                    },
+                    {
+                        "$id": 39,
+                        "$type": "27|PeltRimebear, Assembly-CSharp",
+                        "name": "Rimebear Pelt",
+                        "description": "Pelt obtained from a Rimebear.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 3,
+                        "stackable": true,
+                        "price": 10
+                    },
+                    {
+                        "$id": 40,
+                        "$type": "28|FlowerSnowdrop, Assembly-CSharp",
+                        "name": "Snowdrop",
+                        "description": "Snowdrop gathered from the northern land of Heimonas.",
+                        "sheetPath": "Sprites/HUD/Items/iconsheet",
+                        "sheetIndex": 2,
+                        "stackable": true,
+                        "price": 6
+                    }
+                ]
+            },
+            "stock": {
+                "$id": 41,
+                "$type": "29|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+                "$rlength": 6,
+                "$rcontent": [
+                    203,
+                    68,
+                    193,
+                    143,
+                    240,
+                    51
+                ]
+            }
+        },
+        "consumableItems": {
+            "$id": 42,
+            "$type": "30|System.Collections.Generic.List`1[[ConsumableItem, Assembly-CSharp]], mscorlib",
+            "$rlength": 2,
+            "$rcontent": [
+                $iref:35,
+                $iref:36
+            ]
+        },
+        "consumablesSize": 15,
+        "materialItems": {
+            "$id": 43,
+            "$type": "31|System.Collections.Generic.List`1[[MaterialItem, Assembly-CSharp]], mscorlib",
+            "$rlength": 4,
+            "$rcontent": [
+                $iref:37,
+                $iref:38,
+                $iref:39,
+                $iref:40
+            ]
+        },
+        "materialsSize": 30,
+        "keyItems": {
+            "$id": 44,
+            "$type": "32|System.Collections.Generic.List`1[[KeyItem, Assembly-CSharp]], mscorlib",
+            "$rlength": 0,
+            "$rcontent": [
+            ]
+        },
+        "keysSize": 5,
+        "armory": {
+            "$id": 45,
+            "$type": 19,
+            "$rlength": 4,
+            "$rcontent": [
+                {
+                    "$id": 46,
+                    "$type": "33|AccessoryBellSouvenir, Assembly-CSharp",
+                    "name": "Bell Charm",
+                    "description": "Local souvenir from Kampanario designed after the bell from its belfry. Made from iron, has motifs of snowdrops engraved and emits a faint chime when shaken.",
+                    "sheetPath": "Sprites/HUD/Items/gearsheet",
+                    "sheetIndex": 4,
+                    "stackable": false,
+                    "price": 25,
+                    "statHP": 0,
+                    "statMP": 0,
+                    "statATK": 0,
+                    "statDFN": 0,
+                    "statMAG": 0,
+                    "statDFL": 5,
+                    "statSPI": 0,
+                    "statSPD": 0,
+                    "statMOV": 0,
+                    "statACC": 0,
+                    "statCR": 0,
+                    "statCD": 0,
+                    "statPSA": 0,
+                    "statPRA": 0,
+                    "statASA": 0,
+                    "statARA": 0,
+                    "statSSA": 0,
+                    "statSRA": 0,
+                    "statHSA": 0,
+                    "statHRA": 0,
+                    "statNames": {
+                        "$id": 47,
+                        "$type": 11,
+                        "$rlength": 20,
+                        "$rcontent": [
+                            "HP",
+                            "MP",
+                            "ATK",
+                            "DFN",
+                            "MAG",
+                            "DFL",
+                            "SPI",
+                            "ACC",
+                            "CR",
+                            "CD",
+                            "SPD",
+                            "MOV",
+                            "PSA",
+                            "ASA",
+                            "SSA",
+                            "HSA",
+                            "PRA",
+                            "ARA",
+                            "SRA",
+                            "HRA"
+                        ]
+                    },
+                    "statByName": {
+                        "$id": 48,
+                        "$type": 12,
+                        "comparer": $iref:15,
+                        "$rlength": 19,
+                        "$rcontent": [
+                            {
+                                "$k": "HP",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MP",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ATK",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MAG",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SPI",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFN",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFL",
+                                "$v": 5
+                            },
+                            {
+                                "$k": "SPD",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MOV",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "CR",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "CD",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ASA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ARA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HRA",
+                                "$v": 0
+                            }
+                        ]
+                    }
+                },
+                $iref:46,
+                {
+                    "$id": 49,
+                    "$type": "34|SwordBell, Assembly-CSharp",
+                    "name": "Bell of Stephanos",
+                    "description": "Iron sword forged in the northern town of Kampanario and designed after the bell from its belfry, as well as the bell-like local snowdrops. It emits a faint chime with each swing.",
+                    "sheetPath": "Sprites/HUD/Items/gearsheet",
+                    "sheetIndex": 6,
+                    "stackable": false,
+                    "price": 20,
+                    "statHP": 0,
+                    "statMP": 0,
+                    "statATK": 8,
+                    "statDFN": 0,
+                    "statMAG": 0,
+                    "statDFL": 0,
+                    "statSPI": 0,
+                    "statSPD": 0,
+                    "statMOV": 0,
+                    "statACC": -10,
+                    "statCR": 0,
+                    "statCD": 0,
+                    "statPSA": 0,
+                    "statPRA": 10,
+                    "statASA": 0,
+                    "statARA": 0,
+                    "statSSA": 0,
+                    "statSRA": 0,
+                    "statHSA": 0,
+                    "statHRA": 0,
+                    "statNames": {
+                        "$id": 50,
+                        "$type": 11,
+                        "$rlength": 20,
+                        "$rcontent": [
+                            "HP",
+                            "MP",
+                            "ATK",
+                            "DFN",
+                            "MAG",
+                            "DFL",
+                            "SPI",
+                            "ACC",
+                            "CR",
+                            "CD",
+                            "SPD",
+                            "MOV",
+                            "PSA",
+                            "ASA",
+                            "SSA",
+                            "HSA",
+                            "PRA",
+                            "ARA",
+                            "SRA",
+                            "HRA"
+                        ]
+                    },
+                    "statByName": {
+                        "$id": 51,
+                        "$type": 12,
+                        "comparer": $iref:15,
+                        "$rlength": 20,
+                        "$rcontent": [
+                            {
+                                "$k": "ATK",
+                                "$v": 8
+                            },
+                            {
+                                "$k": "MAG",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ACC",
+                                "$v": -10
+                            },
+                            {
+                                "$k": "CR",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "CD",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ASA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SPI",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MP",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SPD",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MOV",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFN",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFL",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PRA",
+                                "$v": 10
+                            },
+                            {
+                                "$k": "ARA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HP",
+                                "$v": 0
+                            }
+                        ]
+                    },
+                    "dual": false
+                },
+                {
+                    "$id": 52,
+                    "$type": "35|BowAnemone, Assembly-CSharp",
+                    "name": "Anemone Piercer",
+                    "description": "Worn off bow decorated with anemones. A precious memento from Theron's past.",
+                    "sheetPath": "Sprites/HUD/Items/gearsheet",
+                    "sheetIndex": 8,
+                    "stackable": false,
+                    "price": 0,
+                    "statHP": 0,
+                    "statMP": 0,
+                    "statATK": 10,
+                    "statDFN": 0,
+                    "statMAG": 0,
+                    "statDFL": 0,
+                    "statSPI": 0,
+                    "statSPD": 10,
+                    "statMOV": 0,
+                    "statACC": -10,
+                    "statCR": 0,
+                    "statCD": 0,
+                    "statPSA": 0,
+                    "statPRA": 0,
+                    "statASA": 15,
+                    "statARA": 0,
+                    "statSSA": 0,
+                    "statSRA": 0,
+                    "statHSA": 0,
+                    "statHRA": 0,
+                    "statNames": {
+                        "$id": 53,
+                        "$type": 11,
+                        "$rlength": 20,
+                        "$rcontent": [
+                            "HP",
+                            "MP",
+                            "ATK",
+                            "DFN",
+                            "MAG",
+                            "DFL",
+                            "SPI",
+                            "ACC",
+                            "CR",
+                            "CD",
+                            "SPD",
+                            "MOV",
+                            "PSA",
+                            "ASA",
+                            "SSA",
+                            "HSA",
+                            "PRA",
+                            "ARA",
+                            "SRA",
+                            "HRA"
+                        ]
+                    },
+                    "statByName": {
+                        "$id": 54,
+                        "$type": 12,
+                        "comparer": $iref:15,
+                        "$rlength": 20,
+                        "$rcontent": [
+                            {
+                                "$k": "ATK",
+                                "$v": 10
+                            },
+                            {
+                                "$k": "MAG",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ACC",
+                                "$v": -10
+                            },
+                            {
+                                "$k": "CR",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "CD",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ASA",
+                                "$v": 15
+                            },
+                            {
+                                "$k": "SSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HSA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SPI",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "MP",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SPD",
+                                "$v": 10
+                            },
+                            {
+                                "$k": "MOV",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFN",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "DFL",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "PRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "ARA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "SRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HRA",
+                                "$v": 0
+                            },
+                            {
+                                "$k": "HP",
+                                "$v": 0
+                            }
+                        ]
+                    },
+                    "dual": true
+                }
+            ]
+        },
+        "armorySize": 15,
+        "northKey": {
+            "$id": 55,
+            "$type": "36|System.Collections.Generic.List`1[[UnityEngine.KeyCode, UnityEngine.CoreModule]], mscorlib",
+            "$rlength": 1,
+            "$rcontent": [
+                119
+            ]
+        },
+        "westKey": {
+            "$id": 56,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                97
+            ]
+        },
+        "southKey": {
+            "$id": 57,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                115
+            ]
+        },
+        "eastKey": {
+            "$id": 58,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                100
+            ]
+        },
+        "jumpKey": {
+            "$id": 59,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                32
+            ]
+        },
+        "runKey": {
+            "$id": 60,
+            "$type": 36,
+            "$rlength": 2,
+            "$rcontent": [
+                304,
+                303
+            ]
+        },
+        "menuKey": {
+            "$id": 61,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                27
+            ]
+        },
+        "interactKey": {
+            "$id": 62,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                122
+            ]
+        },
+        "skipKey": {
+            "$id": 63,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                120
+            ]
+        },
+        "holdKey": {
+            "$id": 64,
+            "$type": 36,
+            "$rlength": 1,
+            "$rcontent": [
+                324
+            ]
+        },
+        "playerPos": {
+            "$type": "37|UnityEngine.Vector3, UnityEngine.CoreModule",
+            94.7806854,
+            10.0042048,
+            31.8245869
+        },
+        "playerAngle": {
+            "$type": "38|UnityEngine.Quaternion, UnityEngine.CoreModule",
+            0.12935181,
+            0.326581478,
+            -0.04517167,
+            0.9351857
+        },
+        "isInteracting": false
+    },
+    "camera": {
+        "$id": 65,
+        "$type": "39|CameraProperties, Assembly-CSharp",
+        "canZoom": true,
+        "canPivot": true,
+        "canHold": true,
+        "cameraPos": {
+            "$type": 37,
+            93.88967,
+            10.8234882,
+            30.7044086
+        },
+        "cameraAngle": {
+            "$type": 38,
+            0.12935181,
+            0.326581478,
+            -0.04517167,
+            0.9351857
+        }
+    },
+    "world": {
+        "$id": 66,
+        "$type": "40|WorldProperties, Assembly-CSharp",
+        "activeEncounter": null,
+        "pausedGame": false,
+        "savedMaps": {
+            "$id": 67,
+            "$type": "41|System.Collections.Generic.List`1[[MapProperties, Assembly-CSharp]], mscorlib",
+            "$rlength": 1,
+            "$rcontent": [
+                {
+                    "$id": 68,
+                    "$type": "42|MapProperties, Assembly-CSharp",
+                    "overworldScene": "ThrasciasForest_Overworld",
+                    "persistedEncounters": {
+                        "$id": 69,
+                        "$type": "43|System.Collections.Generic.List`1[[EncounterData, Assembly-CSharp]], mscorlib",
+                        "$rlength": 3,
+                        "$rcontent": [
+                            {
+                                "$id": 70,
+                                "$type": "44|EncounterData, Assembly-CSharp",
+                                "foes": {
+                                    "$id": 71,
+                                    "$type": "45|System.Collections.Generic.List`1[[FoeData, Assembly-CSharp]], mscorlib",
+                                    "$rlength": 3,
+                                    "$rcontent": [
+                                        {
+                                            "$id": 72,
+                                            "$type": "46|Foe_Rimebear_Assailant, Assembly-CSharp",
+                                            "name": "Rimebear (Assailant)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 5,
+                                            "KO": false,
+                                            "currentHP": 110,
+                                            "currentMP": 8,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_spritesheet",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_controller",
+                                            "skillset": {
+                                                "$id": 73,
+                                                "$type": 4,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 74,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 75,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 80,
+                                            "baseMP": 6,
+                                            "baseAP": 3,
+                                            "baseFAT": 1000,
+                                            "baseATK": 5,
+                                            "baseDFN": 4,
+                                            "baseMAG": 2,
+                                            "baseDFL": 3,
+                                            "baseSPI": 1,
+                                            "baseSPD": 4,
+                                            "baseMOV": 3,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 125,
+                                            "basePRA": 125,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 3,
+                                            "statFAT": 1000,
+                                            "statHP": 110,
+                                            "statMP": 8,
+                                            "statATK": 11,
+                                            "statDFN": 7,
+                                            "statMAG": 3,
+                                            "statDFL": 5,
+                                            "statSPI": 1,
+                                            "statSPD": 5,
+                                            "statMOV": 3,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 125,
+                                            "statPRA": 125,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 6,
+                                            "incrMP": 0.5,
+                                            "incrATK": 1.2,
+                                            "incrDFN": 0.7,
+                                            "incrMAG": 0.3,
+                                            "incrDFL": 0.5,
+                                            "incrSPI": 0.1,
+                                            "incrSPD": 0.3,
+                                            "skillID": {
+                                                "$id": 76,
+                                                "$type": "47|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Skill, Assembly-CSharp]], mscorlib",
+                                                "comparer": $iref:15,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:74
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 6,
+                                            "lootItems": {
+                                                "$id": 77,
+                                                "$type": "48|System.Collections.Generic.Dictionary`2[[Item, Assembly-CSharp],[System.Single, mscorlib]], mscorlib",
+                                                "comparer": {
+                                                    "$id": 78,
+                                                    "$type": "49|System.Collections.Generic.ObjectEqualityComparer`1[[Item, Assembly-CSharp]], mscorlib"
+                                                },
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 79,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.8
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 80,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.6
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "$id": 81,
+                                            "$type": "50|Foe_Rimebear_Mage, Assembly-CSharp",
+                                            "name": "Rimebear (Mage)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet_mage",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 5,
+                                            "KO": false,
+                                            "currentHP": 80,
+                                            "currentMP": 13,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_mage",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_mage",
+                                            "skillset": {
+                                                "$id": 82,
+                                                "$type": 4,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 83,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 84,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "$id": 85,
+                                                        "$type": "51|Skill_Boulder, Assembly-CSharp",
+                                                        "friendly": false,
+                                                        "name": "Boulder",
+                                                        "description": "The user channels Homa from the ground to create a stone boulder and launch it towards a foe.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 5,
+                                                        "costAP": 0,
+                                                        "range": 3,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "costMP": 5,
+                                                        "elements": {
+                                                            "$id": 86,
+                                                            "$type": 11,
+                                                            "$rlength": 1,
+                                                            "$rcontent": [
+                                                                "homa"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 60,
+                                            "baseMP": 8,
+                                            "baseAP": 1,
+                                            "baseFAT": 1000,
+                                            "baseATK": 1,
+                                            "baseDFN": 3,
+                                            "baseMAG": 5,
+                                            "baseDFL": 4,
+                                            "baseSPI": 2,
+                                            "baseSPD": 3,
+                                            "baseMOV": 1,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 150,
+                                            "basePRA": 125,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 1,
+                                            "statFAT": 1000,
+                                            "statHP": 80,
+                                            "statMP": 13,
+                                            "statATK": 2,
+                                            "statDFN": 6,
+                                            "statMAG": 11,
+                                            "statDFL": 8,
+                                            "statSPI": 4,
+                                            "statSPD": 4,
+                                            "statMOV": 1,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 150,
+                                            "statPRA": 125,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 4,
+                                            "incrMP": 1,
+                                            "incrATK": 0.2,
+                                            "incrDFN": 0.6,
+                                            "incrMAG": 1.2,
+                                            "incrDFL": 0.8,
+                                            "incrSPI": 0.5,
+                                            "incrSPD": 0.2,
+                                            "skillID": {
+                                                "$id": 87,
+                                                "$type": 47,
+                                                "comparer": $iref:15,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:83
+                                                    },
+                                                    {
+                                                        "$k": "ranged",
+                                                        "$v": $iref:85
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 8,
+                                            "lootItems": {
+                                                "$id": 88,
+                                                "$type": 48,
+                                                "comparer": $iref:78,
+                                                "$rlength": 4,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 89,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.2
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 90,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.3
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 91,
+                                                            "$type": 28,
+                                                            "name": "Snowdrop",
+                                                            "description": "Snowdrop gathered from the northern land of Heimonas.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 2,
+                                                            "stackable": true,
+                                                            "price": 6
+                                                        },
+                                                        "$v": 0.1
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 92,
+                                                            "$type": "52|EtherI, Assembly-CSharp",
+                                                            "name": "Small Ether",
+                                                            "description": "Recovers 25 MP to one party member.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 1,
+                                                            "stackable": true,
+                                                            "price": 25,
+                                                            "friendly": true,
+                                                            "range": 1,
+                                                            "directional": false,
+                                                            "squared": false,
+                                                            "multitarget": false
+                                                        },
+                                                        "$v": 0.2
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "$id": 93,
+                                            "$type": "53|Foe_Rimebear_Healer, Assembly-CSharp",
+                                            "name": "Rimebear (Healer)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet_healer",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 5,
+                                            "KO": false,
+                                            "currentHP": 140,
+                                            "currentMP": 10,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_healer",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_healer",
+                                            "skillset": {
+                                                "$id": 94,
+                                                "$type": 4,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 95,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 96,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "$id": 97,
+                                                        "$type": "54|Skill_TreatWounds, Assembly-CSharp",
+                                                        "friendly": true,
+                                                        "name": "Treat wounds",
+                                                        "description": "Heal an adjacent companion a little.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 7,
+                                                        "costAP": 1,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 98,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 100,
+                                            "baseMP": 6,
+                                            "baseAP": 2,
+                                            "baseFAT": 1000,
+                                            "baseATK": 2,
+                                            "baseDFN": 4,
+                                            "baseMAG": 4,
+                                            "baseDFL": 5,
+                                            "baseSPI": 5,
+                                            "baseSPD": 3,
+                                            "baseMOV": 2,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 125,
+                                            "basePRA": 150,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 2,
+                                            "statFAT": 1000,
+                                            "statHP": 140,
+                                            "statMP": 10,
+                                            "statATK": 4,
+                                            "statDFN": 7,
+                                            "statMAG": 8,
+                                            "statDFL": 8,
+                                            "statSPI": 11,
+                                            "statSPD": 4,
+                                            "statMOV": 2,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 125,
+                                            "statPRA": 150,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 8,
+                                            "incrMP": 0.8,
+                                            "incrATK": 0.4,
+                                            "incrDFN": 0.7,
+                                            "incrMAG": 0.8,
+                                            "incrDFL": 0.7,
+                                            "incrSPI": 1.2,
+                                            "incrSPD": 0.3,
+                                            "skillID": {
+                                                "$id": 99,
+                                                "$type": 47,
+                                                "comparer": $iref:15,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:95
+                                                    },
+                                                    {
+                                                        "$k": "heal",
+                                                        "$v": $iref:97
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 7,
+                                            "lootItems": {
+                                                "$id": 100,
+                                                "$type": 48,
+                                                "comparer": $iref:78,
+                                                "$rlength": 5,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 101,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.3
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 102,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.6
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 103,
+                                                            "$type": 25,
+                                                            "name": "Thrascias Herbs",
+                                                            "description": "Herbs gathered from the cold forests of Thrascias.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 4,
+                                                            "stackable": true,
+                                                            "price": 3
+                                                        },
+                                                        "$v": 0.6
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 104,
+                                                            "$type": 28,
+                                                            "name": "Snowdrop",
+                                                            "description": "Snowdrop gathered from the northern land of Heimonas.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 2,
+                                                            "stackable": true,
+                                                            "price": 6
+                                                        },
+                                                        "$v": 0.1
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 105,
+                                                            "$type": 23,
+                                                            "name": "Small Ration",
+                                                            "description": "Heals 100 HP to one party member.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 0,
+                                                            "stackable": true,
+                                                            "price": 15,
+                                                            "friendly": true,
+                                                            "range": 1,
+                                                            "directional": false,
+                                                            "squared": false,
+                                                            "multitarget": false
+                                                        },
+                                                        "$v": 0.2
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "defeated": false,
+                                "fled": false
+                            },
+                            {
+                                "$id": 106,
+                                "$type": 44,
+                                "foes": {
+                                    "$id": 107,
+                                    "$type": 45,
+                                    "$rlength": 1,
+                                    "$rcontent": [
+                                        {
+                                            "$id": 108,
+                                            "$type": 46,
+                                            "name": "Rimebear (Assailant)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 2,
+                                            "KO": false,
+                                            "currentHP": 92,
+                                            "currentMP": 7,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_spritesheet",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_controller",
+                                            "skillset": {
+                                                "$id": 109,
+                                                "$type": 4,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 110,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 111,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 80,
+                                            "baseMP": 6,
+                                            "baseAP": 3,
+                                            "baseFAT": 1000,
+                                            "baseATK": 5,
+                                            "baseDFN": 4,
+                                            "baseMAG": 2,
+                                            "baseDFL": 3,
+                                            "baseSPI": 1,
+                                            "baseSPD": 4,
+                                            "baseMOV": 3,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 125,
+                                            "basePRA": 125,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 3,
+                                            "statFAT": 1000,
+                                            "statHP": 92,
+                                            "statMP": 7,
+                                            "statATK": 7,
+                                            "statDFN": 5,
+                                            "statMAG": 2,
+                                            "statDFL": 4,
+                                            "statSPI": 1,
+                                            "statSPD": 4,
+                                            "statMOV": 3,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 125,
+                                            "statPRA": 125,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 6,
+                                            "incrMP": 0.5,
+                                            "incrATK": 1.2,
+                                            "incrDFN": 0.7,
+                                            "incrMAG": 0.3,
+                                            "incrDFL": 0.5,
+                                            "incrSPI": 0.1,
+                                            "incrSPD": 0.3,
+                                            "skillID": {
+                                                "$id": 112,
+                                                "$type": 47,
+                                                "comparer": $iref:15,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:110
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 5,
+                                            "lootItems": {
+                                                "$id": 113,
+                                                "$type": 48,
+                                                "comparer": $iref:78,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 114,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.8
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 115,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.6
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "defeated": false,
+                                "fled": false
+                            },
+                            {
+                                "$id": 116,
+                                "$type": 44,
+                                "foes": {
+                                    "$id": 117,
+                                    "$type": 45,
+                                    "$rlength": 2,
+                                    "$rcontent": [
+                                        {
+                                            "$id": 118,
+                                            "$type": 46,
+                                            "name": "Rimebear (Assailant)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 3,
+                                            "KO": false,
+                                            "currentHP": 98,
+                                            "currentMP": 7,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_spritesheet",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_controller",
+                                            "skillset": {
+                                                "$id": 119,
+                                                "$type": 4,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 120,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 121,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 80,
+                                            "baseMP": 6,
+                                            "baseAP": 3,
+                                            "baseFAT": 1000,
+                                            "baseATK": 5,
+                                            "baseDFN": 4,
+                                            "baseMAG": 2,
+                                            "baseDFL": 3,
+                                            "baseSPI": 1,
+                                            "baseSPD": 4,
+                                            "baseMOV": 3,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 125,
+                                            "basePRA": 125,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 3,
+                                            "statFAT": 1000,
+                                            "statHP": 98,
+                                            "statMP": 7,
+                                            "statATK": 8,
+                                            "statDFN": 6,
+                                            "statMAG": 2,
+                                            "statDFL": 4,
+                                            "statSPI": 1,
+                                            "statSPD": 4,
+                                            "statMOV": 3,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 125,
+                                            "statPRA": 125,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 6,
+                                            "incrMP": 0.5,
+                                            "incrATK": 1.2,
+                                            "incrDFN": 0.7,
+                                            "incrMAG": 0.3,
+                                            "incrDFL": 0.5,
+                                            "incrSPI": 0.1,
+                                            "incrSPD": 0.3,
+                                            "skillID": {
+                                                "$id": 122,
+                                                "$type": 47,
+                                                "comparer": $iref:15,
+                                                "$rlength": 1,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:120
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 5,
+                                            "lootItems": {
+                                                "$id": 123,
+                                                "$type": 48,
+                                                "comparer": $iref:78,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 124,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.8
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 125,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.6
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "$id": 126,
+                                            "$type": 53,
+                                            "name": "Rimebear (Healer)",
+                                            "description": "A bear, slightly influenced by the flow of Pagos, that commonly inhabitates the southern forests of continental Heimonas.",
+                                            "iconPath": "Sprites/NPCs/Foes/Rimebear/iconsheet",
+                                            "profilePath": "Sprites/NPCs/Foes/Rimebear/profilesheet",
+                                            "facePath": "Sprites/NPCs/Foes/Rimebear/facesheet_healer",
+                                            "spritesheetOWPath": "Sprites/NPCs/Foes/Rimebear/OW_spritesheet",
+                                            "animatorOWPath": "Animations/NPCs/Foes/Rimebear/OW_controller",
+                                            "level": 2,
+                                            "KO": false,
+                                            "currentHP": 116,
+                                            "currentMP": 7,
+                                            "currentAP": 0,
+                                            "currentFAT": 0,
+                                            "initAP": 1,
+                                            "spritesheetCSPath": "Sprites/NPCs/Foes/Rimebear/CS_healer",
+                                            "animatorCSPath": "Animations/NPCs/Foes/Rimebear/CS_healer",
+                                            "skillset": {
+                                                "$id": 127,
+                                                "$type": 4,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$id": 128,
+                                                        "$type": 5,
+                                                        "friendly": false,
+                                                        "name": "Attack",
+                                                        "description": "Basic physical attack.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 0,
+                                                        "costAP": 0,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 129,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "$id": 130,
+                                                        "$type": 54,
+                                                        "friendly": true,
+                                                        "name": "Treat wounds",
+                                                        "description": "Heal an adjacent companion a little.",
+                                                        "sheetPath": "Sprites/HUD/Combat/Skills/skillsheet",
+                                                        "sheetIndex": 7,
+                                                        "costAP": 1,
+                                                        "range": 1,
+                                                        "directional": false,
+                                                        "squared": false,
+                                                        "multitarget": false,
+                                                        "wields": {
+                                                            "$id": 131,
+                                                            "$type": 6,
+                                                            "$rlength": 4,
+                                                            "$rcontent": [
+                                                                null,
+                                                                $iref:7,
+                                                                $iref:8,
+                                                                $iref:9
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "baseHP": 100,
+                                            "baseMP": 6,
+                                            "baseAP": 2,
+                                            "baseFAT": 1000,
+                                            "baseATK": 2,
+                                            "baseDFN": 4,
+                                            "baseMAG": 4,
+                                            "baseDFL": 5,
+                                            "baseSPI": 5,
+                                            "baseSPD": 3,
+                                            "baseMOV": 2,
+                                            "baseACC": 100,
+                                            "baseCR": 5,
+                                            "baseCD": 50,
+                                            "basePSA": 125,
+                                            "basePRA": 150,
+                                            "baseASA": 100,
+                                            "baseARA": 100,
+                                            "baseSSA": 100,
+                                            "baseSRA": 100,
+                                            "baseHSA": 100,
+                                            "baseHRA": 100,
+                                            "statAP": 2,
+                                            "statFAT": 1000,
+                                            "statHP": 116,
+                                            "statMP": 7,
+                                            "statATK": 2,
+                                            "statDFN": 5,
+                                            "statMAG": 5,
+                                            "statDFL": 6,
+                                            "statSPI": 7,
+                                            "statSPD": 3,
+                                            "statMOV": 2,
+                                            "statACC": 100,
+                                            "statCR": 5,
+                                            "statCD": 50,
+                                            "statPSA": 125,
+                                            "statPRA": 150,
+                                            "statASA": 100,
+                                            "statARA": 100,
+                                            "statSSA": 100,
+                                            "statSRA": 100,
+                                            "statHSA": 100,
+                                            "statHRA": 100,
+                                            "incrHP": 8,
+                                            "incrMP": 0.8,
+                                            "incrATK": 0.4,
+                                            "incrDFN": 0.7,
+                                            "incrMAG": 0.8,
+                                            "incrDFL": 0.7,
+                                            "incrSPI": 1.2,
+                                            "incrSPD": 0.3,
+                                            "skillID": {
+                                                "$id": 132,
+                                                "$type": 47,
+                                                "comparer": $iref:15,
+                                                "$rlength": 2,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": "basic",
+                                                        "$v": $iref:128
+                                                    },
+                                                    {
+                                                        "$k": "heal",
+                                                        "$v": $iref:130
+                                                    }
+                                                ]
+                                            },
+                                            "lootXP": 5,
+                                            "lootItems": {
+                                                "$id": 133,
+                                                "$type": 48,
+                                                "comparer": $iref:78,
+                                                "$rlength": 5,
+                                                "$rcontent": [
+                                                    {
+                                                        "$k": {
+                                                            "$id": 134,
+                                                            "$type": 26,
+                                                            "name": "Rimebear Claw",
+                                                            "description": "Claw obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 5,
+                                                            "stackable": true,
+                                                            "price": 8
+                                                        },
+                                                        "$v": 0.3
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 135,
+                                                            "$type": 27,
+                                                            "name": "Rimebear Pelt",
+                                                            "description": "Pelt obtained from a Rimebear.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 3,
+                                                            "stackable": true,
+                                                            "price": 10
+                                                        },
+                                                        "$v": 0.6
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 136,
+                                                            "$type": 25,
+                                                            "name": "Thrascias Herbs",
+                                                            "description": "Herbs gathered from the cold forests of Thrascias.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 4,
+                                                            "stackable": true,
+                                                            "price": 3
+                                                        },
+                                                        "$v": 0.6
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 137,
+                                                            "$type": 28,
+                                                            "name": "Snowdrop",
+                                                            "description": "Snowdrop gathered from the northern land of Heimonas.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 2,
+                                                            "stackable": true,
+                                                            "price": 6
+                                                        },
+                                                        "$v": 0.1
+                                                    },
+                                                    {
+                                                        "$k": {
+                                                            "$id": 138,
+                                                            "$type": 23,
+                                                            "name": "Small Ration",
+                                                            "description": "Heals 100 HP to one party member.",
+                                                            "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                            "sheetIndex": 0,
+                                                            "stackable": true,
+                                                            "price": 15,
+                                                            "friendly": true,
+                                                            "range": 1,
+                                                            "directional": false,
+                                                            "squared": false,
+                                                            "multitarget": false
+                                                        },
+                                                        "$v": 0.2
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "defeated": false,
+                                "fled": false
+                            }
+                        ]
+                    },
+                    "persistedChests": {
+                        "$id": 139,
+                        "$type": "55|System.Collections.Generic.List`1[[ChestData, Assembly-CSharp]], mscorlib",
+                        "$rlength": 3,
+                        "$rcontent": [
+                            {
+                                "$id": 140,
+                                "$type": "56|ChestData, Assembly-CSharp",
+                                "content": {
+                                    "$id": 141,
+                                    "$type": "57|System.Collections.Generic.Dictionary`2[[Item, Assembly-CSharp],[System.Int32, mscorlib]], mscorlib",
+                                    "comparer": $iref:78,
+                                    "$rlength": 2,
+                                    "$rcontent": [
+                                        {
+                                            "$k": {
+                                                "$id": 142,
+                                                "$type": 16,
+                                                "name": "Athanas Sword",
+                                                "description": "Sword forged with great skill just for the Athanas bloodline to wield.",
+                                                "sheetPath": "Sprites/HUD/Items/gearsheet",
+                                                "sheetIndex": 5,
+                                                "stackable": false,
+                                                "price": 0,
+                                                "statHP": 0,
+                                                "statMP": 0,
+                                                "statATK": 1000,
+                                                "statDFN": 0,
+                                                "statMAG": 0,
+                                                "statDFL": 0,
+                                                "statSPI": 0,
+                                                "statSPD": 0,
+                                                "statMOV": 0,
+                                                "statACC": -5,
+                                                "statCR": 0,
+                                                "statCD": 0,
+                                                "statPSA": 25,
+                                                "statPRA": 0,
+                                                "statASA": 0,
+                                                "statARA": 0,
+                                                "statSSA": 0,
+                                                "statSRA": 0,
+                                                "statHSA": 0,
+                                                "statHRA": 0,
+                                                "statNames": {
+                                                    "$id": 143,
+                                                    "$type": 11,
+                                                    "$rlength": 20,
+                                                    "$rcontent": [
+                                                        "HP",
+                                                        "MP",
+                                                        "ATK",
+                                                        "DFN",
+                                                        "MAG",
+                                                        "DFL",
+                                                        "SPI",
+                                                        "ACC",
+                                                        "CR",
+                                                        "CD",
+                                                        "SPD",
+                                                        "MOV",
+                                                        "PSA",
+                                                        "ASA",
+                                                        "SSA",
+                                                        "HSA",
+                                                        "PRA",
+                                                        "ARA",
+                                                        "SRA",
+                                                        "HRA"
+                                                    ]
+                                                },
+                                                "statByName": {
+                                                    "$id": 144,
+                                                    "$type": 12,
+                                                    "comparer": $iref:15,
+                                                    "$rlength": 20,
+                                                    "$rcontent": [
+                                                        {
+                                                            "$k": "ATK",
+                                                            "$v": 1000
+                                                        },
+                                                        {
+                                                            "$k": "MAG",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "ACC",
+                                                            "$v": -5
+                                                        },
+                                                        {
+                                                            "$k": "CR",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "CD",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "PSA",
+                                                            "$v": 25
+                                                        },
+                                                        {
+                                                            "$k": "ASA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "SSA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "HSA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "SPI",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "MP",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "SPD",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "MOV",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "DFN",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "DFL",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "PRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "ARA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "SRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "HRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "HP",
+                                                            "$v": 0
+                                                        }
+                                                    ]
+                                                },
+                                                "dual": false
+                                            },
+                                            "$v": 1
+                                        },
+                                        {
+                                            "$k": {
+                                                "$id": 145,
+                                                "$type": 52,
+                                                "name": "Small Ether",
+                                                "description": "Recovers 25 MP to one party member.",
+                                                "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                "sheetIndex": 1,
+                                                "stackable": true,
+                                                "price": 25,
+                                                "friendly": true,
+                                                "range": 1,
+                                                "directional": false,
+                                                "squared": false,
+                                                "multitarget": false
+                                            },
+                                            "$v": 5
+                                        }
+                                    ]
+                                },
+                                "open": false
+                            },
+                            {
+                                "$id": 146,
+                                "$type": 56,
+                                "content": {
+                                    "$id": 147,
+                                    "$type": 57,
+                                    "comparer": $iref:78,
+                                    "$rlength": 1,
+                                    "$rcontent": [
+                                        {
+                                            "$k": {
+                                                "$id": 148,
+                                                "$type": 24,
+                                                "name": "Medium Ration",
+                                                "description": "Heals 200 HP to one party member.",
+                                                "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                "sheetIndex": 6,
+                                                "stackable": true,
+                                                "price": 30,
+                                                "friendly": true,
+                                                "range": 1,
+                                                "directional": false,
+                                                "squared": false,
+                                                "multitarget": false
+                                            },
+                                            "$v": 2
+                                        }
+                                    ]
+                                },
+                                "open": false
+                            },
+                            {
+                                "$id": 149,
+                                "$type": 56,
+                                "content": {
+                                    "$id": 150,
+                                    "$type": 57,
+                                    "comparer": $iref:78,
+                                    "$rlength": 2,
+                                    "$rcontent": [
+                                        {
+                                            "$k": {
+                                                "$id": 151,
+                                                "$type": 10,
+                                                "name": "Winter Coat",
+                                                "description": "Coat crafted from rimebear leather. It is of common use in the southern regions of Heimonas.",
+                                                "sheetPath": "Sprites/HUD/Items/gearsheet",
+                                                "sheetIndex": 0,
+                                                "stackable": false,
+                                                "price": 80,
+                                                "statHP": 0,
+                                                "statMP": 0,
+                                                "statATK": 0,
+                                                "statDFN": 10,
+                                                "statMAG": 0,
+                                                "statDFL": 5,
+                                                "statSPI": 0,
+                                                "statSPD": 0,
+                                                "statMOV": 0,
+                                                "statACC": 0,
+                                                "statCR": 0,
+                                                "statCD": 0,
+                                                "statPSA": 0,
+                                                "statPRA": 0,
+                                                "statASA": 0,
+                                                "statARA": 0,
+                                                "statSSA": 0,
+                                                "statSRA": 0,
+                                                "statHSA": 0,
+                                                "statHRA": 0,
+                                                "statNames": {
+                                                    "$id": 152,
+                                                    "$type": 11,
+                                                    "$rlength": 20,
+                                                    "$rcontent": [
+                                                        "HP",
+                                                        "MP",
+                                                        "ATK",
+                                                        "DFN",
+                                                        "MAG",
+                                                        "DFL",
+                                                        "SPI",
+                                                        "ACC",
+                                                        "CR",
+                                                        "CD",
+                                                        "SPD",
+                                                        "MOV",
+                                                        "PSA",
+                                                        "ASA",
+                                                        "SSA",
+                                                        "HSA",
+                                                        "PRA",
+                                                        "ARA",
+                                                        "SRA",
+                                                        "HRA"
+                                                    ]
+                                                },
+                                                "statByName": {
+                                                    "$id": 153,
+                                                    "$type": 12,
+                                                    "comparer": $iref:15,
+                                                    "$rlength": 9,
+                                                    "$rcontent": [
+                                                        {
+                                                            "$k": "DFN",
+                                                            "$v": 10
+                                                        },
+                                                        {
+                                                            "$k": "DFL",
+                                                            "$v": 5
+                                                        },
+                                                        {
+                                                            "$k": "MOV",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "PRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "ARA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "SRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "HRA",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "HP",
+                                                            "$v": 0
+                                                        },
+                                                        {
+                                                            "$k": "MP",
+                                                            "$v": 0
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "$v": 1
+                                        },
+                                        {
+                                            "$k": {
+                                                "$id": 154,
+                                                "$type": 23,
+                                                "name": "Small Ration",
+                                                "description": "Heals 100 HP to one party member.",
+                                                "sheetPath": "Sprites/HUD/Items/iconsheet",
+                                                "sheetIndex": 0,
+                                                "stackable": true,
+                                                "price": 15,
+                                                "friendly": true,
+                                                "range": 1,
+                                                "directional": false,
+                                                "squared": false,
+                                                "multitarget": false
+                                            },
+                                            "$v": 3
+                                        }
+                                    ]
+                                },
+                                "open": false
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "currentScene": "ThrasciasForest_Overworld"
+    }
+}

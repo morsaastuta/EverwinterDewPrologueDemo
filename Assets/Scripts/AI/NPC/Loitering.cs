@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class Loitering : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class Loitering : MonoBehaviour
 
     // Animation
     public int velocity;
-    public int direction;
 
     void Start()
     {
@@ -34,20 +32,6 @@ public class Loitering : MonoBehaviour
         if (turn <= 0)
         {
             transform.localRotation = Quaternion.Euler(0, Random.Range(0, 360f), 0);
-            if (transform.localRotation.y > -135)
-            {
-                if (transform.localRotation.y > -45)
-                {
-                    if (transform.localRotation.y > 45)
-                    {
-                        if (transform.localRotation.y > 135) direction = 0;
-                        else direction = 3;
-                    }
-                    else direction = 2;
-                }
-                else direction = 1;
-            }
-            else direction = 0;
             turn = turnMax;
         }
     }
