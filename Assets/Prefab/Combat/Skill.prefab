@@ -526,7 +526,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1477745133, guid: c2141d4ab4eb5e44d93b3a3dca52a876, type: 3}
+  m_Sprite: {fileID: -343136282, guid: a3f60cdd5da83804f9c2a7ca22db310a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -920,6 +920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyIcon: {fileID: 21300000, guid: 11af0d46bbb37774e9350c220dfbd434, type: 3}
+  iconPane: {fileID: 3094107963670908203}
+  namePane: {fileID: 729000072227835513}
   icon: {fileID: 3791354811618113356}
   element: {fileID: 5280422642058473428}
   name: {fileID: 1217879921901116169}

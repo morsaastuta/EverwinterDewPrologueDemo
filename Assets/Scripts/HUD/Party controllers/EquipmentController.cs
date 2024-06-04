@@ -14,20 +14,20 @@ public class EquipmentController : MonoBehaviour
 
     // Item dragger
     [SerializeField] GameObject itemDragger;
-    Item ogItem;
-    bool dropped = true;
+    bool initialized = false;
+    bool operating = false;
     bool fromSelector;
     bool toEquipment;
     Type operationType;
-    bool switched;
-    GearItem switchedItem;
-    bool mismatchError;
+    bool switched = false;
 
-    // Items from selector
-    int ogIndex;
-
-    // Items from gear slots
-    GearController ogSlot;
+    // Original dragged slots & new dropped slots
+    GearController ogShowcaseSlot;
+    SlotController ogSelectorSlot;
+    GearItem ogItem;
+    GearController newShowcaseSlot;
+    SlotController newSelectorSlot;
+    GearItem newItem;
 
     // Shown info
     [SerializeField] Image shownIcon;
@@ -118,10 +118,7 @@ public class EquipmentController : MonoBehaviour
 
         foreach (GearItem item in partyController.playerProperties.armory)
         {
-            if (item.GetType().BaseType.Equals(type))
-            {
-                selectorItemList.Add(item);
-            }
+            if (item.GetType().BaseType.Equals(type)) selectorItemList.Add(item);
         }
 
         LoadSelection(type);
@@ -296,12 +293,7 @@ public class EquipmentController : MonoBehaviour
 
     public void LoadSelection(Type type)
     {
-        foreach (GameObject slot in selectorSlotList)
-        {
-            Destroy(slot);
-        }
-
-        selectorSlotList.Clear();
+        ClearSelection();
 
         foreach (GearItem item in partyController.playerProperties.armory)
         {
@@ -326,6 +318,12 @@ public class EquipmentController : MonoBehaviour
             index++;
             selectorSlotList.Add(slot);
         }
+    }
+
+    public void ClearSelection()
+    {
+        foreach (GameObject slot in selectorSlotList) Destroy(slot);
+        selectorSlotList.Clear();
     }
 
     public void LoadGearSlots(Profile profile)
@@ -355,11 +353,6 @@ public class EquipmentController : MonoBehaviour
         accessory2Slot.GetComponent<GearController>().UpdateGear(profile.accessory2);
     }
 
-    public void CloseSelector()
-    {
-        selectorSlotList.Clear();
-    }
-
     public void Deselect()
     {
         ClearStatSlots();
@@ -368,150 +361,210 @@ public class EquipmentController : MonoBehaviour
         shownName.text = "";
         shownDescription.text = "";
 
-        foreach (GameObject obj in gearSlots)
-        {
-            obj.GetComponent<GearController>().Deselect();
-        }
-
-        foreach (GameObject obj in selectorSlotList)
-        {
-            obj.GetComponent<SlotController>().Deselect();
-        }
+        foreach (GameObject obj in gearSlots) obj.GetComponent<GearController>().Deselect();
+        foreach (GameObject obj in selectorSlotList) obj.GetComponent<SlotController>().Deselect();
     }
 
     public void InitDrag(GearController slot)
     {
-        if (dropped == true)
+        if (!operating)
         {
             CommonInit();
-            operationType = slot.gearType;
             fromSelector = false;
-            ogSlot = slot;
             ogItem = slot.item;
-            Select(slot.item);
-            itemDragger.GetComponentInChildren<SlotController>().UpdateItem(slot.item, 1);
+            ogShowcaseSlot = slot;
+            operationType = ogShowcaseSlot.gearType;
+            Select(ogItem);
+            itemDragger.GetComponentInChildren<SlotController>().UpdateItem(ogItem);
+            slot.Clear();
         }
     }
 
     public void InitDrag(SlotController slot)
     {
-        if (dropped == true)
+        if (!operating)
         {
             CommonInit();
-            operationType = slot.item.GetType().BaseType;
             fromSelector = true;
-            ogItem = slot.item;
-            ogIndex = slot.index;
-            Select((GearItem)slot.item);
-            itemDragger.GetComponentInChildren<SlotController>().UpdateItem(slot.item, 1);
+            ogItem = (GearItem)slot.item;
+            ogSelectorSlot = slot;
+            operationType = ogSelectorSlot.item.GetType().BaseType;
+            Select(ogItem);
+            itemDragger.GetComponentInChildren<SlotController>().UpdateItem(ogItem);
+            slot.Clear();
         }
     }
 
     void CommonInit()
     {
-        switched = false;
         Deselect();
-        dropped = false;
+        initialized = true;
+        operating = true;
         itemDragger.SetActive(true);
     }
 
-    public SlotController Drop(bool equipping)
+    public SlotController GetDropInfo(GearController slot)
     {
-        toEquipment = equipping;
-
-        if (dropped == false && itemDragger.GetComponentInChildren<SlotController>().item != null)
+        if (operating)
         {
-            Deselect();
-            dropped = true;
-            SlotController toReturn = itemDragger.GetComponentInChildren<SlotController>();
-            return toReturn;
+            if (itemDragger.GetComponentInChildren<SlotController>().item is not null)
+            {
+                toEquipment = true;
+                Deselect();
+                return itemDragger.GetComponentInChildren<SlotController>();
+            }
         }
+        else CancelOperation();
+
         return null;
     }
 
-    public void CancelDrop()
+    public SlotController GetDropInfo(SlotController slot)
     {
-        dropped = false;
+        if (operating)
+        {
+            if (ogItem is not null)
+            {
+                toEquipment = false;
+                Deselect();
+                return itemDragger.GetComponentInChildren<SlotController>();
+            }
+        }
+        else CancelOperation();
+
+        return null;
     }
 
-    public void MismatchCorrection()
+    public void SetDropResults(GearController slot)
     {
-        // When a GearItem is dragged from an ItemSlot to a GearSlot that does not match its type, the GearItem disappears.
-        mismatchError = true;
-        CancelDrop();
+        if (operating & ogItem is not null)
+        {
+            newShowcaseSlot = slot;
+            newItem = newShowcaseSlot.item;
+            newShowcaseSlot.UpdateGear(ogItem);
+            operating = false;
+        }
+        else CancelOperation();
+    }
+
+    public void SetDropResults(SlotController slot)
+    {
+        if (operating & ogItem is not null)
+        {
+            newSelectorSlot = slot;
+            newItem = (GearItem)newSelectorSlot.item;
+            newSelectorSlot.UpdateItem(ogItem);
+            operating = false;
+        }
+        else CancelOperation();
     }
 
     public void DragSwitch(GearController slot)
     {
-        Item switchedItem = CommonSwitch(slot.item);
-        if (fromSelector) selectorSlotList[ogIndex].GetComponent<SlotController>().UpdateItem(switchedItem, 1);
-        else
+        // This goes to the showcase
+        newItem = slot.item;
+        if (fromSelector)
         {
-            if (ogItem.GetType().BaseType.Equals(switchedItem.GetType().BaseType)) ogSlot.UpdateGear(switchedItem);
-            else
-            {
-                switched = false;
-                CancelDrop();
-            }
+            slot.UpdateGear(ogItem);
+            ogSelectorSlot.UpdateItem(newItem);
+            switched = true;
+            operating = false;
+        }
+        else // From showcase
+        {
+            slot.UpdateGear(ogItem);
+            ogShowcaseSlot.UpdateGear(newItem);
+            switched = true;
+            operating = false;
         }
     }
 
     public void DragSwitch(SlotController slot)
     {
-        Item switchedItem = CommonSwitch(slot.item);
-        if (fromSelector) selectorSlotList[ogIndex].GetComponent<SlotController>().UpdateItem(switchedItem, 1);
-        else ogSlot.UpdateGear(switchedItem);
+        // This goes to the selector
+        newItem = (GearItem)slot.item;
+        if (fromSelector)
+        {
+            slot.UpdateItem(ogItem);
+            ogSelectorSlot.UpdateItem(newItem);
+            switched = true;
+            operating = false;
+        }
+        else // From showcase
+        {
+            if (ogShowcaseSlot.gearType.Equals(newItem.GetType().BaseType))
+            {
+                slot.UpdateItem(ogItem);
+                ogShowcaseSlot.UpdateGear(newItem);
+                switched = true;
+                operating = false;
+            }
+            else CancelOperation();
+        }
     }
 
-    Item CommonSwitch(Item item)
+    void CancelOperation()
     {
-        switched = true;
-        switchedItem = (GearItem)item;
-        return item;
+        if (operating)
+        {
+            if (ogShowcaseSlot is not null) ogShowcaseSlot.UpdateGear(ogItem);
+            else if (ogSelectorSlot is not null) ogSelectorSlot.UpdateItem(ogItem);
+
+            if (newShowcaseSlot is not null) newShowcaseSlot.UpdateGear(newItem);
+            else if (newSelectorSlot is not null) newSelectorSlot.UpdateItem(newItem);
+
+            EndOperation();
+        }
+
     }
 
-    public bool SafeCheck()
+    public void SafeEnd()
     {
-        if (dropped) return true;
-        else return false;
-    }
-
-    public Item OriginalItem()
-    {
-        dropped = true;
-        return ogItem;
+        if (!initialized || operating) CancelOperation();
+        else EndOperation();
     }
 
     public void EndOperation()
     {
-        if (!mismatchError)
+        // Change player properties ONLY if the operation was not cancelled
+        if (initialized && !operating)
         {
             // Depending on the direction of the drag, remove or add to the list
             if (fromSelector && toEquipment)
             {
-                partyController.playerProperties.armory.Remove(partyController.playerProperties.armory[ogIndex]);
-                if (switched) partyController.playerProperties.armory.Add(switchedItem);
+                partyController.playerProperties.armory.Remove(ogItem);
+                if (switched) partyController.playerProperties.armory.Add(newItem);
             }
             if (!fromSelector && !toEquipment)
             {
-                partyController.playerProperties.armory.Add((GearItem)itemDragger.GetComponentInChildren<SlotController>().item);
-                if (switched) partyController.playerProperties.armory.Remove(switchedItem);
+                partyController.playerProperties.armory.Add(ogItem);
+                if (switched) partyController.playerProperties.armory.Remove(newItem);
             }
+
+            // Save the current gear set
+            partyController.playerProperties.currentProfile.SaveGear(
+                headSlot.GetComponent<GearController>().item, bodySlot.GetComponent<GearController>().item,
+                armsSlot.GetComponent<GearController>().item, legsSlot.GetComponent<GearController>().item,
+                wield1Slot.GetComponent<GearController>().item, wield2Slot.GetComponent<GearController>().item,
+                accessory1Slot.GetComponent<GearController>().item, accessory2Slot.GetComponent<GearController>().item);
         }
 
-        // Save the current gear set
-        partyController.playerProperties.currentProfile.SaveGear(
-            headSlot.GetComponent<GearController>().item, bodySlot.GetComponent<GearController>().item,
-            armsSlot.GetComponent<GearController>().item, legsSlot.GetComponent<GearController>().item,
-            wield1Slot.GetComponent<GearController>().item, wield2Slot.GetComponent<GearController>().item,
-            accessory1Slot.GetComponent<GearController>().item, accessory2Slot.GetComponent<GearController>().item);
 
-        // Finalize by removing content from itemDragger and reloading the selector
-        ogSlot = null;
+        // Finalize by clearing persistent data, removing content from itemDragger and reloading the selector
+
+        ogShowcaseSlot = null;
+        ogSelectorSlot = null;
         ogItem = null;
-        mismatchError = false;
+        newShowcaseSlot = null;
+        newSelectorSlot = null;
+        newItem = null;
+        initialized = false;
+        operating = false;
+        switched = false;
+
         itemDragger.GetComponentInChildren<SlotController>().Clear();
         itemDragger.SetActive(false);
+
         LoadSelection(operationType);
     }
 }

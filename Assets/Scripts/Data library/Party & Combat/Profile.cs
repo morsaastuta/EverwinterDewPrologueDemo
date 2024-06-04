@@ -29,7 +29,6 @@ public abstract class Profile : Combatant
 
     public Profile()
     {
-        NewSkill(new Skill_BasicAttack());
         LoadStats();
     }
 
@@ -163,6 +162,8 @@ public abstract class Profile : Combatant
                 currentWield = wield2;
                 break;
         }
+
+        LoadStats();
     }
 
     public virtual void CheckNewSkills()

@@ -67,7 +67,7 @@ public class Chest : MonoBehaviour
     public void Notify(Dictionary<Item, int> obtainedItems)
     {
         foreach (Item item in obtainedItems.Keys) data.content.Remove(item);
-        controller.Notify(obtainedItems);
+        controller.Notify(obtainedItems, false);
     }
 
     public void UpdateState()

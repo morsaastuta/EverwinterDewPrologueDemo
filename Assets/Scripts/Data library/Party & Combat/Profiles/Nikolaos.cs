@@ -27,8 +27,8 @@ public class Nikolaos : Profile
         baseATK = 5;
         baseDFN = 5;
         baseMAG = 4;
-        baseDFL = 4;
-        baseSPI = 2;
+        baseDFL = 5;
+        baseSPI = 3;
         baseSPD = 5;
         baseMOV = 3;
         basePSA = 150;
@@ -40,7 +40,7 @@ public class Nikolaos : Profile
         incrDFN = 1.6f;
         incrMAG = 0.8f;
         incrDFL = 1.2f;
-        incrSPI = 0.6f;
+        incrSPI = 0.7f;
         incrSPD = 0.8f;
 
         LoadStats();
@@ -52,13 +52,17 @@ public class Nikolaos : Profile
 
     public override void CheckNewSkills()
     {
+        string source = "self";
         switch (level)
         {
+            case 0:
+                NewSkill(new Skill_BasicAttack(source));
+                break;
             case 1:
-                NewSkill(new Skill_TreatWounds());
+                NewSkill(new Skill_TreatWounds(source));
                 break;
             case 4:
-                NewSkill(new Skill_Snowball());
+                NewSkill(new Skill_Snowball(source));
                 break;
         }
     }

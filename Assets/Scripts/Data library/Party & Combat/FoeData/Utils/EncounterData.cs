@@ -8,6 +8,7 @@ public class EncounterData
     [OdinSerialize] List<FoeData> foes = new();
     [OdinSerialize] public bool defeated = false;
     [OdinSerialize] public bool fled = false;
+    [OdinSerialize] public bool boss = false;
 
     public List<FoeData> GetFoes()
     {
@@ -19,10 +20,12 @@ public class EncounterData
         foes = e.foes;
         defeated = e.defeated;
         fled = e.fled;
+        boss = e.boss;
     }
 
-    public void UpdateEncounter(List<FoeData> newFoes)
+    public void UpdateEncounter(List<FoeData> newFoes, bool isBoss)
     {
         foes = newFoes;
+        boss = isBoss;
     }
 }

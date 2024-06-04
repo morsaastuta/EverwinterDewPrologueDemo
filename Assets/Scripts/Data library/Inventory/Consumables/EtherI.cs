@@ -9,7 +9,7 @@ public class EtherI : ConsumableItem
         sheetPath = "Sprites/HUD/Items/iconsheet";
         sheetIndex = 1;
         name = "Small Ether";
-        description = "Recovers 25 MP to one party member.";
+        description = "Recovers 5 MP for one party member.";
         price = 25;
         stackable = true;
         range = 1;
@@ -17,14 +17,14 @@ public class EtherI : ConsumableItem
 
     public override bool Consume(CellController target, CellController user, PlayerProperties player)
     {
-        target.combatant.ChangeMP(25);
+        target.combatant.ChangeMP(5);
         player.inventory.Remove(this);
         return true;
     }
 
     public override void Consume(PlayerProperties player)
     {
-        player.currentProfile.ChangeMP(25);
+        player.currentProfile.ChangeMP(5);
     }
 
     public override Item Regenerate()

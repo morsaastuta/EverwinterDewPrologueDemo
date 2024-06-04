@@ -15,7 +15,7 @@ public abstract class MixedSkill : MagicalSkill
             null,
             typeof(SwordItem),
             typeof(ShieldItem),
-            typeof(ShieldItem)
+            typeof(BowItem)
         };
     }
 

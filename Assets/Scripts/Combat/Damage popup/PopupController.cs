@@ -47,7 +47,7 @@ public class PopupController : MonoBehaviour
                 }
                 else if (amount < 0)
                 {
-                    newPopup.GetComponentInChildren<TextMeshPro>().fontMaterial.SetColor(ShaderUtilities.ID_GlowColor, new Color32(200, 0, 200, 100));
+                    CancelPopup(newPopup);
                 }
                 else
                 {
@@ -58,12 +58,12 @@ public class PopupController : MonoBehaviour
             case "AP":
                 if (amount > 0)
                 {
-                    newPopup.GetComponentInChildren<TextMeshPro>().fontMaterial.SetColor(ShaderUtilities.ID_GlowColor, new Color32(200, 200, 0, 100));
+                    newPopup.GetComponentInChildren<TextMeshPro>().fontMaterial.SetColor(ShaderUtilities.ID_GlowColor, new Color32(240, 160, 0, 100));
                     newPopup.GetComponentInParent<CellController>().Affect(true);
                 }
                 else if (amount < 0)
                 {
-                    newPopup.GetComponentInChildren<TextMeshPro>().fontMaterial.SetColor(ShaderUtilities.ID_GlowColor, new Color32(0, 200, 200, 100));
+                    CancelPopup(newPopup);
                 }
                 else
                 {
@@ -74,5 +74,10 @@ public class PopupController : MonoBehaviour
         }
 
         newPopup.GetComponentInChildren<TextMeshPro>().SetText(detailedAmount);
+    }
+
+    void CancelPopup(GameObject popup)
+    {
+        Destroy(popup);
     }
 }

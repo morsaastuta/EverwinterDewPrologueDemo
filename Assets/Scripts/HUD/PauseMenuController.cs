@@ -132,6 +132,7 @@ public class PauseMenuController : MonoBehaviour
     // Executed each time the menu changes its view or is closed
     private void CloseAll()
     {
+        partyController.CloseAll();
         partyFrame.SetActive(false);
         inventoryController.CloseAll();
         inventoryFrame.SetActive(false);

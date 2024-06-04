@@ -11,8 +11,10 @@ public class ArmsWinter : ArmsItem
         description = "Gloves crafted from rimebear leather. They are of common use in the southern regions of Heimonas.";
         price = 50;
 
-        statDFN = 6;
-        statDFL = 3;
+        statDFN = 4;
+        statDFL = 1;
+        statSPI = 1;
+        statPRA = 2;
 
         GenStatList();
     }

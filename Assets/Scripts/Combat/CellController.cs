@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class CellController : MonoBehaviour
 {
@@ -41,12 +42,9 @@ public class CellController : MonoBehaviour
     int prevHP = -1;
     int prevMP = -1;
     int prevAP = -1;
-    bool alteredHP = false;
-    bool alteredMP = false;
-    bool alteredAP = false;
 
     // Combat references
-    CombatController scene;
+    public CombatController scene;
     TurnBarController card;
     PopupController popup;
 
@@ -105,22 +103,6 @@ public class CellController : MonoBehaviour
         }
     }
 
-    public void PointsAltered(string type)
-    {
-        switch (type)
-        {
-            case "HP":
-                alteredHP = true;
-                break;
-            case "MP":
-                alteredMP = true;
-                break;
-            case "AP":
-                alteredAP = true;
-                break;
-        }
-    }
-
     public void EnterHover()
     {
         if (!selected)
@@ -141,8 +123,6 @@ public class CellController : MonoBehaviour
 
     public void Select()
     {
-        UpdateReferences();
-
         if (selectable)
         {
             newlySelected = true;
@@ -168,10 +148,19 @@ public class CellController : MonoBehaviour
     public void ReceiveCombatant(Combatant newCombatant)
     {
         combatant = newCombatant;
+
         combatantProjection.sprite = newCombatant.GetSpritesheetCS(0);
-        if (scene.turn != 0) combatantDirector.rotation = scene.ActorCell().combatantDirector.rotation;
+        combatantProjection.color = new(255,255,255,100);
+
+        if (scene.turn != 0)
+        {
+            combatantDirector.rotation = scene.ActorCell().combatantDirector.rotation;
+        }
+
         combatantAnimator.runtimeAnimatorController = newCombatant.GetAnimatorCS();
+
         UpdateCombatantVisuals();
+
         card = scene.EnterCombatant(newCombatant);
     }
 
@@ -214,15 +203,11 @@ public class CellController : MonoBehaviour
 
     public void SelectSkill(Skill skill)
     {
-        UpdateReferences();
-
         scene.SelectSkill(skill);
     }
 
     public void SelectItem(ConsumableItem item)
     {
-        UpdateReferences();
-
         scene.SelectItem(item);
     }
 
@@ -258,10 +243,27 @@ public class CellController : MonoBehaviour
         return scene.CastSkill(targetCell);
     }
 
-    public bool UseItem(CellController targetCell)
+    public void InitialDirection(int dir)
     {
         UpdateReferences();
 
+        Quaternion combatantRotation = combatantDirector.rotation;
+        Vector3 rotationAngles = combatantRotation.eulerAngles;
+
+        switch (dir)
+        {
+            case 0: rotationAngles.y = 0; break;
+            case 1: rotationAngles.y = 90; break;
+            case 2: rotationAngles.y = 180; break;
+            case 3: rotationAngles.y = 270; break;
+        }
+
+        combatantRotation.eulerAngles = rotationAngles;
+        combatantDirector.rotation = combatantRotation;
+    }
+
+    public bool UseItem(CellController targetCell)
+    {
         return scene.UseItem(targetCell);
     }
 
@@ -388,6 +390,15 @@ public class CellController : MonoBehaviour
                             }
                             else cellType.sprite = emptySprite;
                         }
+
+                        if (scene.selectedSkill.directional)
+                        {
+                            if (scene.ActorCell().posX != posX && scene.ActorCell().posY != posY)
+                            {
+                                cellType.sprite = emptySprite;
+                                selectable = false;
+                            }
+                        }
                     }
                     // Item
                     else if (scene.selectedItem != null)
@@ -468,8 +479,6 @@ public class CellController : MonoBehaviour
 
     public void UpdateCombatantVisuals()
     {
-        UpdateReferences();
-
         if (combatant != null)
         {
             // Check if the cell has a companion or a foe

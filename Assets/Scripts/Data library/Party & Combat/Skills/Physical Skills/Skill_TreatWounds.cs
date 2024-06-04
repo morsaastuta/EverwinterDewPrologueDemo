@@ -3,8 +3,10 @@ using System;
 [Serializable]
 public class Skill_TreatWounds : PhysicalSkill
 {
-    public Skill_TreatWounds()
+    public Skill_TreatWounds(string s)
     {
+        source = s;
+
         name = "Treat wounds";
         description = "Heal an adjacent companion a little.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
@@ -21,10 +23,10 @@ public class Skill_TreatWounds : PhysicalSkill
     {
         SpendPoints(user.combatant);
         
-        target.combatant.ChangeHP((
+        target.combatant.ChangeHP(
             // Healing
-            Formulate(user.combatant.statSPI * 1.5f, 0)
-            ));
+            Formulate(user.combatant.statSPI * 2.0f, 0)
+            );
 
         return true;
     }

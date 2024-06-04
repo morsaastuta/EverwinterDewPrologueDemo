@@ -20,35 +20,36 @@ public class Foe_Rimebear_Healer : FoeData
         animatorCSPath = "Animations/NPCs/Foes/Rimebear/CS_healer";
 
         level = initLV;
-        lootXP = 4 + (int)(0.6 * initLV);
+        lootXP = 4 + .8f * initLV;
 
         baseAP = 2;
         baseHP = 100;
         baseMP = 6;
-        baseATK = 2;
+        baseATK = 3;
         baseDFN = 4;
         baseMAG = 4;
         baseDFL = 5;
-        baseSPI = 5;
-        baseSPD = 3;
+        baseSPI = 8;
+        baseSPD = 4;
         baseMOV = 2;
         basePSA = 125;
         basePRA = 150;
 
         incrHP = 8.0f;
         incrMP = 0.8f;
-        incrATK = 0.4f;
-        incrDFN = 0.7f;
-        incrMAG = 0.8f;
-        incrDFL = 0.7f;
-        incrSPI = 1.2f;
-        incrSPD = 0.3f;
+        incrATK = 0.9f;
+        incrDFN = 0.8f;
+        incrMAG = 1.3f;
+        incrDFL = 0.8f;
+        incrSPI = 1.6f;
+        incrSPD = 0.8f;
 
         LoadStats();
         FullRestore();
 
-        AddSkill("basic", new Skill_BasicAttack());
-        AddSkill("heal", new Skill_TreatWounds());
+        AddSkill("basic", new Skill_BasicAttack(""));
+        AddSkill("heal", new Skill_TreatWounds(""));
+        AddSkill("blow", new Skill_UrsidBlow(""));
 
         lootItems.Add(new ClawRimebear(), 0.3f);
         lootItems.Add(new PeltRimebear(), 0.6f);
@@ -168,9 +169,14 @@ public class Foe_Rimebear_Healer : FoeData
                     }
                 }
 
+                yield return new WaitForSeconds(1f);
                 scene.EndTurn();
             }
-            else if (target is not null) scene.StartCoroutine(BasicAttack(scene, target));
+            else if (target is not null)
+            {
+                if (CheckCost(skillID.GetValueOrDefault("blow")) && UnityEngine.Random.Range(0, 3) > 1) scene.StartCoroutine(MeleeSingleAttack(skillID.GetValueOrDefault("blow"), scene, target));
+                else scene.StartCoroutine(MeleeSingleAttack(skillID.GetValueOrDefault("basic"), scene, target));
+            }
             else scene.EndTurn();
         }
         else scene.EndTurn();

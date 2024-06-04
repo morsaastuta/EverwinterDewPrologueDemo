@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c2141d4ab4eb5e44d93b3a3dca52a876
+guid: a3f60cdd5da83804f9c2a7ca22db310a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,14 +131,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f3688659179d2d47aeb10ca401e278d
-      internalID: 2121355618
+      spriteID: 777b10266e242c0439c0a139fd317e26
+      internalID: 1130607373
       vertices: []
       indices: 
       edges: []
@@ -152,14 +152,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe65990d84763064ebf4749d2b3769f7
-      internalID: 1497575343
+      spriteID: 6d823170fbd179f48bec007ac863a4ec
+      internalID: -929066275
       vertices: []
       indices: 
       edges: []
@@ -173,14 +173,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d9d1ad4ee8d5604ea8553edb44ba3b1
-      internalID: -744329385
+      spriteID: 00b973a82dd98c14abfe715b54aa9de8
+      internalID: -1853365611
       vertices: []
       indices: 
       edges: []
@@ -194,14 +194,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff9cccd23f7e85f4a9814e47b09c885f
-      internalID: 489710681
+      spriteID: 344321230b967df469e59eb8e3df9a47
+      internalID: 530316007
       vertices: []
       indices: 
       edges: []
@@ -210,19 +210,19 @@ TextureImporter:
       name: skillsheet_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 256
+        y: 64
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4870666a8679b34fac802933c85dd01
-      internalID: -1263516290
+      spriteID: be5f63b74066737428997121c4d902ea
+      internalID: -1125621947
       vertices: []
       indices: 
       edges: []
@@ -231,19 +231,19 @@ TextureImporter:
       name: skillsheet_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 0
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0132993c39e6b504dad1ce921d1775bc
-      internalID: -1477745133
+      spriteID: 8ae6317a2df8f594e8501a14a87d9c63
+      internalID: -343136282
       vertices: []
       indices: 
       edges: []
@@ -252,19 +252,19 @@ TextureImporter:
       name: skillsheet_6
       rect:
         serializedVersion: 2
-        x: 128
+        x: 64
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 380c0298615606044a853137d9429465
-      internalID: 487705496
+      spriteID: 6f5ef1137578ed047b50223ea2afb01f
+      internalID: -796116080
       vertices: []
       indices: 
       edges: []
@@ -273,19 +273,61 @@ TextureImporter:
       name: skillsheet_7
       rect:
         serializedVersion: 2
-        x: 192
+        x: 128
         y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48b74633190e8144e8bfaf8d02048fba
-      internalID: -403445373
+      spriteID: eae75457ed866dd46b6c4813a1bdb819
+      internalID: -1768883620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skillsheet_8
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3663a6ea0b33cf143b5767abeec132ce
+      internalID: 116977782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skillsheet_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93deb0a29d9c7a94f9cb392ecb18c270
+      internalID: 1375324619
       vertices: []
       indices: 
       edges: []
@@ -293,7 +335,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c7fd623b7425065458379284c0da4ace
+    spriteID: 71658a0978d7765418ecdfac2ca44727
     internalID: 0
     vertices: []
     indices: 
@@ -301,14 +343,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      skillsheet_0: 2121355618
-      skillsheet_1: 1497575343
-      skillsheet_2: -744329385
-      skillsheet_3: 489710681
-      skillsheet_4: -1263516290
-      skillsheet_5: -1477745133
-      skillsheet_6: 487705496
-      skillsheet_7: -403445373
+      skillsheet_0: 1130607373
+      skillsheet_1: -929066275
+      skillsheet_2: -1853365611
+      skillsheet_3: 530316007
+      skillsheet_4: -1125621947
+      skillsheet_5: -343136282
+      skillsheet_6: -796116080
+      skillsheet_7: -1768883620
+      skillsheet_8: 116977782
+      skillsheet_9: 1375324619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

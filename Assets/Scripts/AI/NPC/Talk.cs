@@ -13,6 +13,7 @@ public class Talk : MonoBehaviour
     [SerializeField] Animator iconAnimator;
 
     bool inRange = false;
+    bool talked = false;
 
     void Start()
     {
@@ -39,15 +40,14 @@ public class Talk : MonoBehaviour
 
     void Update()
     {
-        if (!dataHUB.world.pausedGame && !dataHUB.player.isInteracting)
+        if (!dataHUB.world.pausedGame && !dataHUB.player.isInteracting && inRange && dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true))
         {
-            if (inRange && Physics.CheckSphere(transform.position, range, playerLayer))
+            if (!talked)
             {
-                if (dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true))
-                {
-                    dialogueController.StartInteraction(dialogueData);
-                }
+                dialogueController.StartInteraction(dialogueData);
+                talked = true;
             }
+            else talked = false;
         }
     }
 }

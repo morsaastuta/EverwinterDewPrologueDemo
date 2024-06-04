@@ -11,7 +11,7 @@ public class AccessoryBellSouvenir : AccessoryItem
         description = "Local souvenir from Kampanario designed after the bell from its belfry. Made from iron, has motifs of snowdrops engraved and emits a faint chime when shaken.";
         price = 25;
 
-        statDFL = 5;
+        statDFL = 2;
 
         GenStatList();
     }

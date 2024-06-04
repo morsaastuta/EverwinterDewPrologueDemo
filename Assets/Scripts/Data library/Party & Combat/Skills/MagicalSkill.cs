@@ -37,16 +37,11 @@ public abstract class MagicalSkill : Skill
         {
             switch (elements[index])
             {
-                case "pagos":
-                    return Resources.LoadAll<Sprite>("Sprites/HUD/Combat/Skills/skillframe")[2];
-                case "aeras":
-                    return Resources.Load<Sprite>("Sprites/Empty");
-                case "spitha":
-                    return Resources.Load<Sprite>("Sprites/Empty");
-                case "homa":
-                    return Resources.LoadAll<Sprite>("Sprites/HUD/Combat/Skills/skillframe")[3];
-                default:
-                    return Resources.Load<Sprite>("Sprites/Empty");
+                case "pagos": return Resources.LoadAll<Sprite>("Sprites/HUD/Combat/Skills/skillframe")[2];
+                case "aeras": return Resources.Load<Sprite>("Sprites/Empty");
+                case "spitha": return Resources.Load<Sprite>("Sprites/Empty");
+                case "homa": return Resources.LoadAll<Sprite>("Sprites/HUD/Combat/Skills/skillframe")[3];
+                default: return Resources.Load<Sprite>("Sprites/Empty");
             }
         }
         else return Resources.Load<Sprite>("Sprites/Empty");

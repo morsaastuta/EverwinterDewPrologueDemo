@@ -50,7 +50,6 @@ public class SkillsController : MonoBehaviour
                 GameObject slot = slotGenerator.Generate();
                 slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
-                slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);
             }
         }
@@ -69,7 +68,6 @@ public class SkillsController : MonoBehaviour
                 GameObject slot = slotGenerator.Generate();
                 slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
-                slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);
             }
         }
@@ -88,7 +86,6 @@ public class SkillsController : MonoBehaviour
                 GameObject slot = slotGenerator.Generate();
                 slot.transform.SetParent(skillSelectionPane);
                 slot.GetComponent<SkillController>().SetSkill(skill);
-                slot.GetComponent<SkillController>().IsMenuShowcase();
                 skillSlots.Add(slot);
             }
         }

@@ -16,7 +16,7 @@ public class ExitCombat : MonoBehaviour
     public void Victory()
     {
         world.activeEncounter.defeated = true;
-        foreach (FoeData foe in world.activeEncounter.GetFoes()) foe.GetLoot(player);
+        foreach (FoeData foe in world.activeEncounter.GetFoes()) player.GetLoot(foe);
         Exit();
     }
 

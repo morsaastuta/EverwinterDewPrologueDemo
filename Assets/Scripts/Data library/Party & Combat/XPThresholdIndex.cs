@@ -36,7 +36,7 @@ public static class XPThresholdIndex
 
         int requirement = 0;
 
-        for (int i = 0; i < job.level + 1; i++) requirement += characterBase + i * characterBase;
+        for (int i = 0; i < job.level + 1; i++) requirement += jobBase + i * jobBase;
 
         if (job.experience >= requirement) job.LevelUp(character);
 

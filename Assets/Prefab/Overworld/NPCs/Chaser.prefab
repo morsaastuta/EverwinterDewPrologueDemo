@@ -101,7 +101,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5a6f8d075695ad145bc1fad993842f77, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -405,10 +405,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  patrolRange: 2
   sightRange: 1
   jumpRange: 1
-  speed: 0.01
+  speed: 0.5
   velocity: 0
   direction: 0
   patrolPoints: []
@@ -421,7 +420,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7886559861318351899}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 1
   m_Acceleration: 1
   avoidancePriority: 50
@@ -430,7 +429,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1

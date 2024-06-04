@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,8 +9,11 @@ public class CombatController : MonoBehaviour
     // Master info
     [SerializeField] public PlayerProperties playerProperties;
     [SerializeField] public CameraProperties cameraProperties;
-    [SerializeField] public WorldProperties mapProperties;
+    [SerializeField] public WorldProperties worldProperties;
     [SerializeField] ExitCombat exitCombat;
+    public int gridLength = 0;
+    [SerializeField] SkillsFrameController skillsFrameController;
+    [SerializeField] ItemFrameController itemFrameController;
 
     // Action info
     public int turn = 0;
@@ -20,6 +24,13 @@ public class CombatController : MonoBehaviour
     public Skill selectedSkill;
     public ConsumableItem selectedItem;
     public int phase;
+
+    // Used skill info
+    [SerializeField] GameObject skillPane;
+    [SerializeField] Image skillType;
+    [SerializeField] Image skillIcon;
+    [SerializeField] TextMeshProUGUI skillName;
+    [SerializeField] Sprite neutralElement;
 
     // Combatants
     public List<Combatant> combatants = new();
@@ -80,12 +91,13 @@ public class CombatController : MonoBehaviour
         int totalCells = AllCells().Count;
         int valX = 0;
         int valY = 0;
+        gridLength = (int)Mathf.Sqrt(totalCells);
         foreach (CellController cell in AllCells())
         {
             cell.posX = valX;
             cell.posY = valY;
             valX++;
-            if (valX == Mathf.Sqrt(totalCells))
+            if (valX == gridLength)
             {
                 valX = 0;
                 valY++;
@@ -101,12 +113,15 @@ public class CombatController : MonoBehaviour
         foreach (Profile profile in party) SetRandomPos(profile, 0, 0, 0, 5);
 
         // Load Foes
-        foreach (FoeData foe in mapProperties.activeEncounter.GetFoes())
+        foreach (FoeData foe in worldProperties.activeEncounter.GetFoes())
         {
             foe.MaxFatigue();
             foes.Add(foe);
         }
         foreach (FoeData foe in foes) SetRandomPos(foe, 5, 5, 0, 5);
+
+        foreach (CellController cell in PartyCells()) cell.InitialDirection(1);
+        foreach (CellController cell in FoeCells()) cell.InitialDirection(3);
     }
 
     void FixedUpdate()
@@ -278,6 +293,7 @@ public class CombatController : MonoBehaviour
     public void EndTurn()
     {
         ClearHUD();
+        skillPane.SetActive(false);
         SwitchMode("", false);
         ActorCell().combatant.ChangeFAT(ActorCell().combatant.statFAT);
         initTurn = false;
@@ -448,8 +464,11 @@ public class CombatController : MonoBehaviour
 
     public void PromptFlee()
     {
-        actionFrame.SetActive(false);
-        fleeConfirmation.SetActive(true);
+        if (!worldProperties.activeEncounter.boss)
+        {
+            actionFrame.SetActive(false);
+            fleeConfirmation.SetActive(true);
+        }
     }
 
     public void CancelFlee()
@@ -486,6 +505,16 @@ public class CombatController : MonoBehaviour
     public bool CastSkill(CellController target)
     {
         CloseActionSelector();
+        skillsFrameController.ClearSkills();
+
+        if (ActorCell().combatant.GetType().BaseType.Equals(typeof(FoeData)))
+        {
+            skillName.SetText(selectedSkill.name);
+            if (selectedSkill.GetType().BaseType.Equals(typeof(MagicalSkill)) || selectedSkill.GetType().BaseType.Equals(typeof(MixedSkill))) skillType.sprite = ((MagicalSkill)selectedSkill).GetElement(0);
+            else skillType.sprite = neutralElement;
+            skillIcon.sprite = selectedSkill.GetIcon();
+            skillPane.SetActive(true);
+        }
 
         bool success = false;
         List<bool> mtSuccesses = new();
@@ -582,6 +611,7 @@ public class CombatController : MonoBehaviour
     public bool UseItem(CellController target)
     {
         CloseActionSelector();
+        itemFrameController.ClearItems();
 
         bool returnedVal = false;
 

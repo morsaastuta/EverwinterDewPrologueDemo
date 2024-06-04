@@ -4,8 +4,10 @@ using System;
 [Serializable]
 public class Skill_Slash : PhysicalSkill
 {
-    public Skill_Slash()
+    public Skill_Slash(string s)
     {
+        source = s;
+
         name = "Slash";
         description = "The user slashes an enemy with a sharp weapon.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
@@ -23,10 +25,13 @@ public class Skill_Slash : PhysicalSkill
 
         if (Roll(user.combatant.statACC))
         {
-            target.combatant.ChangeHP(-(
-                // Physical damage
-                FormulateCrit(user.combatant.statATK * 2.4f, target.combatant.statDFN * 0.8f, user.combatant.statCR, user.combatant.statCD)
-                ));
+            target.combatant.ChangeHP(-
+                RollCrit(
+                    // Physical damage
+                    Formulate(user.combatant.statATK * 2.5f, target.combatant.statDFN * 0.5f),
+                    // Critical augment
+                    user.combatant.statCR, user.combatant.statCD)
+                );
 
             return true;
         }

@@ -4,17 +4,17 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private PlayerProperties player;
 
-    [SerializeField] private Rigidbody body;
-    [SerializeField] private bool grounded = false;
-    [SerializeField] private float force = 1f;
-    [SerializeField] private float impulse = 2000f;
-    private Vector3 jump;
+    [SerializeField] Rigidbody body;
+    [SerializeField] bool grounded = false;
+    [SerializeField] float force = 1f;
+    [SerializeField] float impulse = 2000f;
+    Vector3 jump;
     int safeCheck = 0;
     int safeCheckMax = 100;
 
     private void Start()
     {
-        jump = new Vector3(0f, force, 0f);
+        jump = new(0f, force, 0f);
     }
 
     void Update()

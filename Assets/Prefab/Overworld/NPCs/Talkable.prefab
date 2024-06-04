@@ -101,7 +101,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5a6f8d075695ad145bc1fad993842f77, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -420,7 +420,6 @@ MonoBehaviour:
   speed: 0.001
   turnMax: 100
   velocity: 0
-  direction: 0
 --- !u!114 &2975561033333721094
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,6 +52,12 @@ public class PlayerProperties : MonoBehaviour
     // Visuals
     Animator animator;
 
+    // Exit combat
+    [OdinSerialize] float storedXP = 0;
+    [OdinSerialize] List<Item> storedItems = new();
+    [SerializeField] ItemGatherer itemGatherer;
+    [SerializeField] GrowthGatherer growthGatherer;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -64,32 +70,8 @@ public class PlayerProperties : MonoBehaviour
             SelectCharacter(typeof(Nikolaos));
 
             // Test items
-            AddItem(new BodyWinter(), 1);
-            AddItem(new ArmsWinter(), 1);
-            AddItem(new LegsWinter(), 1);
-            AddItem(new AccessoryChrysanthemumCorola(), 2);
-            AddItem(new AccessoryBellSouvenir(), 2);
             AddItem(new SwordAthanas(), 1);
-            AddItem(new SwordBell(), 1);
             AddItem(new ShieldFloe(), 1);
-            AddItem(new BowAnemone(), 1);
-            for (int i = 0; i < UnityEngine.Random.Range(15, 31); i++)
-            {
-                Item item = null;
-                int stock = UnityEngine.Random.Range(1, 100);
-                switch (UnityEngine.Random.Range(0, 8))
-                {
-                    case 0: item = new RationI(); break;
-                    case 1: item = new RationII(); break;
-                    case 2: item = new EtherI(); break;
-                    case 3: item = new FlowerSnowdrop(); break;
-                    case 4: item = new HerbsThrascias(); break;
-                    case 5: item = new ClawRimebear(); break;
-                    case 6: item = new PeltRimebear(); break;
-                    case 7: item = new Galanthus(); stock = 1; break;
-                }
-                AddItem(item, stock);
-            }
 
             // End
             hasBeenInit = true;
@@ -99,6 +81,7 @@ public class PlayerProperties : MonoBehaviour
     public void Initialize()
     {
         RestoreParty();
+
         if (currentProfile is not null) SelectCharacter(currentProfile.GetType());
         else SelectCharacter(party[0].GetType());
     }
@@ -140,6 +123,9 @@ public class PlayerProperties : MonoBehaviour
         playerPos = p.playerPos;
         playerAngle = p.playerAngle;
 
+        storedXP = p.storedXP;
+        storedItems = p.storedItems;
+
         LoadStatus();
         UpdateVisuals();
     }
@@ -147,6 +133,8 @@ public class PlayerProperties : MonoBehaviour
     void Start()
     {
         foreach (Profile character in party) character.ChangeWield(0);
+
+        SetLoot();
     }
 
     public void SaveState()
@@ -329,5 +317,47 @@ public class PlayerProperties : MonoBehaviour
             animator.SetInteger("direction", 2);
             animator.SetInteger("velocity", 0);
         }
+    }
+
+    public void GetLoot(FoeData foe)
+    {
+        storedXP += foe.lootXP;
+
+        foreach (Item item in foe.lootItems.Keys) if (UnityEngine.Random.Range(0f, 1f) >= foe.lootItems.GetValueOrDefault(item)) storedItems.Add(item);
+    }
+
+    public void SetLoot()
+    {
+        if (storedXP > 0 || storedItems.Count > 0)
+        {
+            Dictionary<Item, int> obtainedItems = new();
+            int skillsetThreshold = currentProfile.skillset.Count;
+            int prev = currentProfile.level;
+            int prevMJ = 0;
+            if (currentProfile.mainJob is not null) prevMJ = currentProfile.mainJob.level;
+            int prevSJ = 0;
+            if (currentProfile.subJob is not null) prevSJ = currentProfile.subJob.level;
+
+            foreach (Profile character in party) character.ObtainXP((int)storedXP);
+
+            foreach (Item item in storedItems)
+            {
+                if (!obtainedItems.ContainsKey(item)) obtainedItems.Add(item, 1);
+                else obtainedItems[item]++;
+                
+                AddItem(item, 1);
+            }
+
+            List<Skill> newSkillset = new();
+            newSkillset.AddRange(currentProfile.skillset);
+            newSkillset.RemoveRange(0, skillsetThreshold);
+
+            itemGatherer.Notify(obtainedItems, true);
+            growthGatherer.Notify(currentProfile, prev, (int)storedXP, prevMJ, (int)(storedXP/2), prevSJ, (int)(storedXP/3), newSkillset);
+
+            storedXP = 0;
+            storedItems.Clear();
+        }
+
     }
 }

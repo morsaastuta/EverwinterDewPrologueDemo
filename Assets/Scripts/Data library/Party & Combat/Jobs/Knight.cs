@@ -15,19 +15,20 @@ public class Knight : Job
 
     public override void CheckNewSkills(Profile character)
     {
-        switch (character.level)
+        string source = "Knight";
+        switch (level)
         {
             case 1:
-                character.NewSkill(new Skill_Slash());
+                character.NewSkill(new Skill_Slash(source));
                 break;
             case 5:
-                character.NewSkill(new Skill_ShieldOnrush());
+                character.NewSkill(new Skill_ShieldOnrush(source));
                 break;
             case 6:
-                character.NewSkill(new Skill_SpinCutter());
+                character.NewSkill(new Skill_SpinCutter(source));
                 break;
             case 7:
-                character.NewSkill(new Skill_IcyEdge());
+                character.NewSkill(new Skill_IcyEdge(source));
                 break;
         }
     }

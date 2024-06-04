@@ -53,42 +53,18 @@ public class GearController : MonoBehaviour, IPointerClickHandler
         if (!gearType.BaseType.Equals(typeof(WieldItem)))
         {
             defaultSymbol = gearSymbol;
-            if (gearType.Equals(typeof(HeadItem)))
-            {
-                defaultIcon = emptyHead;
-            }
-            else if (gearType.Equals(typeof(BodyItem)))
-            {
-                defaultIcon = emptyBody;
-            }
-            else if (gearType.Equals(typeof(ArmsItem)))
-            {
-                defaultIcon = emptyArms;
-            }
-            else if (gearType.Equals(typeof(LegsItem)))
-            {
-                defaultIcon = emptyLegs;
-            }
-            else if (gearType.Equals(typeof(AccessoryItem)))
-            {
-                defaultIcon = emptyAccessory;
-            }
+            if (gearType.Equals(typeof(HeadItem))) defaultIcon = emptyHead;
+            else if (gearType.Equals(typeof(BodyItem))) defaultIcon = emptyBody;
+            else if (gearType.Equals(typeof(ArmsItem))) defaultIcon = emptyArms;
+            else if (gearType.Equals(typeof(LegsItem))) defaultIcon = emptyLegs;
+            else if (gearType.Equals(typeof(AccessoryItem))) defaultIcon = emptyAccessory;
         }
         else
         {
             defaultSymbol = wieldSymbol;
-            if (gearType.Equals(typeof(SwordItem)))
-            {
-                defaultIcon = emptySword;
-            }
-            else if (gearType.Equals(typeof(ShieldItem)))
-            {
-                defaultIcon = emptyShield;
-            }
-            else if (gearType.Equals(typeof(BowItem)))
-            {
-                defaultIcon = emptyBow;
-            }
+            if (gearType.Equals(typeof(SwordItem))) defaultIcon = emptySword;
+            else if (gearType.Equals(typeof(ShieldItem))) defaultIcon = emptyShield;
+            else if (gearType.Equals(typeof(BowItem))) defaultIcon = emptyBow;
         }
 
         symbol.sprite = defaultSymbol;
@@ -118,7 +94,8 @@ public class GearController : MonoBehaviour, IPointerClickHandler
             occupied = true;
             item = (GearItem)newItem;
             Load();
-        } else Clear();
+        }
+        else Clear();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -141,47 +118,22 @@ public class GearController : MonoBehaviour, IPointerClickHandler
 
     public void Drop()
     {
-        GearItem newItem = (GearItem)equipmentController.Drop(true).item;
+        SlotController draggedSlot = equipmentController.GetDropInfo(this);
 
-        // Check if the gear's type mathes the slot's
-        if (newItem.GetType().BaseType.Equals(gearType))
+        if (draggedSlot is not null && draggedSlot.occupied && draggedSlot.item.GetType().BaseType.Equals(gearType))
         {
-            // Check if the receiving slot is occupied
-            if (occupied)
-            {
-                equipmentController.DragSwitch(this);
-                UpdateGear(newItem);
-            }
-            else
-            {
-                // If the receiving slot is unoccupied, simply update
-                UpdateGear(newItem);
-            }
+            if (occupied) equipmentController.DragSwitch(this);
+            else equipmentController.SetDropResults(this);
         }
-        else equipmentController.MismatchCorrection();
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left) InitDrag();
     }
 
     public void InitDrag()
     {
-        if (occupied)
-        {
-            equipmentController.InitDrag(this);
-            Clear();
-        }
+        if (occupied) equipmentController.InitDrag(this);
     }
 
     public void EndDrag()
     {
-        if (!equipmentController.SafeCheck())
-        {
-            UpdateGear(equipmentController.OriginalItem());
-        }
-
-        equipmentController.EndOperation();
+        equipmentController.SafeEnd();
     }
 }

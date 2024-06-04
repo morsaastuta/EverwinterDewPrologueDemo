@@ -30,6 +30,13 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IBeginDragHan
         Load();
     }
 
+    public void UpdateItem(Item newItem)
+    {
+        occupied = true;
+        item = newItem;
+        UpdateStock(1);
+    }
+
     public void UpdateItem(Item newItem, int newStock)
     {
         occupied = true;
@@ -107,15 +114,18 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IBeginDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Only InventoryController takes note of Extractions
-        if (GetComponentInParent<InventoryController>() != null)
+        if (occupied)
         {
-            if (eventData.button == PointerEventData.InputButton.Left) InitDrag(false);
-            else if (eventData.button == PointerEventData.InputButton.Right) InitDrag(true);
-        }
-        else if (GetComponentInParent<EquipmentController>() != null)
-        {
-            InitDrag(false);
+            // Only InventoryController takes note of Extractions
+            if (GetComponentInParent<InventoryController>() != null)
+            {
+                if (eventData.button == PointerEventData.InputButton.Left) InitDrag(false);
+                else if (eventData.button == PointerEventData.InputButton.Right) InitDrag(true);
+            }
+            else if (GetComponentInParent<EquipmentController>() != null)
+            {
+                InitDrag(false);
+            }
         }
     }
 
@@ -145,68 +155,65 @@ public class SlotController : MonoBehaviour, IPointerClickHandler, IBeginDragHan
     {
         SlotController draggedSlot = null;
 
-        if (GetComponentInParent<InventoryController>() != null)
-        {
-            draggedSlot = GetComponentInParent<InventoryController>().Drop();
-        }
-        else if (GetComponentInParent<EquipmentController>() != null)
-        {
-            draggedSlot = GetComponentInParent<EquipmentController>().Drop(false);
-        }
+        if (GetComponentInParent<InventoryController>() is not null) draggedSlot = GetComponentInParent<InventoryController>().Drop();
+        else if (GetComponentInParent<EquipmentController>() is not null) draggedSlot = GetComponentInParent<EquipmentController>().GetDropInfo(this);
 
-        // Check if the receiving slot is occupied
-        if (occupied)
+        if (draggedSlot is not null && draggedSlot.occupied)
         {
-            // Check if the item is the same AND stackable
-            if (item.GetType().Equals(draggedSlot.item.GetType()) && item.stackable)
+            // Check if the receiving slot is occupied
+            if (occupied)
             {
-                // If it is, FUSE
-                UpdateStock(stock + draggedSlot.stock);
+                // Check if the item is the same AND stackable
+                if (item.GetType().Equals(draggedSlot.item.GetType()) && item.stackable)
+                {
+                    // If it is, FUSE
+                    UpdateStock(stock + draggedSlot.stock);
+                }
+                else
+                {
+                    // In case the items are not stackable, check if the drag is an extraction (only on InventoryController)
+                    if (GetComponentInParent<EquipmentController>() is null)
+                    {
+                        if (GetComponentInParent<InventoryController>().OriginalStock() == 1 || !GetComponentInParent<InventoryController>().CheckExtraction())
+                        {
+                            // If the items are not the same, and the original slot had stock = 1 OR the drag is not an extraction (that is, if the dragged slot has stock = 1), SWITCH
+                            GetComponentInParent<InventoryController>().DragSwitch(item, stock);
+                            UpdateItem(draggedSlot.item, draggedSlot.stock);
+                        }
+                    }
+                    else
+                    {
+                        // On EquipmentController, try to switch directly
+                        GetComponentInParent<EquipmentController>().DragSwitch(this);
+                    }
+                }
             }
             else
             {
-                // In case the items are not stackable, check if the drag is an extraction (only on InventoryController)
-                if (GetComponentInParent<EquipmentController>() == null)
+                if (GetComponentInParent<EquipmentController>() is null)
                 {
-                    if (GetComponentInParent<InventoryController>().OriginalStock() == 1 || !GetComponentInParent<InventoryController>().CheckExtraction())
-                    {
-                        // If the items are not the same, and the original slot had stock = 1 OR the drag is not an extraction (that is, if the dragged slot has stock = 1), SWITCH
-                        GetComponentInParent<InventoryController>().DragSwitch(item, stock);
-                        UpdateItem(draggedSlot.item, draggedSlot.stock);
-                    }
-                } else
-                {
-                    // On EquipmentController, switch directly
-                    GetComponentInParent<EquipmentController>().DragSwitch(this);
+                    // If the receiving slot is unoccupied, simply update
                     UpdateItem(draggedSlot.item, draggedSlot.stock);
                 }
+                else
+                {
+                    // On EquipmentController
+                    GetComponentInParent<EquipmentController>().SetDropResults(this);
+                }
             }
-        }
-        else
-        {
-            // If the receiving slot is unoccupied, simply update
-            UpdateItem(draggedSlot.item, draggedSlot.stock);
         }
     }
 
     public void EndDrag()
     {
-        if (GetComponentInParent<InventoryController>() != null)
+        if (GetComponentInParent<InventoryController>() is not null)
         {
             if (!GetComponentInParent<InventoryController>().SafeCheck())
             {
                 UpdateItem(GetComponentInParent<InventoryController>().OriginalItem(), GetComponentInParent<InventoryController>().OriginalStock());
             }
         }
-        else if (GetComponentInParent<EquipmentController>() != null)
-        {
-            if (!GetComponentInParent<EquipmentController>().SafeCheck())
-            {
-                UpdateItem(GetComponentInParent<EquipmentController>().OriginalItem(), 1);
-            }
-
-            GetComponentInParent<EquipmentController>().EndOperation();
-        }
+        else if (GetComponentInParent<EquipmentController>() is not null) GetComponentInParent<EquipmentController>().SafeEnd();
     }
 
     public void UseItem()

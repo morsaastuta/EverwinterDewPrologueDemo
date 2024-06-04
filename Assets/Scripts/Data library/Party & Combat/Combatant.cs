@@ -15,7 +15,7 @@ public abstract class Combatant : Character
     [OdinSerialize] public int currentMP;
     [OdinSerialize] public int currentAP;
     [OdinSerialize] public int currentFAT;
-    [OdinSerialize] public int initAP = 1;
+    [OdinSerialize] public int initAP = 0;
 
     // Visuals
     [OdinSerialize] public string spritesheetCSPath;
@@ -142,8 +142,8 @@ public abstract class Combatant : Character
     {
         if (!KO)
         {
-            if (currentHP + quantity > statHP) currentHP = statHP;
-            else if (currentHP + quantity < 0)
+            if (currentHP + quantity >= statHP) currentHP = statHP;
+            else if (currentHP + quantity <= 0)
             {
                 currentHP = 0;
                 KnockOut();
@@ -154,22 +154,22 @@ public abstract class Combatant : Character
 
     public void ChangeMP(int quantity)
     {
-        if (currentMP + quantity > statMP) currentMP = statMP;
-        else if (currentMP + quantity < 0) currentMP = 0;
+        if (currentMP + quantity >= statMP) currentMP = statMP;
+        else if (currentMP + quantity <= 0) currentMP = 0;
         else currentMP += quantity;
     }
 
     public void ChangeAP(int quantity)
     {
-        if (currentAP + quantity > statAP) currentAP = statAP;
-        else if (currentAP + quantity < 0) currentAP = 0;
+        if (currentAP + quantity >= statAP) currentAP = statAP;
+        else if (currentAP + quantity <= 0) currentAP = 0;
         else currentAP += quantity;
     }
 
     public void ChangeFAT(int quantity)
     {
-        if (currentFAT + quantity > statFAT) currentFAT = statFAT;
-        else if (currentFAT + quantity < 0) currentFAT = 0;
+        if (currentFAT + quantity >= statFAT) currentFAT = statFAT;
+        else if (currentFAT + quantity <= 0) currentFAT = 0;
         else currentFAT += quantity;
     }
 

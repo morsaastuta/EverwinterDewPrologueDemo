@@ -11,9 +11,10 @@ public class LegsWinter : LegsItem
         description = "Boots crafted from rimebear leather. They are of common use in the southern regions of Heimonas.";
         price = 65;
 
-        statDFN = 6;
-        statDFL = 3;
-        statSPD = 3;
+        statDFN = 3;
+        statDFL = 1;
+        statSPD = 2;
+        statPRA = 2;
 
         GenStatList();
     }

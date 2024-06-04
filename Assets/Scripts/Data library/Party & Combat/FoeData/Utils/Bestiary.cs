@@ -9,6 +9,7 @@ public static class Bestiary
             case "rimebear_m": return new Foe_Rimebear_Mage(initLV);
             case "rimebear_h": return new Foe_Rimebear_Healer(initLV);
             case "rimebear_b": return new Foe_Rimebear_Boss(initLV);
+            case "rimebear_c": return new Foe_Rimebear_Cait(initLV);
         }
         return null;
     }

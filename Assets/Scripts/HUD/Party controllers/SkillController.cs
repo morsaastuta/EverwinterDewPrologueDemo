@@ -14,12 +14,6 @@ public class SkillController : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Image animIcon;
 
-    // Cost meters
-    [SerializeField] GameObject meterAP;
-    [SerializeField] TextMeshProUGUI costAP;
-    [SerializeField] GameObject meterMP;
-    [SerializeField] TextMeshProUGUI costMP;
-
     // Elements
     [SerializeField] Sprite elementNull;
 
@@ -37,22 +31,6 @@ public class SkillController : MonoBehaviour
         if (skill.GetType().BaseType.Equals(typeof(MagicalSkill)) || skill.GetType().BaseType.Equals(typeof(MixedSkill))) element.sprite = ((MagicalSkill)skill).GetElement(0);
         else element.sprite = elementNull;
         name.SetText(skill.name);
-
-        if (skill.costAP > 0)
-        {
-            costAP.SetText(skill.costAP.ToString());
-            meterAP.SetActive(true);
-        }
-
-        if (skill.GetType().BaseType.Equals(typeof(MagicalSkill)) || skill.GetType().BaseType.Equals(typeof(MixedSkill)))
-        {
-            MagicalSkill temp = (MagicalSkill)skill;
-            if (temp.costMP > 0)
-            {
-                costMP.SetText(temp.costMP.ToString());
-                meterMP.SetActive(true);
-            }
-        }
     }
 
     public void Clear()
@@ -60,17 +38,6 @@ public class SkillController : MonoBehaviour
         icon.sprite = emptyIcon;
         element.sprite = emptyIcon;
         name.SetText("");
-
-        meterAP.SetActive(false);
-        costAP.SetText("0");
-        meterMP.SetActive(false);
-        costAP.SetText("0");
-    }
-
-    public void IsMenuShowcase()
-    {
-        meterAP.SetActive(false);
-        meterMP.SetActive(false);
     }
 
     public void Select()

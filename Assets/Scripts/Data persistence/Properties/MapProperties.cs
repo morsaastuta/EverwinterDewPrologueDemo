@@ -9,11 +9,13 @@ public class MapProperties : MonoBehaviour
     [OdinSerialize] public string overworldScene;
     [OdinSerialize] public List<EncounterData> persistedEncounters = new();
     [OdinSerialize] public List<ChestData> persistedChests = new();
+    [OdinSerialize] public List<DialogueEventController> persistedEvents = new();
 
     public void Reload(MapProperties m, bool real)
     {
         persistedEncounters = m.persistedEncounters;
         persistedChests = m.persistedChests;
+        persistedEvents = m.persistedEvents;
 
         if (real) LoadInfo();
     }
@@ -36,9 +38,11 @@ public class MapProperties : MonoBehaviour
     {
         persistedEncounters.Clear();
         persistedChests.Clear();
+        persistedEvents.Clear();
 
         foreach (Encounter encounter in GetComponentsInChildren<Encounter>(true)) persistedEncounters.Add(encounter.data);
         foreach (Chest chest in GetComponentsInChildren<Chest>(true)) persistedChests.Add(chest.data);
+        foreach (DialogueEventController dialogueEvent in GetComponentsInChildren<DialogueEventController>(true)) persistedEvents.Add(dialogueEvent);
 
         return this;
     }
@@ -57,12 +61,19 @@ public class MapProperties : MonoBehaviour
         if (persistedChests.Count <= 0) foreach (Chest chest in allChests) persistedChests.Add(chest.data);
         else foreach (Chest chest in allChests) chest.data.UpdateData(persistedChests[allChests.IndexOf(chest)]);
 
-        UpdateInfo(allEncounters, allChests);
+        // Set all chests
+        List<DialogueEventController> allEvents = new();
+        allEvents.AddRange(GetComponentsInChildren<DialogueEventController>());
+        if (persistedEvents.Count <= 0) foreach (DialogueEventController dialogueEvent in allEvents) persistedEvents.Add(dialogueEvent);
+        else foreach (DialogueEventController dialogueEvent in allEvents) dialogueEvent.Seen(persistedEvents[allEvents.IndexOf(dialogueEvent)].seen);
+
+        UpdateInfo(allEncounters, allChests, allEvents);
     }
 
-    public void UpdateInfo(List<Encounter> encounters, List<Chest> chests)
+    public void UpdateInfo(List<Encounter> encounters, List<Chest> chests, List<DialogueEventController> events)
     {
         foreach (Encounter encounter in encounters) encounter.UpdateState();
         foreach (Chest chest in chests) chest.UpdateState();
+        foreach (DialogueEventController dialogueEvent in events) dialogueEvent.UpdateState();
     }
 }

@@ -8,8 +8,8 @@ using UnityEngine;
 public abstract class FoeData : Combatant
 {
     [OdinSerialize] protected Dictionary<string, Skill> skillID = new();
-    [OdinSerialize] protected int lootXP;
-    [OdinSerialize] protected Dictionary<Item, float> lootItems = new();
+    [OdinSerialize] public float lootXP;
+    [OdinSerialize] public Dictionary<Item, float> lootItems = new();
 
     public virtual IEnumerator AutoTurn(CombatController scene)
     {
@@ -34,11 +34,11 @@ public abstract class FoeData : Combatant
         skillset.Add(skill);
     }
 
-    protected IEnumerator BasicAttack(CombatController scene, CellController target)
+    protected IEnumerator MeleeSingleAttack(Skill skill, CombatController scene, CellController target)
     {
         if (scene.CalcDistance(scene.ActorCell(), target) == 1)
         {
-            UseSkill(scene, target, skillID.GetValueOrDefault("basic"));
+            UseSkill(scene, target, skill);
         }
         else
         {
@@ -96,11 +96,12 @@ public abstract class FoeData : Combatant
 
                 if (scene.CalcDistance(scene.ActorCell(), target) == 1)
                 {
-                    UseSkill(scene, target, skillID.GetValueOrDefault("basic"));
+                    UseSkill(scene, target, skill);
                 }
             }
         }
 
+        yield return new WaitForSeconds(1f);
         scene.EndTurn();
     }
 
@@ -117,19 +118,5 @@ public abstract class FoeData : Combatant
     {
         scene.selectedSkill = skill;
         scene.ActorCell().CastSkill(target);
-    }
-
-    public void GetLoot(PlayerProperties player)
-    {
-        foreach (Profile character in player.party) character.ObtainXP(lootXP);
-
-        foreach (Item item in lootItems.Keys)
-        {
-            if (UnityEngine.Random.Range(0f, 1f) >= lootItems.GetValueOrDefault(item))
-            {
-                player.AddItem(item, 1);
-            }
-        }
-
     }
 }

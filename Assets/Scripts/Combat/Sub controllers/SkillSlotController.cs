@@ -1,12 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using System.Collections.Generic;
 
 public class SkillSlotController : MonoBehaviour
 {
     [SerializeField] Sprite emptyIcon;
     Skill skill;
+    bool active = true;
 
     // Showcase
     [SerializeField] Image icon;
@@ -32,8 +33,35 @@ public class SkillSlotController : MonoBehaviour
         Load();
     }
 
+    public Skill GetSkill()
+    {
+        return skill;
+    }
+
+    public void Deactivate(bool ap, bool mp)
+    {
+        active = false;
+
+        List<Image> images = new();
+        images.AddRange(gameObject.GetComponents<Image>());
+        images.AddRange(gameObject.GetComponentsInChildren<Image>());
+        foreach (Image image in images) image.color = new(.8f, .8f, .8f, .8f);
+
+        List<Image> imagesAP = new();
+        imagesAP.AddRange(meterAP.GetComponents<Image>());
+        imagesAP.AddRange(meterAP.GetComponentsInChildren<Image>());
+        if (ap) foreach (Image image in imagesAP) image.color = new(1f, .8f, .8f, .8f);
+
+        List<Image> imagesMP = new();
+        imagesMP.AddRange(meterMP.GetComponents<Image>());
+        imagesMP.AddRange(meterMP.GetComponentsInChildren<Image>());
+        if (mp) foreach (Image image in imagesMP) image.color = new(1f, .8f, .8f, .8f);
+    }
+
     public void Load()
     {
+        active = true;
+
         Clear();
 
         icon.sprite = skill.GetIcon();
@@ -43,8 +71,8 @@ public class SkillSlotController : MonoBehaviour
 
         if (skill.costAP > 0)
         {
-            costAP.SetText(skill.costAP.ToString());
             meterAP.SetActive(true);
+            costAP.SetText(skill.costAP.ToString());
         }
 
         if (skill.GetType().BaseType.Equals(typeof(MagicalSkill)) || skill.GetType().BaseType.Equals(typeof(MixedSkill)))
@@ -52,8 +80,8 @@ public class SkillSlotController : MonoBehaviour
             MagicalSkill temp = (MagicalSkill)skill;
             if (temp.costMP > 0)
             {
-                costMP.SetText(temp.costMP.ToString());
                 meterMP.SetActive(true);
+                costMP.SetText(temp.costMP.ToString());
             }
         }
     }
@@ -64,28 +92,28 @@ public class SkillSlotController : MonoBehaviour
         element.sprite = emptyIcon;
         name.SetText("");
 
+        costAP.SetText("0");
         meterAP.SetActive(false);
         costAP.SetText("0");
-        meterMP.SetActive(false);
-        costAP.SetText("0");
-    }
-
-    public void IsMenuShowcase()
-    {
-        meterAP.SetActive(false);
         meterMP.SetActive(false);
     }
 
     public void Select()
     {
-        GetComponentInParent<SkillsFrameController>().Select(skill);
-
-        if (!selected)
+        if (GetComponentInParent<SkillsFrameController>())
         {
-            selected = true;
-            animator.SetTrigger("select");
+            if (active)
+            {
+                GetComponentInParent<SkillsFrameController>().Select(skill);
+
+                if (!selected)
+                {
+                    selected = true;
+                    animator.SetTrigger("select");
+                }
+                else Deselect();
+            }
         }
-        else Deselect();
     }
 
     public void Deselect()

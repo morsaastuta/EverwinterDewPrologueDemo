@@ -18,6 +18,8 @@ public abstract class Skill
     [OdinSerialize] public bool squared = false;
     [OdinSerialize] public bool multitarget = false;
 
+    [OdinSerialize] public string source = "";
+
     public Sprite GetIcon()
     {
         if (sheetIndex >= 0) return Resources.LoadAll<Sprite>(sheetPath)[sheetIndex];
@@ -49,17 +51,15 @@ public abstract class Skill
         else return 0;
     }
 
-    protected int FormulateCrit(float power, float resistance, float rate, float multiplier)
+    protected int RollCrit(float damage, float rate, float multiplier)
     {
-        float value = Formulate(power, resistance);
-
         if (Roll(rate))
         {
             // Critical DMG = DMG + DMG * CD
-            value += value * multiplier;
+            damage += damage * (multiplier / 100);
         }
 
-        if (value >= 0) return (int)value;
+        if (damage >= 0) return (int)damage;
         else return 0;
     }
 

@@ -11,8 +11,9 @@ public class BodyWinter : BodyItem
         description = "Coat crafted from rimebear leather. It is of common use in the southern regions of Heimonas.";
         price = 80;
 
-        statDFN = 10;
-        statDFL = 5;
+        statDFN = 7;
+        statDFL = 2;
+        statPRA = 4;
 
         GenStatList();
     }

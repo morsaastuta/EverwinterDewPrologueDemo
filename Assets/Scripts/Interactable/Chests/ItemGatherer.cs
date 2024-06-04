@@ -8,9 +8,12 @@ public class ItemGatherer : MonoBehaviour
     [SerializeField] GameObject notification;
     [SerializeField] SlotGenerator slotGenerator;
     [SerializeField] ObtainedItemHelper helper;
+    bool gg = false;
 
-    public void Notify(Dictionary<Item, int> obtainedItems)
+    public void Notify(Dictionary<Item, int> obtainedItems, bool xpRightAfter)
     {
+        gg = xpRightAfter;
+
         dataHUB.player.SetActive(false);
         dataHUB.camera.SetActive(false);
         notification.SetActive(true);
@@ -41,5 +44,7 @@ public class ItemGatherer : MonoBehaviour
         notification.SetActive(false);
         dataHUB.camera.SetActive(true);
         dataHUB.player.SetActive(true);
+
+        if (gg) dataHUB.growthGatherer.Launch();
     }
 }

@@ -14,12 +14,22 @@ public class DialogueController : MonoBehaviour
     List<string> nameLog = new();
     List<string> messageLog = new();
 
+    public bool isEvent = false;
+    public DialogueEventController dec;
+
     void Update()
     {
         if (dataHUB.player.isInteracting)
         {
-            if (dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true)) Interact();
-            else if (dataHUB.player.CompareKeyOnce(dataHUB.player.skipKey, true)) EndInteraction();
+            if (!isEvent)
+            {
+                if (dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true)) Interact();
+                else if (dataHUB.player.CompareKeyOnce(dataHUB.player.skipKey, true)) EndInteraction();
+            }
+            else if (isEvent)
+            {
+                if (dec.movingActor.Count == 0 && dataHUB.player.CompareKeyOnce(dataHUB.player.interactKey, true)) Interact();
+            }
         }
     }
 
@@ -45,6 +55,7 @@ public class DialogueController : MonoBehaviour
         else
         {
             int characterIndex = dialogueData.order[messageIndex];
+            if (isEvent) dec.CheckIndex(messageIndex);
 
             textHUB.face.sprite = dialogueData.characterFaces[characterIndex];
 

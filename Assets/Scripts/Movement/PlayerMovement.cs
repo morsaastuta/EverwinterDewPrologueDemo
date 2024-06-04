@@ -7,35 +7,39 @@ public class PlayerMovement : MonoBehaviour
     // Speed
     float walkSpeed = 0.01f;
     float runSpeed = 0.02f;
-    float normalFactor = 1.5f;
+    float normalFactor = 2f;
     float speed;
     public int velocity;
 
     // Move
-    private Vector3 movement;
-    private bool movingSides;
-    private bool movingFront;
+    Vector3 movement;
+    bool movingSides;
+    bool movingFront;
     public int direction;
 
     // Visuals
-    public Animator animator;
+    [SerializeField] Animator animator;
+    [SerializeField] Transform body;
+    [SerializeField] Transform projection;
 
     void Start()
     {
         speed = walkSpeed;
 
-        movement = transform.localScale;
+        movement = body.localScale;
         movingSides = false;
         movingFront = false;
         direction = 2;
         velocity = 0;
+
+        transform.rotation = Quaternion.identity;
     }
 
     void Update()
     {
         if (player.canMove)
         {
-            movement = transform.position;
+            movement = body.position;
 
             if (player.canRun)
             {
@@ -54,29 +58,29 @@ public class PlayerMovement : MonoBehaviour
             if (player.CompareKey(player.eastKey))
             {
                 direction = 3;
-                if (!movingFront) movement += speed * transform.right;
-                else movement += speed / normalFactor * transform.right;
+                if (!movingFront) movement += speed * projection.right;
+                else movement += speed / normalFactor * projection.right;
             }
             if (player.CompareKey(player.westKey))
             {
                 direction = 1;
-                if (!movingFront) movement += speed * -transform.right;
-                else movement += speed/normalFactor * -transform.right;
+                if (!movingFront) movement += speed * -projection.right;
+                else movement += speed/normalFactor * -projection.right;
             }
             if (player.CompareKey(player.northKey))
             {
                 direction = 0;
-                if (!movingSides) movement += speed * transform.forward;
-                else movement += speed / normalFactor * transform.forward;
+                if (!movingSides) movement += speed * projection.forward;
+                else movement += speed / normalFactor * projection.forward;
             }
             if (player.CompareKey(player.southKey))
             {
                 direction = 2;
-                if (!movingSides) movement += speed * -transform.forward;
-                else movement += speed / normalFactor * -transform.forward;
+                if (!movingSides) movement += speed * -projection.forward;
+                else movement += speed / normalFactor * -projection.forward;
             }
 
-            transform.position = movement;
+            body.position = movement;
 
             if (animator.GetInteger("velocity") != velocity) animator.SetInteger("velocity", velocity);
             if (animator.GetInteger("direction") != direction) animator.SetInteger("direction", direction);
