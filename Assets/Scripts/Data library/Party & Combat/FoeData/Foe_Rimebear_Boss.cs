@@ -41,6 +41,10 @@ public class Foe_Rimebear_Boss : FoeData
         AddSkill("basic", new Skill_BasicAttack(""));
         AddSkill("blow", new Skill_UrsidBlow(""));
         AddSkill("frostbite", new Skill_FrostBite(""));
+
+        lootItems.Add(new ClawRimebear(), 1f);
+        lootItems.Add(new PeltRimebear(), 1f);
+        lootItems.Add(new Galanthus(), 1f);
     }
 
     public override IEnumerator AutoTurn(CombatController scene)

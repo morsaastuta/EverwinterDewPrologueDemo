@@ -12,10 +12,10 @@ public class BowAnemone : BowItem
         description = "Worn off bow decorated with anemones. A precious memento from Theron's past.";
         price = 0;
 
-        statATK = 10;
-        statSPD = 10;
+        statATK = 12;
+        statSPD = 5;
         statACC = -10;
-        statASA = 15;
+        statASA = 20;
 
         GenStatList();
     }

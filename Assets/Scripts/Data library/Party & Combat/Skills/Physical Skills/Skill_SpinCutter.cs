@@ -12,7 +12,7 @@ public class Skill_SpinCutter : PhysicalSkill
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 2;
 
-        costAP = 1;
+        costAP = 2;
         range = 1;
         squared = true;
         multitarget = true;

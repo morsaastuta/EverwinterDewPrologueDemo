@@ -21,13 +21,13 @@ public class Knight : Job
             case 1:
                 character.NewSkill(new Skill_Slash(source));
                 break;
-            case 5:
+            case 3:
                 character.NewSkill(new Skill_ShieldOnrush(source));
                 break;
-            case 6:
+            case 4:
                 character.NewSkill(new Skill_SpinCutter(source));
                 break;
-            case 7:
+            case 6:
                 character.NewSkill(new Skill_IcyEdge(source));
                 break;
         }
