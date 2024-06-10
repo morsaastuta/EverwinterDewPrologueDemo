@@ -9,6 +9,10 @@ public class ItemFrameController : MonoBehaviour
     [SerializeField] RectTransform itemSelectionPane;
     List<GameObject> itemSlots = new();
 
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip selectClip;
+
     public void Consumables()
     {
         ClearItems();
@@ -44,6 +48,7 @@ public class ItemFrameController : MonoBehaviour
 
     public void Select(ConsumableItem item)
     {
+        audioMachine.PlaySFX(selectClip);
         if (scene.mode.Equals("use"))
         {
             scene.ReturnMode();

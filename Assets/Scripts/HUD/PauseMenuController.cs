@@ -8,6 +8,7 @@ public class PauseMenuController : MonoBehaviour
     // Subsequent controllers
     [SerializeField] PartyController partyController;
     [SerializeField] InventoryController inventoryController;
+    [SerializeField] GuidebookController guidebookController;
     [SerializeField] HelpCall helper;
 
     // External properties
@@ -29,6 +30,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] GameObject optExit;
 
     // Party submenu
+    [SerializeField] GameObject partyFrame;
     [SerializeField] GameObject infoBox;
     [SerializeField] GameObject optStatus;
     [SerializeField] GameObject optEquipment;
@@ -36,8 +38,15 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] GameObject optFormation;
 
     // Inventory submenu
-    [SerializeField] GameObject partyFrame;
     [SerializeField] GameObject inventoryFrame;
+
+    // Guidebook submenu
+    [SerializeField] GameObject guidebookFrame;
+
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip openClip;
+    [SerializeField] AudioClip closeClip;
 
     void Start()
     {
@@ -59,6 +68,7 @@ public class PauseMenuController : MonoBehaviour
         // Open menu
         if (dataHUB.player.canPause && cooldown == cooldownMax && !menuBox.activeSelf && dataHUB.player.CompareKeyOnce(dataHUB.player.menuKey, true))
         {
+            audioMachine.PlaySFX(openClip);
             partyController.CloseAll();
             inventoryController.CloseAll();
             menuBox.SetActive(true);
@@ -71,6 +81,7 @@ public class PauseMenuController : MonoBehaviour
         // Close menu
         if (cooldown == cooldownMax && menuBox.activeSelf && dataHUB.player.CompareKeyOnce(dataHUB.player.menuKey, true))
         {
+            audioMachine.PlaySFX(closeClip);
             CloseAll();
             helper.Dismiss();
             menuBox.SetActive(false);
@@ -124,6 +135,12 @@ public class PauseMenuController : MonoBehaviour
         inventoryFrame.SetActive(true);
     }
 
+    public void OptGuidebook()
+    {
+        CloseAll();
+        guidebookFrame.SetActive(true);
+    }
+
     private void OptExit()
     {
         dataHUB.world.ExitToTitle();
@@ -136,6 +153,8 @@ public class PauseMenuController : MonoBehaviour
         partyFrame.SetActive(false);
         inventoryController.CloseAll();
         inventoryFrame.SetActive(false);
+        guidebookController.CloseAll();
+        guidebookFrame.SetActive(false);
     }
 
 }

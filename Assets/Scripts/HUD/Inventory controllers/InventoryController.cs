@@ -34,6 +34,11 @@ public class InventoryController : MonoBehaviour
     List<GameObject> keys = new();
     List<GameObject> activeList = new();
 
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip selectClip;
+    [SerializeField] AudioClip dropClip;
+
     public void Consumables()
     {
         Deselect();
@@ -165,6 +170,8 @@ public class InventoryController : MonoBehaviour
 
     public void Select(int index)
     {
+        audioMachine.PlaySFX(selectClip);
+
         selectedSlot = activeList[index].GetComponent<SlotController>();
 
         shownIcon.sprite = selectedSlot.item.GetIcon();
@@ -239,6 +246,8 @@ public class InventoryController : MonoBehaviour
     {
         if (dropped == false && itemDragger.GetComponentInChildren<SlotController>().item != null)
         {
+            audioMachine.PlaySFX(dropClip);
+
             dropped = true;
             Deselect();
             SlotController toReturn = itemDragger.GetComponentInChildren<SlotController>();

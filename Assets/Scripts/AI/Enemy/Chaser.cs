@@ -22,6 +22,9 @@ public class Chaser : MonoBehaviour
     [SerializeField] List<GameObject> patrolPoints;
     GameObject patrolTarget;
 
+    // Audio
+    [SerializeField] AudioClip targetedClip;
+
     void Start()
     {
         velocity = 0;
@@ -80,6 +83,8 @@ public class Chaser : MonoBehaviour
 
     void Chase()
     {
+        if (patrolling) GetComponentInParent<DataHUB>().audioMachine.PlaySFX(targetedClip);
+
         patrolling = false;
         velocity = 1;
         target = GetComponentInParent<DataHUB>().player.gameObject.transform.position;

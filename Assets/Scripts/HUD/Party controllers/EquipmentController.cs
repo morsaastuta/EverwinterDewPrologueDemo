@@ -17,7 +17,7 @@ public class EquipmentController : MonoBehaviour
     bool initialized = false;
     bool operating = false;
     bool fromSelector;
-    bool toEquipment;
+    bool toShowcase;
     Type operationType;
     bool switched = false;
 
@@ -95,6 +95,12 @@ public class EquipmentController : MonoBehaviour
     [SerializeField] Image typeImg7;
     [SerializeField] Image typeImg8;
 
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip selectClip;
+    [SerializeField] AudioClip dropInSelectorClip;
+    [SerializeField] AudioClip dropInShowcaseClip;
+
     public void Awake()
     {
         // Slot observation
@@ -112,6 +118,8 @@ public class EquipmentController : MonoBehaviour
 
     public void SelectGearSlot(Type type, GearItem gearItem)
     {
+        audioMachine.PlaySFX(selectClip);
+
         Deselect();
         selectorItemList.Clear();
         Select(gearItem);
@@ -269,6 +277,8 @@ public class EquipmentController : MonoBehaviour
 
     public void Select(GearItem item)
     {
+        audioMachine.PlaySFX(selectClip);
+
         int shownStats = 0;
         if (item != null)
         {
@@ -409,7 +419,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (itemDragger.GetComponentInChildren<SlotController>().item is not null)
             {
-                toEquipment = true;
+                toShowcase = true;
                 Deselect();
                 return itemDragger.GetComponentInChildren<SlotController>();
             }
@@ -425,7 +435,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (ogItem is not null)
             {
-                toEquipment = false;
+                toShowcase = false;
                 Deselect();
                 return itemDragger.GetComponentInChildren<SlotController>();
             }
@@ -530,15 +540,23 @@ public class EquipmentController : MonoBehaviour
         if (initialized && !operating)
         {
             // Depending on the direction of the drag, remove or add to the list
-            if (fromSelector && toEquipment)
+            if (toShowcase)
             {
-                partyController.playerProperties.armory.Remove(ogItem);
-                if (switched) partyController.playerProperties.armory.Add(newItem);
+                audioMachine.PlaySFX(dropInShowcaseClip);
+                if (fromSelector)
+                {
+                    partyController.playerProperties.armory.Remove(ogItem);
+                    if (switched) partyController.playerProperties.armory.Add(newItem);
+                }
             }
-            if (!fromSelector && !toEquipment)
+            else
             {
-                partyController.playerProperties.armory.Add(ogItem);
-                if (switched) partyController.playerProperties.armory.Remove(newItem);
+                audioMachine.PlaySFX(dropInSelectorClip);
+                if (!fromSelector)
+                {
+                    partyController.playerProperties.armory.Add(ogItem);
+                    if (switched) partyController.playerProperties.armory.Remove(newItem);
+                }
             }
 
             // Save the current gear set

@@ -62,6 +62,7 @@ public class GrowthGatherer : MonoBehaviour
     {
         dataHUB.player.SetActive(false);
         dataHUB.camera.SetActive(false);
+        dataHUB.world.pausedGame = true;
         notification.SetActive(true);
 
         obtainedShowcase.SetText(obtained.ToString());
@@ -120,5 +121,6 @@ public class GrowthGatherer : MonoBehaviour
         notification.SetActive(false);
         dataHUB.camera.SetActive(true);
         dataHUB.player.SetActive(true);
+        dataHUB.world.pausedGame = false;
     }
 }

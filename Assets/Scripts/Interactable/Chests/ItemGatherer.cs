@@ -16,6 +16,7 @@ public class ItemGatherer : MonoBehaviour
 
         dataHUB.player.SetActive(false);
         dataHUB.camera.SetActive(false);
+        dataHUB.world.pausedGame = true;
         notification.SetActive(true);
 
         foreach (Item obtainedItem in obtainedItems.Keys)
@@ -44,6 +45,7 @@ public class ItemGatherer : MonoBehaviour
         notification.SetActive(false);
         dataHUB.camera.SetActive(true);
         dataHUB.player.SetActive(true);
+        dataHUB.world.pausedGame = false;
 
         if (gg) dataHUB.growthGatherer.Launch();
     }

@@ -12,6 +12,7 @@ public class Skill_Slash : PhysicalSkill
         description = "The user slashes an enemy with a sharp weapon.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 1;
+        sfxPath = "Audio/SFX/sword3";
 
         costAP = 1;
         range = 1;

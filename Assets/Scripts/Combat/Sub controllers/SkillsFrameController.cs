@@ -9,6 +9,10 @@ public class SkillsFrameController : MonoBehaviour
     [SerializeField] RectTransform skillSelectionPane;
     List<GameObject> skillSlots = new();
 
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip selectClip;
+
     public void Physical()
     {
         ClearSkills();
@@ -110,6 +114,7 @@ public class SkillsFrameController : MonoBehaviour
 
     public void Select(Skill skill)
     {
+        audioMachine.PlaySFX(selectClip);
         if (scene.mode.Equals("use"))
         {
             scene.ReturnMode();

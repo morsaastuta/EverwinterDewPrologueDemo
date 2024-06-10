@@ -211,6 +211,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: -4944074888243435336}
+  openClip: {fileID: 8300000, guid: 315c72c1cf1c2bc438f7289b73545db6, type: 3}
+  closeClip: {fileID: 8300000, guid: 4fe18563c39e903429c46e6487602a61, type: 3}
+  lockedClip: {fileID: 8300000, guid: 2171c88d8fe98ad4da899248746139d9, type: 3}
 --- !u!1 &190144
 GameObject:
   m_ObjectHideFlags: 0

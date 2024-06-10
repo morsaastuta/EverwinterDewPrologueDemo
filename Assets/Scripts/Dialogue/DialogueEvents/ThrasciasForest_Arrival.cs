@@ -37,7 +37,7 @@ public class ThrasciasForest_Arrival : DialogueEvent
                 dec.SwitchPOV(2);
                 dec.MoveActor(1, 7, 0.4f);
                 break;
-            case 17:
+            case 18:
                 CommonOutro();
                 dec.ExitEvent();
                 break;

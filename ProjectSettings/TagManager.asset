@@ -50,3 +50,6 @@ TagManager:
   - name: UI elements
     uniqueID: 3115471493
     locked: 0
+  - name: Text
+    uniqueID: 4194387255
+    locked: 0

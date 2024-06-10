@@ -11,6 +11,7 @@ public class Skill_BasicAttack : PhysicalSkill
         description = "Basic physical attack.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 0;
+        sfxPath = "Audio/SFX/blow2";
 
         range = 1;
 

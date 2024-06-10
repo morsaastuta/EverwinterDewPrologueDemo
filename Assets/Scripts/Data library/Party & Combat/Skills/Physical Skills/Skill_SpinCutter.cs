@@ -11,6 +11,7 @@ public class Skill_SpinCutter : PhysicalSkill
         description = "The user spins around with its sword unleashed, cutting any foe close enough.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 2;
+        sfxPath = "Audio/SFX/sword4";
 
         costAP = 2;
         range = 1;

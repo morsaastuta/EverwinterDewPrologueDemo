@@ -20,10 +20,17 @@ public abstract class Skill
 
     [OdinSerialize] public string source = "";
 
+    [OdinSerialize] protected string sfxPath = "";
+
     public Sprite GetIcon()
     {
         if (sheetIndex >= 0) return Resources.LoadAll<Sprite>(sheetPath)[sheetIndex];
         else return Resources.Load<Sprite>(sheetPath);
+    }
+
+    public AudioClip GetSFX()
+    {
+        return Resources.Load<AudioClip>(sfxPath);
     }
 
     protected virtual void SpendPoints(Combatant user)

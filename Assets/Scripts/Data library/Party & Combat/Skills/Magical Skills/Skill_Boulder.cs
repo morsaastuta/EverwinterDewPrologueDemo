@@ -12,6 +12,7 @@ public class Skill_Boulder : MagicalSkill
         description = "The user channels Homa from the ground to create a stone boulder and launch it towards a foe.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 5;
+        sfxPath = "Audio/SFX/rock2";
 
         elements.Add("homa");
 

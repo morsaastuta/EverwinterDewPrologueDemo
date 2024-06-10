@@ -382,9 +382,11 @@ MonoBehaviour:
   data:
     defeated: 0
     fled: 0
+    boss: 0
   foeNames: []
   foeLevels: 
   combatScene: 
+  isBoss: 0
   ready: 0
 --- !u!114 &7607693451362209825
 MonoBehaviour:
@@ -411,6 +413,7 @@ MonoBehaviour:
   velocity: 0
   direction: 0
   patrolPoints: []
+  targetedClip: {fileID: 8300000, guid: be9c723c43090eb4b90a4537f8ed7798, type: 3}
 --- !u!195 &3092024295380950315
 NavMeshAgent:
   m_ObjectHideFlags: 0

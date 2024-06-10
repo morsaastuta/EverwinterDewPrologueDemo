@@ -11,6 +11,7 @@ public class Skill_TreatWounds : PhysicalSkill
         description = "Heal an adjacent companion a little.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 7;
+        sfxPath = "Audio/SFX/heal1";
 
         friendly = true;
         costAP = 1;

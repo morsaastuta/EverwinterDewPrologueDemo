@@ -15,10 +15,16 @@ public class Chest : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Animator animator;
 
+    // Audio
+    AudioMachine audioMachine;
+    [SerializeField] AudioClip openClip;
+    [SerializeField] AudioClip lockedClip;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponentInParent<DataHUB>().itemGatherer;
+        audioMachine = GetComponentInParent<DataHUB>().audioMachine;
 
         Dictionary<Item, int> content = new();
 
@@ -39,6 +45,7 @@ public class Chest : MonoBehaviour
     {
         if (!data.open && !forcefully)
         {
+            audioMachine.PlaySFX(openClip);
             bool success = true;
             Dictionary<Item, int> obtainedItems = new();
 
@@ -62,6 +69,7 @@ public class Chest : MonoBehaviour
             }
         }
         else if (forcefully) animator.SetTrigger("force");
+        else if (!data.open) audioMachine.PlaySFX(lockedClip);
     }
 
     public void Notify(Dictionary<Item, int> obtainedItems)

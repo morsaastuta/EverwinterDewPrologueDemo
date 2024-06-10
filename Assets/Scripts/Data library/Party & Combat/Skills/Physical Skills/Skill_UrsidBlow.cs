@@ -11,6 +11,7 @@ public class Skill_UrsidBlow : PhysicalSkill
         description = "";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 8;
+        sfxPath = "Audio/SFX/blow1";
 
         costAP = 1;
         range = 1;

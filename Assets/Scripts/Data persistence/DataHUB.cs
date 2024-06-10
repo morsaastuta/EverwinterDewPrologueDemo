@@ -10,4 +10,5 @@ public class DataHUB : MonoBehaviour
     [SerializeField] public SavingSystem savingSystem;
     [SerializeField] public ItemGatherer itemGatherer;
     [SerializeField] public GrowthGatherer growthGatherer;
+    [SerializeField] public AudioMachine audioMachine;
 }

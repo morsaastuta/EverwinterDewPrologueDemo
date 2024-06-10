@@ -13,6 +13,7 @@ public class Skill_ShieldOnrush : PhysicalSkill
         description = "The user runs shield in hand along a straight line and hits a foe, sending it in the opposite direction with as much force as the user gathered during the rally.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 3;
+        sfxPath = "Audio/SFX/bash1";
 
         costAP = 2;
         range = 3;

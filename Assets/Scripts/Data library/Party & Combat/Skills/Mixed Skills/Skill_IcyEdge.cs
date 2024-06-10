@@ -11,6 +11,7 @@ public class Skill_IcyEdge : MixedSkill
         description = "The user channels Pagos into its sword's edge and slashes an enemy.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 6;
+        sfxPath = "Audio/SFX/ice3";
 
         elements.Add("pagos");
 

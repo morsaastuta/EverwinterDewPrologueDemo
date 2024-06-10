@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -44,7 +43,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] SlotGenerator partyCards;
     [SerializeField] SlotGenerator foeCards;
 
-    // Act HUD: Combatant info
+    // Profile HUD
     [SerializeField] GameObject statusFrame;
     [SerializeField] TextMeshProUGUI combatantName;
     [SerializeField] TextMeshProUGUI combatantLevel;
@@ -56,7 +55,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] GameObject meterAP;
     [SerializeField] Sprite actionSprite;
 
-    // Act HUD: Action selector
+    // Action HUD
     [SerializeField] GameObject actionFrame;
     [SerializeField] GameObject returnButton;
     [SerializeField] Image wieldIcon;
@@ -79,6 +78,12 @@ public class CombatController : MonoBehaviour
     // "check": Player is checking a combatant other than the current turn's combatant
     public string mode = "";
     public List<string> modeHistory = new();
+
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip missClip;
+    [SerializeField] AudioClip itemClip;
+    [SerializeField] AudioClip cellClip;
 
     void Start()
     {
@@ -191,10 +196,7 @@ public class CombatController : MonoBehaviour
                 if (actor.wield2 is not null) actor.ChangeWield(2);
                 else actor.ChangeWield(0);
             }
-            else if (actor.currentWield.Equals(actor.wield2))
-            {
-                actor.ChangeWield(0);
-            }
+            else if (actor.currentWield.Equals(actor.wield2)) actor.ChangeWield(0);
         }
         else
         {
@@ -203,10 +205,7 @@ public class CombatController : MonoBehaviour
                 if (actor.wield2 is not null) actor.ChangeWield(2);
                 else if (actor.wield1 is not null) actor.ChangeWield(1);
             }
-            else if (actor.currentWield.Equals(actor.wield1))
-            {
-                actor.ChangeWield(0);
-            }
+            else if (actor.currentWield.Equals(actor.wield1)) actor.ChangeWield(0);
             else if (actor.currentWield.Equals(actor.wield2))
             {
                 if (actor.wield1 is not null) actor.ChangeWield(1);
@@ -302,6 +301,7 @@ public class CombatController : MonoBehaviour
 
     public void SelectCell(CellController givenCell)
     {
+        audioMachine.PlaySFX(cellClip);
         Deselect();
 
         switch (mode)
@@ -387,18 +387,14 @@ public class CombatController : MonoBehaviour
                 }
                 else if (phase == 2) EndTurn();
                 break;
+
             case "act":
                 EndTurn();
                 break;
+
             case "use":
-                if (selectedSkill is not null)
-                {
-                    ActorCell().CastSkill(SubjectCell());
-                }
-                else if (selectedItem is not null)
-                {
-                    ActorCell().UseItem(SubjectCell());
-                }
+                if (selectedSkill is not null) ActorCell().CastSkill(SubjectCell());
+                else if (selectedItem is not null) ActorCell().UseItem(SubjectCell());
                 if (phase == 1)
                 {
                     phase = 2;
@@ -480,9 +476,7 @@ public class CombatController : MonoBehaviour
     public bool DirectionX(CellController target)
     {
         bool returnedVal = false;
-
         if (target.posX == ActorCell().posX) returnedVal = true;
-
         return returnedVal;
     }
 
@@ -506,6 +500,9 @@ public class CombatController : MonoBehaviour
     {
         CloseActionSelector();
         skillsFrameController.ClearSkills();
+
+        actionFrame.SetActive(false);
+        returnButton.SetActive(false);
 
         if (ActorCell().combatant.GetType().BaseType.Equals(typeof(FoeData)))
         {
@@ -605,6 +602,10 @@ public class CombatController : MonoBehaviour
         if (mtSuccesses.Count > 0) success = true;
         foreach (bool mtSuccess in mtSuccesses) if (!mtSuccess) success = false;
 
+        // Play SFX
+        if (success) audioMachine.PlaySFX(selectedSkill.GetSFX());
+        else audioMachine.PlaySFX(missClip);
+
         return success;
     }
 
@@ -612,6 +613,9 @@ public class CombatController : MonoBehaviour
     {
         CloseActionSelector();
         itemFrameController.ClearItems();
+
+        actionFrame.SetActive(false);
+        returnButton.SetActive(false);
 
         bool returnedVal = false;
 
@@ -671,6 +675,9 @@ public class CombatController : MonoBehaviour
                 }
             }
         }
+
+        // PlaySFX
+        audioMachine.PlaySFX(itemClip);
 
         return returnedVal;
     }
@@ -860,10 +867,7 @@ public class CombatController : MonoBehaviour
 
     public bool CheckExistingCell(int posX, int posY)
     {
-        foreach (CellController cell in AllCells())
-        {
-            if (cell.posX == posX && cell.posY == posY) return true;
-        }
+        foreach (CellController cell in AllCells()) if (cell.posX == posX && cell.posY == posY) return true;
 
         return false;
     }

@@ -37,6 +37,10 @@ public class SkillsController : MonoBehaviour
     [SerializeField] RectTransform skillSelectionPane;
     List<GameObject> skillSlots = new();
 
+    // Audio
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip clip;
+
     public void Physical()
     {
         ClearSkills();
@@ -105,6 +109,8 @@ public class SkillsController : MonoBehaviour
 
     public void Select(Skill skill)
     {
+        audioMachine.PlaySFX(clip);
+
         Deselect();
 
         skillIcon.sprite = skill.GetIcon();

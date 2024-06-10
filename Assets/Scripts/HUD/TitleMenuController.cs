@@ -9,7 +9,6 @@ public class TitleMenuController : MonoBehaviour
 
     [SerializeField] GameObject optNew;
     [SerializeField] GameObject optSlots;
-    [SerializeField] GameObject optSettings;
     [SerializeField] GameObject optExit;
 
     [SerializeField] SavingSystem savingSystem;
@@ -29,7 +28,6 @@ public class TitleMenuController : MonoBehaviour
     {
         optNew.GetComponent<Button>().interactable = !state;
         optSlots.GetComponent<Button>().interactable = !state;
-        optSettings.GetComponent<Button>().interactable = !state;
         optExit.GetComponent<Button>().interactable = !state;
     }
 
@@ -59,10 +57,6 @@ public class TitleMenuController : MonoBehaviour
     {
         Working(true);
         savingSystem.TitleLoad();
-    }
-
-    public void OptSettings()
-    {
     }
 
     public void OptExit()

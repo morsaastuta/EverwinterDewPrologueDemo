@@ -11,6 +11,7 @@ public class Skill_Snowball : MagicalSkill
         description = "The user channels Pagos from around to create a snowball and throw it towards an enemy.";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 4;
+        sfxPath = "Audio/SFX/ice1";
 
         elements.Add("pagos");
 

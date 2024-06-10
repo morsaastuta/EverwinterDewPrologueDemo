@@ -11,6 +11,7 @@ public class Skill_FrostBite : MixedSkill
         description = "";
         sheetPath = "Sprites/HUD/Combat/Skills/skillsheet";
         sheetIndex = 9;
+        sfxPath = "Audio/SFX/bite1";
 
         elements.Add("pagos");
 

@@ -17,6 +17,9 @@ public class DialogueController : MonoBehaviour
     public bool isEvent = false;
     public DialogueEventController dec;
 
+    [SerializeField] AudioMachine audioMachine;
+    [SerializeField] AudioClip messageClip;
+
     void Update()
     {
         if (dataHUB.player.isInteracting)
@@ -51,6 +54,7 @@ public class DialogueController : MonoBehaviour
 
     void Interact()
     {
+        audioMachine.PlaySFX(messageClip);
         if (messageIndex > dialogueData.order.Capacity - 1) EndInteraction();
         else
         {
