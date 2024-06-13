@@ -56,10 +56,7 @@ public class FileDataHandler
 
     public void DeleteSlot()
     {
-        if (File.Exists(slotPath))
-        {
-            File.Delete(slotPath);
-        }
+        if (File.Exists(slotPath)) File.Delete(slotPath);
     }
 
     // Just for checking

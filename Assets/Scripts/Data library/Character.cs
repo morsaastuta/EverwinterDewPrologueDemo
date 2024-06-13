@@ -1,6 +1,5 @@
 using Sirenix.Serialization;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -16,10 +15,6 @@ public abstract class Character
     [OdinSerialize] public string facePath;
     [OdinSerialize] public string spritesheetOWPath;
     [OdinSerialize] public string animatorOWPath;
-
-    public Character()
-    {
-    }
 
     public Sprite GetIcon(int i)
     {

@@ -27,6 +27,8 @@ public class InventoryController : MonoBehaviour
     [SerializeField] TextMeshProUGUI shownDescription;
     [SerializeField] GameObject stockBox;
     [SerializeField] TextMeshProUGUI shownStock;
+    [SerializeField] GameObject dropButton;
+    [SerializeField] GameObject useButton;
 
     // Slot lists
     List<GameObject> consumables = new();
@@ -41,31 +43,41 @@ public class InventoryController : MonoBehaviour
 
     public void Consumables()
     {
-        Deselect();
-        DeleteSlots();
+        CloseAll();
         activeList = consumables;
+        dropButton.SetActive(true);
+        useButton.SetActive(true);
         LoadSection();
     }
 
     public void Materials()
     {
-        Deselect();
-        DeleteSlots();
+        CloseAll();
         activeList = materials;
+        dropButton.SetActive(true);
         LoadSection();
     }
 
     public void Keys()
     {
-        Deselect();
-        DeleteSlots();
+        CloseAll();
         activeList = keys;
         LoadSection();
     }
 
     public void CloseAll()
     {
+        if (itemDragger.activeInHierarchy)
+        {
+            activeList = null;
+            dropped = true;
+            itemDragger.GetComponentInChildren<SlotController>().Clear();
+            itemDragger.SetActive(false);
+        }
+
         Deselect();
+        dropButton.SetActive(false);
+        useButton.SetActive(false);
         DeleteSlots();
     }
 
@@ -172,6 +184,9 @@ public class InventoryController : MonoBehaviour
     {
         audioMachine.PlaySFX(selectClip);
 
+        dropButton.GetComponent<Button>().interactable = true;
+        useButton.GetComponent<Button>().interactable = true;
+
         selectedSlot = activeList[index].GetComponent<SlotController>();
 
         shownIcon.sprite = selectedSlot.item.GetIcon();
@@ -212,6 +227,9 @@ public class InventoryController : MonoBehaviour
         shownDescription.text = "";
         shownStock.text = "";
         stockBox.SetActive(false);
+
+        dropButton.GetComponent<Button>().interactable = false;
+        useButton.GetComponent<Button>().interactable = false;
 
         if (activeList != null)
         {

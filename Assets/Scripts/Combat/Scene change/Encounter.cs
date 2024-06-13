@@ -9,7 +9,6 @@ public class Encounter : MonoBehaviour
     [SerializeField] List<string> foeNames;
     [SerializeField] List<int> foeLevels;
     [SerializeField] string combatScene;
-    [SerializeField] bool isBoss;
     public bool ready = false;
 
     void Start()
@@ -20,7 +19,7 @@ public class Encounter : MonoBehaviour
 
         for (int i = 0; i < foeNames.Count; i++) foes.Add(Bestiary.Generate(foeNames[i], foeLevels[i]));
 
-        data.UpdateEncounter(foes, isBoss);
+        data.UpdateEncounter(foes);
     }
 
     void OnCollisionEnter(Collision collision)

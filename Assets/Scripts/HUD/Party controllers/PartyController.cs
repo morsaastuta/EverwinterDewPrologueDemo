@@ -18,6 +18,7 @@ public class PartyController : MonoBehaviour
     public void CloseAll()
     {
         statusFrame.SetActive(false);
+        equipmentController.SafeEnd();
         equipmentController.ClearSelection();
         equipmentFrame.SetActive(false);
         skillsFrame.SetActive(false);

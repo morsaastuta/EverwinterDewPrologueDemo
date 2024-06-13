@@ -61,7 +61,7 @@ public class MapProperties : MonoBehaviour
         if (persistedChests.Count <= 0) foreach (Chest chest in allChests) persistedChests.Add(chest.data);
         else foreach (Chest chest in allChests) chest.data.UpdateData(persistedChests[allChests.IndexOf(chest)]);
 
-        // Set all chests
+        // Set all events
         List<DialogueEventController> allEvents = new();
         allEvents.AddRange(GetComponentsInChildren<DialogueEventController>());
         if (persistedEvents.Count <= 0) foreach (DialogueEventController dialogueEvent in allEvents) persistedEvents.Add(dialogueEvent);
@@ -72,8 +72,19 @@ public class MapProperties : MonoBehaviour
 
     public void UpdateInfo(List<Encounter> encounters, List<Chest> chests, List<DialogueEventController> events)
     {
-        foreach (Encounter encounter in encounters) encounter.UpdateState();
-        foreach (Chest chest in chests) chest.UpdateState();
-        foreach (DialogueEventController dialogueEvent in events) dialogueEvent.UpdateState();
+        foreach (Encounter encounter in encounters)
+        {
+            encounter.UpdateState();
+        }
+
+        foreach (Chest chest in chests)
+        {
+            chest.UpdateState();
+        }
+
+        foreach (DialogueEventController dialogueEvent in events)
+        {
+            dialogueEvent.UpdateState();
+        }
     }
 }

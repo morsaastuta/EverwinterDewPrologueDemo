@@ -20,12 +20,10 @@ public class EncounterData
         foes = e.foes;
         defeated = e.defeated;
         fled = e.fled;
-        boss = e.boss;
     }
 
-    public void UpdateEncounter(List<FoeData> newFoes, bool isBoss)
+    public void UpdateEncounter(List<FoeData> newFoes)
     {
         foes = newFoes;
-        boss = isBoss;
     }
 }
