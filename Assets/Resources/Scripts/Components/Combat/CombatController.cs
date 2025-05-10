@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CombatController : MonoBehaviour
 {
     // Master info
-    [SerializeField] public PlayerProperties playerProperties;
+    [SerializeField] public PlayerBehaviour playerProperties;
     [SerializeField] public CameraProperties cameraProperties;
     [SerializeField] public WorldProperties worldProperties;
     [SerializeField] ExitCombat exitCombat;

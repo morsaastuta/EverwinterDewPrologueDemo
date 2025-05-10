@@ -64,7 +64,7 @@ public class LocalLoader : MonoBehaviour
         {
             obj.SetActive(true);
             if (obj.GetComponentInChildren<Encounter>()) obj.GetComponentInChildren<Encounter>().UpdateState();
-            if (obj.GetComponentInChildren<Chest>()) obj.GetComponentInChildren<Chest>().UpdateState();
+            if (obj.GetComponentInChildren<ChestBehaviour>()) obj.GetComponentInChildren<ChestBehaviour>().UpdateState();
             if (obj.GetComponentInChildren<DialogueEventController>()) obj.GetComponentInChildren<DialogueEventController>().UpdateState();
         }
     }

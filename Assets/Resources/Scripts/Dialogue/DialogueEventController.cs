@@ -7,7 +7,7 @@ public class DialogueEventController : MonoBehaviour
     [OdinSerialize] public bool seen = false;
 
     DataHUB dataHUB;
-    DialogueController controller;
+    DialogueManager controller;
     DialogueData data;
     DialogueEvent dialogueEvent;
     [SerializeField] int range;
@@ -27,7 +27,7 @@ public class DialogueEventController : MonoBehaviour
     void Start()
     {
         dataHUB = GetComponentInParent<DataHUB>();
-        controller = GetComponentInParent<DialogueController>();
+        controller = GetComponentInParent<DialogueManager>();
         data = GetComponent<DialogueData>();
         dialogueEvent = GetComponent<DialogueEvent>();
 

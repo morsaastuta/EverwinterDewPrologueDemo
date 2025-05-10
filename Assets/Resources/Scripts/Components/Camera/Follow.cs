@@ -7,7 +7,7 @@ public class Follow : MonoBehaviour
 {
     [SerializeField] GameObject item;
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = item.transform.position;
     }

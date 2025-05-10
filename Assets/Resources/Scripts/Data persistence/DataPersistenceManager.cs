@@ -8,7 +8,7 @@ public class DataPersistenceManager : MonoBehaviour
     string newGameScene = "ThrasciasForest_Overworld";
 
     // Referenced scripts
-    [SerializeField] PlayerProperties player;
+    [SerializeField] PlayerBehaviour player;
     [SerializeField] CameraProperties camera;
     [SerializeField] WorldProperties world;
 
@@ -40,7 +40,7 @@ public class DataPersistenceManager : MonoBehaviour
 
         // Load data from file and get it ready for the reload
         List<MonoBehaviour> loadedProperties = savfile.LoadData();
-        player.Reload((PlayerProperties)loadedProperties[0]);
+        player.Reload((PlayerBehaviour)loadedProperties[0]);
         camera.Reload((CameraProperties)loadedProperties[1]);
         world.Reload((WorldProperties)loadedProperties[2]);
 

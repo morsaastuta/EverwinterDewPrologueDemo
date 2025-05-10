@@ -5,11 +5,11 @@ public class SettingsData : Data
 {
     // Player properties
 
-    public SettingsData(PlayerProperties p)
+    public SettingsData(PlayerBehaviour p)
     {
     }
 
-    public void LoadData(PlayerProperties p)
+    public void LoadData(PlayerBehaviour p)
     {
     }
 }

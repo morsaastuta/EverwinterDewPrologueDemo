@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SavingSystem : MonoBehaviour
 {
-    [SerializeField] PlayerProperties properties;
+    [SerializeField] PlayerBehaviour properties;
     [SerializeField] CameraProperties camProperties;
     [SerializeField] WorldProperties mapProperties;
     [SerializeField] DataPersistenceManager dpm;

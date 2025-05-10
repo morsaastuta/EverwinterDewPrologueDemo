@@ -41,7 +41,7 @@ public class MapProperties : MonoBehaviour
         persistedEvents.Clear();
 
         foreach (Encounter encounter in GetComponentsInChildren<Encounter>(true)) persistedEncounters.Add(encounter.data);
-        foreach (Chest chest in GetComponentsInChildren<Chest>(true)) persistedChests.Add(chest.data);
+        foreach (ChestBehaviour chest in GetComponentsInChildren<ChestBehaviour>(true)) persistedChests.Add(chest.data);
         foreach (DialogueEventController dialogueEvent in GetComponentsInChildren<DialogueEventController>(true)) persistedEvents.Add(dialogueEvent);
 
         return this;
@@ -56,10 +56,10 @@ public class MapProperties : MonoBehaviour
         else foreach (Encounter encounter in allEncounters) encounter.data.UpdateData(persistedEncounters[allEncounters.IndexOf(encounter)]);
 
         // Set all chests
-        List<Chest> allChests = new();
-        allChests.AddRange(GetComponentsInChildren<Chest>());
-        if (persistedChests.Count <= 0) foreach (Chest chest in allChests) persistedChests.Add(chest.data);
-        else foreach (Chest chest in allChests) chest.data.UpdateData(persistedChests[allChests.IndexOf(chest)]);
+        List<ChestBehaviour> allChests = new();
+        allChests.AddRange(GetComponentsInChildren<ChestBehaviour>());
+        if (persistedChests.Count <= 0) foreach (ChestBehaviour chest in allChests) persistedChests.Add(chest.data);
+        else foreach (ChestBehaviour chest in allChests) chest.data.UpdateData(persistedChests[allChests.IndexOf(chest)]);
 
         // Set all events
         List<DialogueEventController> allEvents = new();
@@ -70,14 +70,14 @@ public class MapProperties : MonoBehaviour
         UpdateInfo(allEncounters, allChests, allEvents);
     }
 
-    public void UpdateInfo(List<Encounter> encounters, List<Chest> chests, List<DialogueEventController> events)
+    public void UpdateInfo(List<Encounter> encounters, List<ChestBehaviour> chests, List<DialogueEventController> events)
     {
         foreach (Encounter encounter in encounters)
         {
             encounter.UpdateState();
         }
 
-        foreach (Chest chest in chests)
+        foreach (ChestBehaviour chest in chests)
         {
             chest.UpdateState();
         }

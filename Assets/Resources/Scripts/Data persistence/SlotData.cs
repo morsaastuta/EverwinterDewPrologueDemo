@@ -6,11 +6,11 @@ using UnityEngine;
 [Serializable]
 public class SlotData
 {
-    [OdinSerialize] PlayerProperties player;
+    [OdinSerialize] PlayerBehaviour player;
     [OdinSerialize] CameraProperties camera;
     [OdinSerialize] WorldProperties world;
 
-    public SlotData(PlayerProperties p, CameraProperties c, WorldProperties w)
+    public SlotData(PlayerBehaviour p, CameraProperties c, WorldProperties w)
     {
         player = p;
         camera = c;

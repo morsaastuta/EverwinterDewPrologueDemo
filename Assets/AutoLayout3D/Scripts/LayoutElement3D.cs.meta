@@ -10,3 +10,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 148554
+  packageName: Auto Layout 3D
+  packageVersion: 1.0.2
+  assetPath: Assets/AutoLayout3D/Scripts/LayoutElement3D.cs
+  uploadId: 342698

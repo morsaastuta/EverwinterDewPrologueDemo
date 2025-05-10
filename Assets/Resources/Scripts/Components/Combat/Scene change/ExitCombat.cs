@@ -3,7 +3,7 @@ using UnityEngine;
 public class ExitCombat : MonoBehaviour
 {
     [SerializeField] DataPersistenceManager dpm;
-    [SerializeField] PlayerProperties player;
+    [SerializeField] PlayerBehaviour player;
     [SerializeField] CameraProperties camera;
     [SerializeField] WorldProperties world;
 

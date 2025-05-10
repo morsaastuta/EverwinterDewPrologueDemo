@@ -13,17 +13,17 @@ public abstract class ConsumableItem : Item
     [OdinSerialize] public bool squared = false;
     [OdinSerialize] public bool multitarget = false;
 
-    public virtual bool Consume(CellController target, CellController user, PlayerProperties player)
+    public virtual bool Consume(CellController target, CellController user, PlayerBehaviour player)
     {
         player.inventory.Remove(this);
         return false;
     }
 
-    public virtual void Consume(PlayerProperties player)
+    public virtual void Consume(PlayerBehaviour player)
     {
     }
 
-    public void Drop(PlayerProperties player)
+    public void Drop(PlayerBehaviour player)
     {
         player.inventory.Remove(this);
     }
